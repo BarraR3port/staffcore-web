@@ -1,0 +1,37 @@
+<div class="background">
+    <div class="container">
+        {{#each bans}}
+            <div class="panel pricing-table">
+                <div class="pricing-plan">
+                    <i><img src="" id="banned-image" class="pricing-img" alt="BarraR3port"></i>
+                    <h2 class="pricing-header">Personal</h2>
+                    <ul class="pricing-features">
+                        <li class="pricing-features-item">Custom domains</li>
+                        <li class="pricing-features-item">Sleeps after 30 mins of inactivity</li>
+                    </ul>
+                    <span class="pricing-price">Free</span>
+                    <a href="#/" class="pricing-button">Sign up</a>
+                </div>
+            </div>
+        {{else}}
+        {{/each}}
+    </div>
+</div>
+<script>
+    function changeImg( image, input ) {
+        const player_image = document.getElementById( image );
+        const player_input = document.getElementById( image ).alt;
+
+        if (player_input !== undefined) {
+            player_image.src = `https://cravatar.eu/avatar/${player_input}/256.png`;
+        }
+        if (player_input === "" ){
+            player_input.src = "";
+        }
+
+    }
+    const form = document.getElementById("banned-input");
+    console.log("Aaaaaaaaaaaaaaaaaaaaaa"+document.getElementById( "banned-image" ).alt);
+    changeImg("banned-image", "Name" );
+
+</script>

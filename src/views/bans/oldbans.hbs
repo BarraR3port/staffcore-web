@@ -1,0 +1,40 @@
+<div class="p-4 container">
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+        <tr class="bg-primary">
+            <th scope="col">Id</th>
+            <th scope="col">Banned</th>
+            <th scope="col">Banner</th>
+            <th scope="col">Reason</th>
+            <th scope="col">Created</th>
+            <th scope="col">Expires</th>
+            <th scope="col">Ip Banned</th>
+            <th scope="col">Status</th>
+            <th scope="col"><a href="/bans/create" class="btn btn-outline-info"><i class="fas fa-plus"></i></a></th>
+        </tr>
+        </thead>
+        {{#each bans}}
+        <tbody>
+            <tr>
+                <td>{{BanId}}</td>
+                <td>{{Name}}</td>
+                <td>{{Baner}}</td>
+                <td>{{Reason}}</td>
+                <td>{{timeago Date}}</td>
+                <td>{{timeago ExpDate}}</td>
+                <td>{{IP_Banned}}</td>
+                <td>{{Status}}</td>
+                <td class="fa-1x">
+                    <a href="/bans/edit" class="btn btn-outline-info"><i class="fas fa-wrench"></i></a>
+                    <a href="/bans/delete/{{BanId}}" class="btn btn-outline-danger"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+
+        </tbody>
+        {{else}}
+            <div class="no-players">
+                <p>There are no Banned Players</p>
+            </div>
+        {{/each}}
+    </table>
+</div>
