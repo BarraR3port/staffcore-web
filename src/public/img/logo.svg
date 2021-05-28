@@ -1,0 +1,70 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="400" height="400"
+     viewBox="0 0 400 400">
+    <defs>
+        <style>
+            .cls-1 {
+            fill: #412245;
+            stroke: #56120f;
+            stroke-linejoin: round;
+            stroke-width: 4px;
+            filter: url(#filter);
+            }
+
+            .cls-1, .cls-2, .cls-3 {
+            fill-rule: evenodd;
+            }
+
+            .cls-2 {
+            fill: #265da1;
+            filter: url(#filter-2);
+            }
+
+            .cls-3 {
+            fill: #56120f;
+            }
+        </style>
+        <filter id="filter" x="32" y="0" width="337" height="400" filterUnits="userSpaceOnUse">
+            <feFlood result="flood"/>
+            <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+            <feBlend result="blend" in2="SourceGraphic"/>
+            <feFlood result="flood-2"/>
+            <feComposite result="composite-2" operator="in" in2="SourceAlpha"/>
+            <feOffset result="offset" dx="45.48" dy="-6.894"/>
+            <feOffset result="offset-2" dx="-45.48" dy="6.894" in="composite-2"/>
+            <feComposite result="composite-3" operator="xor" in="offset"/>
+            <feComposite result="composite-6" operator="xor" in2="composite-2"/>
+            <feComposite result="composite-4" operator="in" in2="SourceAlpha"/>
+            <feGaussianBlur result="blur" stdDeviation="7.616"/>
+            <feComponentTransfer result="comp">
+                <feFuncA type="linear" slope="0.5"/>
+            </feComponentTransfer>
+            <feComposite result="composite-5" operator="in" in2="SourceAlpha"/>
+            <feBlend result="blend-2" mode="luminosity" in2="blend"/>
+        </filter>
+        <filter id="filter-2" x="45.563" y="13.656" width="309.875" height="373.625" filterUnits="userSpaceOnUse">
+            <feFlood result="flood" flood-color="#060"/>
+            <feComposite result="composite" operator="in" in2="SourceAlpha"/>
+            <feOffset result="offset" dx="0.509" dy="22.994"/>
+            <feOffset result="offset-2" dx="-0.509" dy="-22.994" in="composite"/>
+            <feComposite result="composite-2" operator="xor" in="offset"/>
+            <feComposite result="composite-5" operator="xor" in2="composite"/>
+            <feComposite result="composite-3" operator="in" in2="SourceAlpha"/>
+            <feGaussianBlur result="blur" stdDeviation="9.487"/>
+            <feComponentTransfer result="comp">
+                <feFuncA type="linear"/>
+            </feComponentTransfer>
+            <feComposite result="composite-4" operator="in" in2="SourceAlpha"/>
+            <feBlend result="blend" mode="luminosity" in2="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g style="fill: #412245; filter: url(#filter)">
+        <path id="Rectángulo_1" data-name="Rectángulo 1" class="cls-1"
+              d="M55.679,7.327H345.632c9.029,0,16.361,9.02,16.358,16.553,0,1.841-.868,170.048.015,277.2,0.5,60.755-83.547,92.132-165.923,92.218-57.676.06-144.9-28.833-152.912-72.433-0.194-1.058-4.17-22.4-4.17-22.4S39.316,24.7,39.321,23.881C39.321,22.921,46.366,7.33,55.679,7.327Z"
+              style="stroke: inherit; filter: none; fill: inherit"/>
+    </g>
+    <use xlink:href="#Rectángulo_1" style="stroke: #56120f; filter: none; fill: none"/>
+    <path id="Rectángulo_1-2" data-name="Rectángulo 1" class="cls-2"
+          d="M62.009,14.148H339.288c8.635,0,15.646,8.708,15.643,15.981,0,1.777-.83,164.168.014,267.614,0.479,58.655-79.894,88.946-158.67,89.029-55.155.059-138.566-27.836-146.228-69.928-0.186-1.021-3.987-21.621-3.987-21.621s0.3-264.306.307-265.094C46.366,29.2,53.1,14.151,62.009,14.148Z"/>
+    <path id="SC" class="cls-3"
+          d="M175.878,101.805a72.548,72.548,0,0,0-29.663-6.672q-21.025,0-34.227,12.909t-13.2,33.529q0,13.947,5.216,24.035t16.117,22.267l18.716,20.939q10.573,11.733,14.6,18.554a28.646,28.646,0,0,1,4.026,14.825q0,11.562-7.905,18.977t-20.129,7.413a38.882,38.882,0,0,1-15.32-3.336,75.8,75.8,0,0,1-10.268-4.966,4.372,4.372,0,0,0-.978-0.445v22.682q17.926,6.671,30.315,6.671,22.493,0,36.427-13.129t13.935-34.2a53.436,53.436,0,0,0-8.556-29.966q-8.558-13.058-24.728-30.819t-20.781-25.841q-4.611-8.074-4.609-15.19a22.505,22.505,0,0,1,7.742-17.19,26.607,26.607,0,0,1,18.661-7.113q10.918,0,24.611,6.671V101.805ZM301.866,261.317q-11.9,4.6-20.048,4.595-13.854,0-22.98-8.83T247.184,233.34q-2.529-14.913-2.526-41.328,0-44.37,11.572-59.43t27.87-15.063a52.515,52.515,0,0,1,17.766,3.409V97.8a122.9,122.9,0,0,0-24.122-2.965q-26.079,0-44.414,21.067T215,197.8q0,56.079,18.335,73.734t43.436,17.655a62.27,62.27,0,0,0,25.1-5.485V261.317Z"/>
+</svg>

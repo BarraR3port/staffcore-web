@@ -1,5 +1,8 @@
 const { format } = require('timeago.js');
 
+const { servername } = require('../keys');
+const { config } = require('../keys');
+
 const helpers = { };
 
 helpers.timeago = (timestamp) =>{
@@ -16,7 +19,16 @@ helpers.status = (status) =>{
     }
     if ( status === "closed"){
         return "Expired"
+    } else {
+        return "Expired"
     }
+}
+helpers.servername = () =>{
+    return servername.name;
+}
+
+helpers.configured = () =>{
+    return config.configured;
 }
 
 

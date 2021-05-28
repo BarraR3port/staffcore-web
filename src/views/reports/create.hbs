@@ -1,17 +1,17 @@
 <div class="create-form form-check-inline">
-    <div class="card-header">Ban a Player</div>
+    <div class="card-header">Report a Player</div>
     <div class="card-body">
-        <form action="/bans/create" method="POST" id="create-form" autocomplete="on" >
-            <label for="banned" class="mb-2" >Player Name</label>
-            <div class="input-icons" id="banned-input">
-                <i><img src="" id="banned-image" class="icon"></i>
+        <form action="/reports/create" method="POST" id="create-form" autocomplete="on" >
+            <label for="reported" class="mb-2" >Player Name</label>
+            <div class="input-icons" id="reported-input">
+                <i><img src="" id="reported-image" class="icon"></i>
                 <input type="text" id="Name" name="Name" placeholder="Type the Player Name" class="input-field" style="text-decoration-width: auto" required >
             </div>
 
             <label for="user" class="mb-2" >Your Nick Name</label>
             <div class="input-icons" id="user-input">
                 <i><img src="" id="player-image" class="icon" alt=""></i>
-                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
+                <label for="Reporter"></label><input type="text" id="Reporter" name="Reporter" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
             </div>
 
             <div class="input-icons" id="user-input">
@@ -20,21 +20,7 @@
             </div>
 
             <div>
-                <label for="datemin">Enter the date To Expire</label>
-                <input type="datetime-local" class="create-form datemin" id="expdate" value="" min="" name="expdate" step="1">
-            </div>
-
-
-            <div class="radio">
-                <label for="ban-ip">Ban IP?
-                    <input label="Yes" type="radio" id="Ip_Banned" name="Ip_Banned" value="true">
-                    <input label="No" type="radio" id="Ip_Banned" name="Ip_Banned" value="false" checked>
-                </label>
-            </div>
-
-
-            <div>
-                <button type="submit" class="btn btn-primary btn-save " tabindex="5" >Ban</button><a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-save " tabindex="5" >Report</button><a href="/reports" class="btn btn-primary btn-cancel">Cancel</a>
             </div>
         </form>
     </div>
@@ -77,21 +63,19 @@
         }
 
     }
-    const form = document.getElementById("banned-input");
+    const form = document.getElementById("reported-input");
     form.addEventListener("input", () => {
-        changeImg("banned-image", "Name" );
+        changeImg("reported-image", "Name" );
     });
     const form2 = document.getElementById("user-input");
     form2.addEventListener("input", () => {
-        changeImg("player-image", "Baner" );
+        changeImg("player-image", "Reporter" );
     });
     function myFunction() {
         document.getElementById("expdate").value = date;
         document.getElementById('expdate').min = date;
     }
     myFunction();
-
-    const radios = document.getElementsByName('ip-banned');
 
 </script>
 

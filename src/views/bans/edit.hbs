@@ -1,0 +1,83 @@
+<div class="create-form form-check-inline p-4" style="font-size: large">
+    <div class="text-center p-4" style="font-size: x-large">Edit the Ban {{bans.BanId}}</div>
+    <div class="card-body">
+        <form action="/bans/edit/{{bans.BanId}}" method="POST" id="create-form" autocomplete="on" >
+            <label for="banned" class="mb-2" >The Banned Name</label>
+            <div class="input-icons" id="banned-input" >
+                <i><img src="https://cravatar.eu/avatar/{{bans.Name}}/32.png" id="banned-image" class="icon"></i>
+                <input type="text" id="Name" name="Name" value="{{bans.Name}}" placeholder="Type the Player Name" class="input-field" style="text-decoration-width: auto" readonly required >
+            </div>
+
+            <label for="user" class="mb-2" >The Banner Nick Name</label>
+            <div class="input-icons" id="user-input">
+                <i><img src="https://cravatar.eu/avatar/{{bans.Baner}}/32.png" id="player-image" class="icon"></i>
+                <input type="text" id="Baner" name="Baner" value="{{bans.Baner}}" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
+            </div>
+
+            <div class="input-icons" id="user-input">
+                <label for="reason">Reason</label>
+                <input type="text" id="Reason" name="Reason" value="{{bans.Reason}}" class="input-field" style="text-decoration-width: auto" placeholder="Type the Reason" required>
+            </div>
+
+            <div>
+                <label for="datemin">Enter the date To Expire</label>
+                <input type="datetime-local" class="create-form datemin" value="" id="expdate" alt="{{bans.ExpDate}}" name="expdate" step="1">
+            </div>
+
+            <div class="radio">
+                <label for="ban-ip">Ban IP?
+                    <input label="Yes" type="radio" id="Ip_Banned_true" name="Ip_Banned" value="true" alt="{{bans.IP_Banned}}">
+                    <input label="No" type="radio" id="Ip_Banned_false" name="Ip_Banned" value="false" alt="{{bans.IP_Banned}}">
+                </label>
+            </div>
+            <div style=" text-align: center;">
+                <button type="submit" class="btn btn-primary btn-save" tabindex="5" >Confirm Edit</button><a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function changeImg( image, input ) {
+        const player_image = document.getElementById( image );
+        const player_input = document.getElementById( input ).value;
+
+        if (player_input !== undefined) {
+            player_image.src = `https://cravatar.eu/avatar/${player_input}/32.png`;
+        }
+        if (player_input === "" ){
+            player_input.src = "";
+        }
+
+    }
+    const form = document.getElementById("banned-input");
+    form.addEventListener("input", () => {
+        changeImg("banned-image", "Name" );
+    });
+    const form2 = document.getElementById("user-input");
+    form2.addEventListener("input", () => {
+        changeImg("player-image", "Baner" );
+    });
+
+
+
+    const radioTrue = document.getElementById('Ip_Banned_true');
+    const radioFalse = document.getElementById('Ip_Banned_false');
+    const date = document.getElementById('expdate');
+    if (radioTrue.alt.match('true') ) {
+        radioTrue.checked = true;
+    } else if (radioFalse.alt.match('false') ) {
+        radioFalse.checked = true;
+    }
+    function convertDateToHtml(date){
+        const day = date.substring(0,2);
+        const month = date.substring(3,5);
+        const year = date.substring(6,10);
+        const hour = date.substring(11,19);
+        return year + "-" + month + "-" + day + "T" + hour;
+    }
+    date.value = convertDateToHtml(date.alt);
+</script>
+
+

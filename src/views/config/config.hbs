@@ -1,0 +1,38 @@
+<h1>Config Section</h1>
+<div class="create-form form-check-inline p-4" >
+    <div class="text-center p-4" style="font-size: x-large">Edit the Ban </div>
+    <div class="card-body">
+        <form action="/config" method="POST" id="create-form" autocomplete="on" >
+            <label for="banned" class="mb-2" >The Banned Name</label>
+            <div id="banned-input" >
+                <input type="text" id="Name" name="Name" value="{{bans.Name}}" placeholder="Type the Player Name" class="input-field" style="text-decoration-width: auto" readonly required >
+            </div>
+
+            <label for="user" class="mb-2" >The Banner Nick Name</label>
+            <div class="input-icons" id="user-input">
+                <i><img src="https://cravatar.eu/avatar/{{bans.Baner}}/32.png" id="player-image" class="icon"></i>
+                <input type="text" id="Baner" name="Baner" value="{{bans.Baner}}" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
+            </div>
+
+            <div class="input-icons" id="user-input">
+                <label for="reason">Reason</label>
+                <input type="text" id="Reason" name="Reason" value="{{bans.Reason}}" class="input-field" style="text-decoration-width: auto" placeholder="Type the Reason" required>
+            </div>
+
+            <div>
+                <label for="datemin">Enter the date To Expire</label>
+                <input type="datetime-local" class="create-form datemin" value="" id="expdate" alt="{{bans.ExpDate}}" name="expdate" step="1">
+            </div>
+
+            <div class="radio">
+                <label for="ban-ip">Ban IP?
+                    <input label="Yes" type="radio" id="Ip_Banned_true" name="Ip_Banned" value="true" alt="{{bans.IP_Banned}}">
+                    <input label="No" type="radio" id="Ip_Banned_false" name="Ip_Banned" value="false" alt="{{bans.IP_Banned}}">
+                </label>
+            </div>
+            <div style=" text-align: center;">
+                <button type="submit" class="btn btn-primary btn-save" tabindex="5" >Confirm Edit</button><a href="/config" class="btn btn-primary btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

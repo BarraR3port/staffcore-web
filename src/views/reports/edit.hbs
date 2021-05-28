@@ -1,0 +1,53 @@
+<div class="create-form form-check-inline p-4" style="font-size: large">
+    <div class="text-center p-4" style="font-size: x-large">Edit the Report {{reports.ReportId}}</div>
+    <div class="card-body">
+        <form action="/reports/edit/{{reports.ReportId}}" method="POST" id="create-form" autocomplete="on" >
+            <label for="reported" class="mb-2" >The Reported Name</label>
+            <div class="input-icons" id="reported-input" >
+                <i><img src="https://cravatar.eu/avatar/{{reports.Name}}/32.png" id="reported-image" class="icon"></i>
+                <input type="text" id="Name" name="Name" value="{{reports.Name}}" placeholder="Type the Player Name" class="input-field" style="text-decoration-width: auto" readonly required >
+            </div>
+
+            <label for="user" class="mb-2" >The Reporter Nick Name</label>
+            <div class="input-icons" id="user-input">
+                <i><img src="https://cravatar.eu/avatar/{{reports.Reporter}}/32.png" id="player-image" class="icon"></i>
+                <input type="text" id="Reporter" name="Reporter" value="{{reports.Reporter}}" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
+            </div>
+
+            <div class="input-icons" id="user-input">
+                <label for="reason">Reason</label>
+                <input type="text" id="Reason" name="Reason" value="{{reports.Reason}}" class="input-field" style="text-decoration-width: auto" placeholder="Type the Reason" required>
+            </div>
+
+            <div style=" text-align: center;">
+                <button type="submit" class="btn btn-primary btn-save" tabindex="5" >Confirm Edit</button><a href="/reports" class="btn btn-primary btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    function changeImg( image, input ) {
+        const player_image = document.getElementById( image );
+        const player_input = document.getElementById( input ).value;
+
+        if (player_input !== undefined) {
+            player_image.src = `https://cravatar.eu/avatar/${player_input}/32.png`;
+        }
+        if (player_input === "" ){
+            player_input.src = "";
+        }
+
+    }
+    const form = document.getElementById("reported-input");
+    form.addEventListener("input", () => {
+        changeImg("reported-image", "Name" );
+    });
+    const form2 = document.getElementById("user-input");
+    form2.addEventListener("input", () => {
+        changeImg("player-image", "Reporter" );
+    });
+</script>
+
+

@@ -8,23 +8,21 @@ body, td {
   background-color: #16191c !important;
 }
 
-.login-form, .contenedor {
-  width: 70%;
-  padding-top: 150px;
-  margin: 0 auto;
-}
-
-.login-form h1 {
-  text-align: center;
-  color: midnightblue;
-  font-size: 28px;
-  padding: 70px 0 10px 0;
-}
-
-.login-form input[type="password"],
-.login-form input[type="text"] {
+.auth-form {
   width: 100%;
-  padding: 15px;
+  margin: 0 auto;
+  background-color: #081721;
+}
+
+.auth-form h3 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 28px;
+}
+
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
+  width: 100%;
   border: 1px solid #ced4da;
   margin-bottom: 20px;
   box-sizing: border-box;
@@ -124,7 +122,7 @@ body, td {
 
 /* Estilos boton CANCELAR*/
 .btn-cancel {
-  width: 50%;
+  width: 25%;
   padding: 15px;
   background-color: #6f42c1;
   border: 0;
@@ -134,6 +132,7 @@ body, td {
   font-size: medium;
   color: #ffffff;
   margin-top: 20px;
+  margin-left: 20px;
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
@@ -153,7 +152,7 @@ body, td {
 
 /* Estilos boton GUARDAR*/
 .btn-save {
-  width: 50%;
+  width: 25%;
   padding: 15px;
   background-color: #34D399;
   border: 0;
@@ -276,11 +275,10 @@ body, td {
   min-width: 50px;
   text-align: center;
 }
-.icon2 {
-  padding: 10%;
-  color: green !important;
+.target-face {
+  margin-top: 7%;
   min-width: 50px;
-  position: absolute;
+  text-align: center;
 }
 .input-field {
   width: 100%;
@@ -324,7 +322,7 @@ body, td {
 }
 
 .radio input:checked {
-  background-image: linear-gradient(180deg, #95d891, #74bbad);
+  background-image: linear-gradient(180deg, #34D399, #10B981);
   color: #ffffff;
   box-shadow: 0 1px 1px #0000002e;
   text-shadow: 0 1px 1px rgba(131, 85, 99, 0.48);
@@ -351,8 +349,9 @@ body, td {
   );
   border-radius: 3px;
 }
-
-
+ul {
+  list-style: none;
+}
 .price-table-wrapper{
   text-align: center;
   margin-top: 30px;
@@ -371,7 +370,7 @@ body, td {
       padding: 20px;
       font-size: 20px;
       color: #000000;
-      background: #E0E0E0;
+      background: rgba(172, 30, 30, 0.57);
     }
     &__price{
       margin: auto;
@@ -388,7 +387,7 @@ body, td {
       overflow: hidden;
       transition: all 0.3s ease-in-out;
       border-radius: 10%;
-
+      margin-top: 30px;
       &:before{
         position: absolute;
         left: -20%;
@@ -430,6 +429,7 @@ body, td {
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease-in-out;
+      margin-top: 30px;
 
       &:before{
         position: absolute;
@@ -464,10 +464,11 @@ body, td {
 
     &__list{
       padding: 20px;
-      color: #A0A0A0;
+      color: #ffffff;
+      width: fit-content;
       li{
         padding: 15px;
-        border-bottom: 1px solid #C8C8C8 ;
+        border-bottom: 1px solid #ffffff;
 
         &:last-child{
           border: none;
