@@ -1,13 +1,13 @@
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-
+const { isLoggedIn } = require('../lib/auth')
 const db = require('../database')
 
-router.get('/create' ,(req, res) => {
+router.get('/create' , isLoggedIn, (req, res) => {
     res.render('bans/create');
 })
-router.post('/create', async(req,res) => {
+router.post('/create', isLoggedIn, async(req,res) => {
     const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
     const date = app.getDate();
     const ExpDate = app.convertDate(expdate);
@@ -28,26 +28,26 @@ router.post('/create', async(req,res) => {
         res.redirect('/bans');
     });
 })
-router.get('/', async (res,req)=>{
+router.get('/', isLoggedIn, async (res,req)=>{
     const bans = await db.query('SELECT * FROM `sc_bans` ORDER BY `BanId`');
     req.render('bans/bans',{bans});
 })
 
 
-router.get('/delete/:id', async (req,res) =>{
+router.get('/delete/:id', isLoggedIn, async (req,res) =>{
     const id = req.params.id;
     await db.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
     req.flash('success', 'Ban Deleted Correctly')
     res.redirect('/bans')
 });
 
-router.get('/edit/:id', async (req,res) =>{
+router.get('/edit/:id', isLoggedIn, async (req,res) =>{
     const id = req.params.id;
     const bans = await db.query('SELECT * FROM `sc_bans` WHERE BanId = ?', [id]);
     res.render('bans/edit', {bans: bans[0]})
 });
 
-router.post('/edit/:id', async (req,res)=>{
+router.post('/edit/:id', isLoggedIn, async (req,res)=>{
     const id = req.params.id;
     const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
     const ExpDate = app.convertDate(expdate);
@@ -66,7 +66,7 @@ router.post('/edit/:id', async (req,res)=>{
 })
 
 
-router.get('/new' ,(req, res) => {
+router.get('/new' , isLoggedIn, (req, res) => {
     res.render('bans/bans');
 })
 
