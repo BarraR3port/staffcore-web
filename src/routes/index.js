@@ -7,6 +7,7 @@ router.get('/', (req,res) =>{
         configured: config.configured,
         message: 'this is served in https'
     })
+    res.render('index')
 })
 
 

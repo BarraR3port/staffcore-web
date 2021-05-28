@@ -11,9 +11,6 @@ module.exports = {
         if (config.configured){
             return next();
         }
-        res.json({
-            configured: false
-        })
         return res.redirect('/config');
     }
 

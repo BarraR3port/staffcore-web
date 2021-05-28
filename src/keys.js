@@ -1,6 +1,6 @@
 module.exports = {
     config: {
-        configured: false
+        configured: true
     },
     database:{
         host: 'localhost',

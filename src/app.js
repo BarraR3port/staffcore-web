@@ -29,7 +29,7 @@ const createUsersDatabase = async () =>{
 };
 createUsersDatabase()
 // Settings
-app.set('port', process.env.PORT || 82);
+app.set('port', process.env.PORT || 443);
 app.set('views', path.join(__dirname,'views'));
 app.engine('.hbs', hbs({
     defaultLayout: 'main',
