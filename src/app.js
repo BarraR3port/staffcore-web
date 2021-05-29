@@ -119,16 +119,7 @@ const options = {
 };
 
 app.get('/', function(req, res) {
-    res.json({
-        configured: config.configured,
-        message: 'this is served in https'
-    })
-})
-app.get('/test/json/1', function(req, res) {
-    res.json({
-        configured: config.configured,
-        message: 'this is served in https'
-    })
+    res.render('index')
 })
 // Starting The Server
 
