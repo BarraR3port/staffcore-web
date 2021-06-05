@@ -11,20 +11,28 @@
 </svg>
 {{#if success}}
     <div style="margin: 20px"></div>
-    <div class="alert alert-success mx-auto" style="width: 300px; justify-content: center; font-size: large" role="alert">
-        <svg class="bi flex-shrink-0 me-2" width="30" height="30" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+    <div class="alert alert-success mx-auto" style="width: 300px; justify-content: center; font-size: large"
+         role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="30" height="30" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill"/>
+        </svg>
         {{success}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin-left: 6px"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                style="margin-left: 6px"></button>
     </div>
 
 {{/if}}
 {{#if error}}
     <div class="container">
         <div style="margin: 20px"></div>
-        <div class="alert alert-danger mx-auto" style="width: fit-content; justify-content: center; font-size: large" role="alert">
-            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div class="alert alert-danger mx-auto" style="width: fit-content; justify-content: center; font-size: large"
+             role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                <use xlink:href="#exclamation-triangle-fill"/>
+            </svg>
             {{error}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin-left: 6px"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                    style="margin-left: 6px"></button>
         </div>
     </div>
 

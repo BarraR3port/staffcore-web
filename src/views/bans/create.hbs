@@ -1,27 +1,31 @@
 <div class="create-form form-check-inline">
     <div class="card-header">Ban a Player</div>
     <div class="card-body">
-        <form action="/bans/create" method="POST" id="create-form" autocomplete="on" >
-            <label for="banned" class="mb-2" >Player Name</label>
+        <form action="/bans/create" method="POST" id="create-form" autocomplete="on">
+            <label for="banned" class="mb-2">Player Name</label>
             <div class="input-icons" id="banned-input">
                 <i><img src="" id="banned-image" class="icon"></i>
-                <input type="text" id="Name" name="Name" placeholder="Type the Player Name" class="input-field" style="text-decoration-width: auto" required >
+                <input type="text" id="Name" name="Name" placeholder="Type the Player Name" class="input-field"
+                       style="text-decoration-width: auto" required>
             </div>
 
-            <label for="user" class="mb-2" >Your Nick Name</label>
+            <label for="user" class="mb-2">Your Nick Name</label>
             <div class="input-icons" id="user-input">
                 <i><img src="" id="player-image" class="icon" alt=""></i>
-                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Nick Name" class="input-field" style="text-decoration-width: auto" required >
+                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Nick Name"
+                                                  class="input-field" style="text-decoration-width: auto" required>
             </div>
 
             <div class="input-icons" id="user-input">
                 <label for="reason">Reason</label>
-                <input type="text" id="Reason" name="Reason" class="input-field" style="text-decoration-width: auto" placeholder="Type the Reason" required>
+                <input type="text" id="Reason" name="Reason" class="input-field" style="text-decoration-width: auto"
+                       placeholder="Type the Reason" required>
             </div>
 
             <div>
                 <label for="datemin">Enter the date To Expire</label>
-                <input type="datetime-local" class="create-form datemin" id="expdate" value="" min="" name="expdate" step="1">
+                <input type="datetime-local" class="create-form datemin" id="expdate" value="" min="" name="expdate"
+                       step="1">
             </div>
 
 
@@ -34,7 +38,8 @@
 
 
             <div>
-                <button type="submit" class="btn btn-primary btn-save " tabindex="5" >Ban</button><a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
+                <button type="submit" class="btn btn-primary btn-save " tabindex="5">Ban</button>
+                <a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
             </div>
         </form>
     </div>
@@ -42,53 +47,56 @@
 
 <script>
     const dNow = new Date();
-    let month = ( dNow.getMonth() + 1);
-    if ( month <= 9){
-        month = "0"+month.toString();
+    let month = (dNow.getMonth() + 1);
+    if (month <= 9) {
+        month = "0" + month.toString();
     }
     let day = dNow.getDate();
-    if ( day <= 9){
-        day = "0"+day.toString();
+    if (day <= 9) {
+        day = "0" + day.toString();
     }
     let hours = dNow.getHours();
-    if ( hours <= 9){
-        hours = "0"+hours.toString();
+    if (hours <= 9) {
+        hours = "0" + hours.toString();
     }
     let minutes = dNow.getMinutes();
-    if ( minutes <= 9){
-        minutes = "0"+minutes.toString();
+    if (minutes <= 9) {
+        minutes = "0" + minutes.toString();
     }
     let seconds = dNow.getSeconds();
-    if ( seconds <= 9){
-        seconds = "0"+seconds.toString();
+    if (seconds <= 9) {
+        seconds = "0" + seconds.toString();
     }
 
     const date = dNow.getFullYear() + '-' + month + '-' + day + 'T' + hours + ':' + minutes + ':' + seconds;
 
-    function changeImg( image, input ) {
-        const player_image = document.getElementById( image );
-        const player_input = document.getElementById( input ).value;
+    function changeImg(image, input) {
+        const player_image = document.getElementById(image);
+        const player_input = document.getElementById(input).value;
 
         if (player_input !== undefined) {
             player_image.src = `https://cravatar.eu/avatar/${player_input}/32.png`;
         }
-        if (player_input === "" ){
+        if (player_input === "") {
             player_input.src = "";
         }
 
     }
+
     const form = document.getElementById("banned-input");
     form.addEventListener("input", () => {
-        changeImg("banned-image", "Name" );
+        changeImg("banned-image", "Name");
     });
     const form2 = document.getElementById("user-input");
     form2.addEventListener("input", () => {
-        changeImg("player-image", "Baner" );
+        changeImg("player-image", "Baner");
     });
+
     function myFunction() {
         document.getElementById("expdate").value = date;
         document.getElementById('expdate').min = date;
     }
+
     myFunction();
 
     const radios = document.getElementsByName('ip-banned');

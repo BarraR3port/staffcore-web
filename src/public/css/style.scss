@@ -5,13 +5,14 @@ body, td {
   margin: auto;
   color: rgba(255, 253, 231, 0.781) !important;
   text-align: center;
-  background-color: #16191c !important;
+  background: #081721 !important;
 }
 
 .auth-form {
-  width: 100%;
-  margin: 0 auto;
+  size: auto;
+  margin: auto;
   background-color: #081721;
+  color: white;
 }
 
 .auth-form h3 {
@@ -31,10 +32,8 @@ body, td {
 
 /*Estilos boton LOGIN*/
 .btn-login {
-  width: 100%;
-  padding: 15px;
-  background-color: #34D399;
-  border: 0;
+  size: auto;
+  background-color: rgb(16, 185, 24);
   box-sizing: border-box;
   margin-top: 20px;
   margin-right: 5px;
@@ -47,21 +46,19 @@ body, td {
 
 .btn-login:hover, .btn-login:active {
   color: mintcream;
-  background-color: #10B981;
-  border-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
+  border-color: rgba(16, 185, 24, 0.69);
   text-rendering: unset;
 }
 
 .btn-login:focus {
-  box-shadow: 0 0 0 3px #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 24, 0.69);
 }
 
 /* Estilos boton REGISTER*/
 .btn-register {
-  width: 100%;
-  padding: 15px;
-  margin-left: 5px;
-  background-color: #6f42c1;
+  size: auto;
+  background-color: #d21818;
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -72,19 +69,16 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
-  text-decoration: none;
-  border-radius: .25rem;
 }
 
 .btn-register:hover, .btn-register:active {
   color: #fff;
-  background-color: #61428f;
-  border-color: #61428f;
+  background-color: rgba(210, 24, 24, 0.62);
+  border-color: rgba(210, 24, 24, 0.62);
 }
 
 .btn-register:focus {
-  box-shadow: 0 0 0 3px rgba(1211, 82, 179, 0.25);
+  box-shadow: 0 0 0 3px rgba(210, 24, 24, 0.62);
 }
 
 
@@ -92,7 +86,7 @@ body, td {
 .a-login:link, .a-login:visited {
   background-color: white;
   color: black;
-  border: 2px solid #10B981;
+  border: 2px solid #10b918;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -100,7 +94,7 @@ body, td {
 }
 
 .a-login:hover, .a-login:active {
-  background-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
   color: white;
 }
 
@@ -108,7 +102,7 @@ body, td {
 .a-logout:link, .a-logout:visited {
   background-color: white;
   color: black;
-  border: 2px solid #F87171;
+  border: 2px solid #d21818;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -116,16 +110,15 @@ body, td {
 }
 
 .a-logout:hover, .a-logout:active {
-  background-color: #F87171;
+  background-color: rgba(210, 24, 24, 0.62);
   color: white;
 }
 
 /* Estilos boton CANCELAR*/
 .btn-cancel {
-  width: 25%;
-  padding: 15px;
-  background-color: #6f42c1;
-  border: 0;
+  size: auto;
+  background-color: rgb(210, 24, 24);
+  border: 12px;
   box-sizing: border-box;
   cursor: pointer;
   font-weight: bold;
@@ -136,25 +129,23 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
 }
 
 .btn-cancel:hover, .btn-cancel:active {
   color: #ffffff;
-  background-color: #61428f;
-  border-color: #61428f;
+  background-color: rgba(210, 24, 24, 0.62);
+  border-color: rgba(210, 24, 24, 0.62);
 }
 
 .btn-cancel:focus {
-  box-shadow: 0 0 0 3px rgba(1211, 82, 179, 0.25);
+  box-shadow: 0 0 0 3px rgba(210, 24, 24, 0.62);
 }
 
 /* Estilos boton GUARDAR*/
 .btn-save {
-  width: 25%;
-  padding: 15px;
-  background-color: #34D399;
+  size: auto;
+  background-color: rgb(16, 185, 24);
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -165,18 +156,17 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
 }
 
 .btn-save:hover, .btn-save:active {
   color: #fff;
-  background-color: #10B981;
-  border-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
+  border-color: rgba(16, 185, 24, 0.69);
 }
 
 .btn-save:focus {
-  box-shadow: 0 0 0 3px #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 24, 0.69);
 }
 
 /* form User Registration */
@@ -229,24 +219,23 @@ body, td {
 }
 
 .select-css:focus {
-  box-decoration-break: #aaa;
+  box-decoration-break: unset;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
-  box-shadow: 0 0 0 3px -moz-mac-focusring;
   color: #222;
   outline: none;
 
 }
 
 
-
 #staffcore {
   color: white;
 }
-.add-button{
+
+.add-button {
   text-align: justify-all;
 }
 
-.create-form{
+.create-form {
   text-align: left;
   color: #ffffff;
   width: 70%;
@@ -254,7 +243,7 @@ body, td {
 
 .create-form input[type="password"],
 .create-form input[type="text"],
-.create-form input[type="datetime-local"]{
+.create-form input[type="datetime-local"] {
   width: 100%;
   padding: 15px;
   border: 1px solid #ced4da;
@@ -263,23 +252,28 @@ body, td {
   border-radius: .25rem;
   text-align: center;
 }
+
 .input-icons i {
   position: absolute;
 }
+
 .input-icons {
   width: 100%;
   margin-bottom: 10px;
 }
+
 .icon {
   padding: 10%;
   min-width: 50px;
   text-align: center;
 }
+
 .target-face {
   margin-top: 7%;
   min-width: 50px;
   text-align: center;
 }
+
 .input-field {
   width: 100%;
   padding: 10px;
@@ -292,12 +286,13 @@ body, td {
   border-radius: 5px;
   background-color: #a21b1b;
   padding: 3px 5px;
-  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
   width: 50%;
   text-align: center;
 }
+
 ::placeholder,
-.datemin{
+.datemin {
   color: #000000;
   opacity: 1;
 }
@@ -334,14 +329,16 @@ body, td {
   text-align: center;
   width: 100%;
 }
+
 .swal2-styled.swal2-confirm {
   background-color: #34D399 !important;
 }
-::-webkit-scrollbar{
+
+::-webkit-scrollbar {
   width: 15px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: linear-gradient(
                   46deg,
                   #0a53be,
@@ -349,34 +346,39 @@ body, td {
   );
   border-radius: 3px;
 }
+
 ul {
   list-style: none;
 }
-.price-table-wrapper{
+
+.price-table-wrapper {
   text-align: center;
   margin-top: 30px;
 
-  .featured-table{
-    box-shadow: 0px 0px 19px -3px rgba(0,0,0,1);
+  .featured-table {
+    box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 1);
   }
 
-  .pricing-table{
+  .pricing-table {
     display: inline-block;
     border: 1px solid #C8C8C8;
     background: #081721;
     margin: 10px;
     transition: all 0.3s ease-in-out;
-    &__header{
+
+    &__header {
       padding: 20px;
       font-size: 20px;
       color: #000000;
-      background: rgba(172, 30, 30, 0.57);
+      background: rgba(210, 24, 24, 0.62);
     }
-    &__price{
+
+    &__price {
       margin: auto;
       font-weight: 500;
     }
-    &__button{
+
+    &__button {
       display: inline-block;
       background: #0a2537;
       text-decoration: none;
@@ -388,7 +390,8 @@ ul {
       transition: all 0.3s ease-in-out;
       border-radius: 10%;
       margin-top: 30px;
-      &:before{
+
+      &:before {
         position: absolute;
         left: -20%;
         top: -10%;
@@ -401,7 +404,7 @@ ul {
         transition: all 0.3s ease-in-out;
       }
 
-      &:after{
+      &:after {
         position: absolute;
         content: '>';
         top: 0;
@@ -414,11 +417,12 @@ ul {
         transition: all 0.3s ease-in-out;
       }
 
-      &:hover{
+      &:hover {
         background: #00ff16;
       }
     }
-    &__redbutton{
+
+    &__redbutton {
       display: inline-block;
       background: #0a2537;
       text-decoration: none;
@@ -431,7 +435,7 @@ ul {
       transition: all 0.3s ease-in-out;
       margin-top: 30px;
 
-      &:before{
+      &:before {
         position: absolute;
         left: -20%;
         top: -10%;
@@ -444,7 +448,7 @@ ul {
         transition: all 0.3s ease-in-out;
       }
 
-      &:after{
+      &:after {
         position: absolute;
         content: '>';
         top: 0;
@@ -457,53 +461,98 @@ ul {
         transition: all 0.3s ease-in-out;
       }
 
-      &:hover{
-        background: #ff0000;
+      &:hover {
+        background: rgb(210, 24, 24);
       }
     }
 
-    &__list{
+    &__list {
       padding: 20px;
       color: #ffffff;
       width: fit-content;
-      li{
+
+      li {
         padding: 15px;
         border-bottom: 1px solid #ffffff;
 
-        &:last-child{
+        &:last-child {
           border: none;
         }
       }
     }
 
-    &:hover{
-      box-shadow: 0px 0px 19px -3px rgba(0,0,0,0.36);
-      .pricing-table__button{
+    &:hover {
+      box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 0.36);
+
+      .pricing-table__button {
         padding-left: 0;
         padding-right: 35px;
-        &:before{
+
+        &:before {
           top: -80%;
           transform: rotate(0deg);
           width: 100%;
         }
-        &:after{
+
+        &:after {
           opacity: 1;
           padding-right: 15px;
         }
       }
-      .pricing-table__redbutton{
+
+      .pricing-table__redbutton {
         padding-left: 0;
         padding-right: 35px;
-        &:before{
+
+        &:before {
           top: -80%;
           transform: rotate(0deg);
           width: 100%;
         }
-        &:after{
+
+        &:after {
           opacity: 1;
           padding-right: 15px;
         }
       }
     }
   }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header.header-nav-menu .header-right {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    background-color: #081721;
+  }
+}
+
+html.modern .header-right {
+  display: flex;
+  align-items: center;
+  height: 66px;
+}
+
+.header-right {
+  float: right;
+  height: 56px;
+}
+
+.navbar {
+  background-color: rgba(62, 21, 102, 0.18) !important;
+}
+.dropdown-menu {
+  background-color: #103553 !important;
+  color: white !important;
+}
+.dropdown-item{
+  color: white !important;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+  color: #5d79cd !important;
+  background-color: rgba(8, 23, 33, 0.65) !important;
+}
+.navbar-toggler-icon{
+  color: white !important;
 }

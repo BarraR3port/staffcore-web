@@ -1,29 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="/">{{servername}}</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <ul class="navbar-nav me-auto my-3 my-lg-1 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 {{#if user}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             Bans
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             <li><a class="dropdown-item" href="/bans">The Ban List</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/bans/create">Ban a Player</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             Reports
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                             <li><a class="dropdown-item" href="/reports">The Report List</a></li>
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item" href="/reports/create">Report a Player</a></li>
                         </ul>
                     </li>
@@ -33,10 +40,30 @@
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            {{#if user}}
-                <a class="nav-link" href="/profile" tabindex="-1" >Profile</a>
-                <a class="nav-link" href="/logout" tabindex="-1" >Logout</a>
-            {{/if}}
+                <div class="navbar-nav ml-auto justify" >
+                    <div class="nav-item dropdown">
+                    {{#if user}}
+                        <a class="nav-link dropdown-toggle" href="/profile" id="navbarScrollingDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="btn "><i><img src="https://cravatar.eu/avatar/{{user.username}}/32.png"
+                                                      id="player-image" class="icon" alt=""></i></div>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="/profile/settings" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
+                            <div class="divider dropdown-divider"></div>
+                            <a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    {{else}}
+                        <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle user-action"><img
+                                src="/img/favicon.ico" class="avatar" alt="Avatar">
+                            {{servername}} <b class="caret"></b></a>
+                        <div class="dropdown-menu">
+                            <a href="/login" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> LogIn</a>
+                            <a href="/register" class="dropdown-item"><i class="fas fa-sign-in-alt"></i> Register</a>
+                        </div>
+                    {{/if}}
+                    </div>
+                </div>
         </div>
     </div>
 </nav>

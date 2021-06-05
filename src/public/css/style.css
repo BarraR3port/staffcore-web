@@ -5,13 +5,14 @@ body, td {
   margin: auto;
   color: rgba(255, 253, 231, 0.781) !important;
   text-align: center;
-  background-color: #16191c !important;
+  background: #081721 !important;
 }
 
 .auth-form {
-  width: 100%;
-  margin: 0 auto;
+  size: auto;
+  margin: auto;
   background-color: #081721;
+  color: white;
 }
 
 .auth-form h3 {
@@ -31,10 +32,8 @@ body, td {
 
 /*Estilos boton LOGIN*/
 .btn-login {
-  width: 100%;
-  padding: 15px;
-  background-color: #34D399;
-  border: 0;
+  size: auto;
+  background-color: #10b918;
   box-sizing: border-box;
   margin-top: 20px;
   margin-right: 5px;
@@ -47,21 +46,19 @@ body, td {
 
 .btn-login:hover, .btn-login:active {
   color: mintcream;
-  background-color: #10B981;
-  border-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
+  border-color: rgba(16, 185, 24, 0.69);
   text-rendering: unset;
 }
 
 .btn-login:focus {
-  box-shadow: 0 0 0 3px #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 24, 0.69);
 }
 
 /* Estilos boton REGISTER*/
 .btn-register {
-  width: 100%;
-  padding: 15px;
-  margin-left: 5px;
-  background-color: #6f42c1;
+  size: auto;
+  background-color: #d21818;
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -72,26 +69,23 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
-  text-decoration: none;
-  border-radius: 0.25rem;
 }
 
 .btn-register:hover, .btn-register:active {
   color: #fff;
-  background-color: #61428f;
-  border-color: #61428f;
+  background-color: rgba(210, 24, 24, 0.62);
+  border-color: rgba(210, 24, 24, 0.62);
 }
 
 .btn-register:focus {
-  box-shadow: 0 0 0 3px rgba(255, 82, 179, 0.25);
+  box-shadow: 0 0 0 3px rgba(210, 24, 24, 0.62);
 }
 
 /* Estilos de link para ir a LOGIN*/
 .a-login:link, .a-login:visited {
   background-color: white;
   color: black;
-  border: 2px solid #10B981;
+  border: 2px solid #10b918;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -99,7 +93,7 @@ body, td {
 }
 
 .a-login:hover, .a-login:active {
-  background-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
   color: white;
 }
 
@@ -107,7 +101,7 @@ body, td {
 .a-logout:link, .a-logout:visited {
   background-color: white;
   color: black;
-  border: 2px solid #F87171;
+  border: 2px solid #d21818;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -115,16 +109,15 @@ body, td {
 }
 
 .a-logout:hover, .a-logout:active {
-  background-color: #F87171;
+  background-color: rgba(210, 24, 24, 0.62);
   color: white;
 }
 
 /* Estilos boton CANCELAR*/
 .btn-cancel {
-  width: 25%;
-  padding: 15px;
-  background-color: #6f42c1;
-  border: 0;
+  size: auto;
+  background-color: #d21818;
+  border: 12px;
   box-sizing: border-box;
   cursor: pointer;
   font-weight: bold;
@@ -135,25 +128,23 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
 }
 
 .btn-cancel:hover, .btn-cancel:active {
   color: #ffffff;
-  background-color: #61428f;
-  border-color: #61428f;
+  background-color: rgba(210, 24, 24, 0.62);
+  border-color: rgba(210, 24, 24, 0.62);
 }
 
 .btn-cancel:focus {
-  box-shadow: 0 0 0 3px rgba(255, 82, 179, 0.25);
+  box-shadow: 0 0 0 3px rgba(210, 24, 24, 0.62);
 }
 
 /* Estilos boton GUARDAR*/
 .btn-save {
-  width: 25%;
-  padding: 15px;
-  background-color: #34D399;
+  size: auto;
+  background-color: #10b918;
   border: 0;
   box-sizing: border-box;
   cursor: pointer;
@@ -164,18 +155,17 @@ body, td {
   /* Para dar la apariencia de un boton */
   -webkit-appearance: button;
   -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
 }
 
 .btn-save:hover, .btn-save:active {
   color: #fff;
-  background-color: #10B981;
-  border-color: #10B981;
+  background-color: rgba(16, 185, 24, 0.69);
+  border-color: rgba(16, 185, 24, 0.69);
 }
 
 .btn-save:focus {
-  box-shadow: 0 0 0 3px #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 24, 0.69);
 }
 
 /* form User Registration */
@@ -228,9 +218,8 @@ body, td {
 }
 
 .select-css:focus {
-  box-decoration-break: #aaa;
+  box-decoration-break: unset;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, 0.7);
-  box-shadow: 0 0 0 3px -moz-mac-focusring;
   color: #222;
   outline: none;
 }
@@ -373,7 +362,7 @@ ul {
   padding: 20px;
   font-size: 20px;
   color: #000000;
-  background: rgba(172, 30, 30, 0.57);
+  background: rgba(210, 24, 24, 0.62);
 }
 .price-table-wrapper .pricing-table__price {
   margin: auto;
@@ -457,7 +446,7 @@ ul {
   transition: all 0.3s ease-in-out;
 }
 .price-table-wrapper .pricing-table__redbutton:hover {
-  background: #ff0000;
+  background: #d21818;
 }
 .price-table-wrapper .pricing-table__list {
   padding: 20px;
@@ -499,6 +488,47 @@ ul {
 .price-table-wrapper .pricing-table:hover .pricing-table__redbutton:after {
   opacity: 1;
   padding-right: 15px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header.header-nav-menu .header-right {
+    position: absolute;
+    top: 0;
+    right: 60px;
+    background-color: #081721;
+  }
+}
+html.modern .header-right {
+  display: flex;
+  align-items: center;
+  height: 66px;
+}
+
+.header-right {
+  float: right;
+  height: 56px;
+}
+
+.navbar {
+  background-color: rgba(62, 21, 102, 0.18) !important;
+}
+
+.dropdown-menu {
+  background-color: #103553 !important;
+  color: white !important;
+}
+
+.dropdown-item {
+  color: white !important;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  color: #5d79cd !important;
+  background-color: rgba(8, 23, 33, 0.65) !important;
+}
+
+.navbar-toggler-icon {
+  color: white !important;
 }
 
 /*# sourceMappingURL=style.css.map */

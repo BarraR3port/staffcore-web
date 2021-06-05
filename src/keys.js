@@ -2,7 +2,7 @@ module.exports = {
     config: {
         configured: true
     },
-    database:{
+    database: {
         host: 'localhost',
         user: 'root',
         password: '',
@@ -12,7 +12,7 @@ module.exports = {
         name: 'StaffCore' //Here you need to change to Your Server Name
     },
     servers: {
-        server1:{
+        server1: {
             name: "",
             ip: "",
             port: ""

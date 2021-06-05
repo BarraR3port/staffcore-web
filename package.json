@@ -4,26 +4,33 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon src/app.js",
     "dev": "nodemon src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "bootstrap-icons": "^1.5.0",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
+    "cookies": "^0.8.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.2",
     "express-mysql-session": "^2.1.6",
     "express-session": "^1.17.2",
     "express-validator": "^6.11.1",
     "fs": "^0.0.1-security",
+    "got": "^9.6.0",
     "https": "^1.0.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "openssl": "^1.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "request": "^2.88.2",
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
