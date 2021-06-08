@@ -7,10 +7,12 @@ const flash = require('connect-flash');
 const MysqlStore = require('express-mysql-session')
 const {database, config} = require('./keys');
 const {isLoggedIn, isConfigured} = require('./lib/auth')
+const validator = require('express-validator');
 const passport = require('passport');
 const db = require('./database')
 const https = require('https');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 // Initializations
 const app = express();
@@ -18,27 +20,32 @@ require('./lib/passport');
 
 
 // CREATE THE USERS TABLE
-const createUsersDatabase = async () => {
+async function createUsersDatabase ()  {
+    // Create the Users Table
     await db.query(`CREATE TABLE IF NOT EXISTS sc_users (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
     username VARCHAR (20) NOT NULL UNIQUE KEY, 
-    mail VARCHAR(20) NOT NULL UNIQUE KEY,
+    mail VARCHAR(40) NOT NULL UNIQUE KEY,
     password VARCHAR(255) NOT NULL,
-    db VARCHAR(500),
+    serverId VARCHAR(15),
     role VARCHAR(20) NOT NULL DEFAULT 'User')`
     );
-
+    // Create the Servers Table
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers(
-    owner VARCHAR(20) NOT NULL,
-    server VARCHAR(30) NOT NULL,
+    serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    owner VARCHAR(20) NOT NULL UNIQUE KEY,
+    server VARCHAR(30) NOT NULL UNIQUE KEY,
     username VARCHAR(100) NOT NULL,
     db VARCHAR(100) NOT NULL,
     host VARCHAR(100) NOT NULL,
+    port VARCHAR(30) NOT NULL,
     password VARCHAR(100),
     staff VARCHAR(200),
     FOREIGN KEY (owner) REFERENCES sc_users (username))`
     );
-};
+    // Alter the Users table by adding the FK
+    await db.query('ALTER TABLE sc_users ADD FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)')
+}
 createUsersDatabase()
 // Settings
 app.set('port', process.env.PORT || 82);
@@ -54,17 +61,18 @@ app.set('view engine', 'hbs');
 
 // Middlewares
 app.use(session({
-    secret: 'JHAKLJh83ha9hJKHAD7H',
+    secret: 'LKJAHDSLKjhasdkj19090JKAJSD',
     resave: false,
     saveUninitialized: false,
     store: new MysqlStore(database)
-}))
+}));
 app.use(flash());
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
+//app.use(validator());
 
 // Global Variables
 
@@ -119,11 +127,12 @@ app.use((req, res, next) => {
     next();
 })
 app.use('/config', require('./routes/config'));
-app.use(isConfigured, require('./routes'));
-app.use(isConfigured, require('./routes/autentication'));
-app.use('/bans', isConfigured, require('./routes/bans'));
-app.use('/api', isConfigured, require('./routes/api'));
-app.use('/reports', isConfigured, require('./routes/reports'));
+app.use( require('./routes'));
+app.use( require('./routes/autentication'));
+app.use('/bans', require('./routes/bans'));
+app.use('/api', require('./routes/api'));
+app.use('/reports', require('./routes/reports'));
+app.use('/servers', require('./routes/servers'));
 
 
 // Public
@@ -145,4 +154,6 @@ secure.listen(app.get('port'), function() {
 
  */
 
-app.listen(app.get('port'), () => console.log('Server running at http://localhost:82/bans'))
+app.listen(app.get('port'), () => {
+    console.log('Server is in port', app.get('port'));
+});

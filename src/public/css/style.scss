@@ -263,7 +263,6 @@ body, td {
 }
 
 .icon {
-  padding: 10%;
   min-width: 50px;
   text-align: center;
 }
@@ -543,7 +542,7 @@ html.modern .header-right {
   background-color: rgba(62, 21, 102, 0.18) !important;
 }
 .dropdown-menu {
-  background-color: #103553 !important;
+  background-color: rgba(62, 21, 102, 0.7) !important;
   color: white !important;
 }
 .dropdown-item{
@@ -555,4 +554,12 @@ html.modern .header-right {
 }
 .navbar-toggler-icon{
   color: white !important;
+}
+.profile{
+  background-color: rgba(62, 21, 102, 0.7) !important;
+  color: white;
+}
+.profile-from{
+  color: black;
+  margin-right: .5rem!important;
 }

@@ -18,8 +18,8 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
-    <data-source name="@Google" uuid="80819901-02f3-4049-883f-7f8a88f42d55">
-      <database-info product="MariaDB" version="10.4.19-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.6.0" dbms="MARIADB" exact-version="10.4.19" exact-driver-version="2.6">
+    <data-source name="Google" uuid="8e75f069-0edd-482c-aa79-07a012781a3c">
+      <database-info product="MySQL" version="5.5.5-10.4.19-MariaDB" jdbc-version="4.2" driver-name="MySQL Connector/J" driver-version="mysql-connector-java-8.0.21 (Revision: 33f65445a1bcc544eb0120491926484da168f199)" dbms="MARIADB" exact-version="10.4.19" exact-driver-version="8.0">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>

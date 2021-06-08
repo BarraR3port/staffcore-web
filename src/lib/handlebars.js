@@ -3,6 +3,8 @@ const {format} = require('timeago.js');
 const {servername} = require('../keys');
 const {config} = require('../keys');
 
+const db = require('../database')
+
 const helpers = {};
 
 helpers.timeago = (timestamp) => {
@@ -31,5 +33,12 @@ helpers.configured = () => {
     return config.configured;
 }
 
+helpers.hasServerLinked = (serverId)=>{
+    return serverId !== null;
+}
+
+helpers.decode = (encodedString) =>{
+    return Buffer.from(encodedString, 'base64').toString('ascii');
+}
 
 module.exports = helpers;

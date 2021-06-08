@@ -1,11 +1,37 @@
-<div class="container p-4">
+<div class="container p-4" style="position: center;">
     <div class="row">
-        <div class="col-md-4 md-auto">
+        <div class="md-auto">
             <div class="card-body">
-                <h3>Welcome {{user.username}}</h3>
-                <a href="/bans" class="btn btn-primary m-4">
-                    the ban list
-                </a>
+                <!--<h3>Welcome {{user.username}}</h3>-->
+                {{#if (hasServerLinked user.serverId)}}
+                    {{#each server}}
+                    <h3>Server Name: {{server}}</h3>
+                    <div class="price-table-wrapper">
+                            <div class="pricing-table">
+                                <h2 class="pricing-table__header">{{owner}}  </h2>
+                                <i><img src="https://cravatar.eu/avatar/{{owner}}/128.png" id="banned-image" class="icon"></i>
+                                <ul class="pricing-table__list">
+                                    <li>Reason: {{ decode username}}</li>
+                                    <li>Ip Banned: {{decode db}}</li>
+                                    <li>Status: {{decode host}}</li>
+                                    <li>Ban id: {{decode password}}</li>
+                                    <a class="pricing-table__button" href="/bans/edit/{{BanId}}"><i class="fas fa-pencil-alt"></i></a><a
+                                        class="pricing-table__redbutton" href="/bans/delete/{{BanId}}"><i class="fas fa-minus-circle "></i></a>
+                                </ul>
+                            </div>
+                    </div>
+                    {{/each}}
+                {{else}}
+                    <div class="price-table-wrapper">
+                        <div class="pricing-table">
+                            <h2 class="pricing-table__header">You haven't Linked your Server with the Web</h2>
+                            <div class="mb-2 p-3">Please go to the server and type:</div>
+                            <div class="mb-2 p-3">/staffcore link &lt;Server Name&gt; &lt;User Name&gt; &lt;Password&gt; </div>
+                            <div class="mb-2 p-3">Remember that the User Name and the Password has to be the same </div>
+                            <div class="mb-2 p-3">credentials that you use in the web!</div>
+                        </div>
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>
