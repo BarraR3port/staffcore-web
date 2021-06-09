@@ -18,5 +18,12 @@
       <jdbc-url>jdbc:mysql://34.95.200.166:3306/staffcore</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Amazon" uuid="b2125a5b-de65-4c47-940f-be73df27748c">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://staffcore.clblgp3bqcme.us-east-2.rds.amazonaws.com :3306/staffcore</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

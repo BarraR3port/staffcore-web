@@ -32,5 +32,11 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="Amazon" uuid="b2125a5b-de65-4c47-940f-be73df27748c">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>staffcore</user-name>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>

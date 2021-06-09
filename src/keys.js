@@ -1,6 +1,6 @@
 module.exports = {
     database: {
-        host: '34.95.200.166',
+        host: 'staffcore.clblgp3bqcme.us-east-2.rds.amazonaws.com',
         user: 'staffcore',
         password: 'brunoysamuel2453',
         database: 'staffcore',
