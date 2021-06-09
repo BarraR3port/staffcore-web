@@ -63,7 +63,7 @@ async function createUsersDatabase ()  {
         maxReports INT NOT NULL DEFAULT 100,
         maxWarns INT NOT NULL DEFAULT 100,
         maxPlayers INT NOT NULL DEFAULT 1000,
-        public BOOLEAN NOT NULL DEFAULT TRUE,
+        isPublic BOOLEAN NOT NULL DEFAULT TRUE,
         CONSTRAINT fk_server_id_settings FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)
     )`);
 

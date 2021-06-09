@@ -40,9 +40,7 @@ async function addServer(database){
         const { username, db, host, password, port, address } = database;
         let owner = decode2(database.owner);
         let server = decode2(database.server);
-        let staff = {
-            owner
-        }
+        let staff = owner
         const insert = {
             owner,
             server,
