@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const got = require('got');
 const {database, config} = require('../keys');
-const {isConfigured, isLoggedIn} = require('../lib/auth')
 const passport = require('passport');
 const datab = require('../database')
 const bcrypt = require('bcrypt');
@@ -54,6 +53,7 @@ async function addServer(database){
         await datab.query('INSERT INTO sc_servers SET ?', [insert]);
         const result = await datab.query('SELECT serverId FROM sc_servers WHERE server LIKE ?', [server]);
         const serverId = result[0].serverId;
+        await datab.query('INSERT INTO sc_servers_settings SET ?', [serverId]);
         await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [serverId,3,owner])
 
     } catch (Exception){
@@ -65,8 +65,8 @@ async function removeServer(database){
         let owner = decode2(database.owner);
         const result = await datab.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [owner]);
         const serverId = result[0].serverId;
-        await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
         await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null,1,owner])
+        await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
     } catch (Exception){
         console.log(Exception)
     }
@@ -84,7 +84,7 @@ const isPlayerLinked = async ( player )=>{
 }
 
 
-router.get('/', isConfigured, (req, res) => {
+router.get('/', (req, res) => {
     res.redirect('/')
 })
 

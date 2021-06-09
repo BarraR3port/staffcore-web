@@ -55,6 +55,16 @@ CREATE TABLE IF NOT EXISTS sc_users (
     CONSTRAINT fk_staff_id FOREIGN KEY (staffId) REFERENCES sc_servers_staff(staffId),
     CONSTRAINT fk_server_id FOREIGN KEY (serverId) REFERENCES sc_servers(serverId));
 
+CREATE TABLE IF NOT EXISTS sc_servers_settings(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    serverId INT,
+    maxBans INT NOT NULL DEFAULT 100,
+    maxReports INT NOT NULL DEFAULT 100,
+    maxWarns INT NOT NULL DEFAULT 100,
+    maxPlayers INT NOT NULL DEFAULT 1000,
+    public BOOLEAN NOT NULL DEFAULT TRUE,
+    CONSTRAINT fk_server_id_settings FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)
+);
 
 
 

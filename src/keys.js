@@ -1,7 +1,4 @@
 module.exports = {
-    config: {
-        configured: true
-    },
     database: {
         host: '34.95.200.166',
         user: 'staffcore',

@@ -56,6 +56,17 @@ async function createUsersDatabase ()  {
         FOREIGN KEY fk_server_id(serverId) REFERENCES sc_servers(serverId))`
     );
 
+    await db.query( `CREATE TABLE IF NOT EXISTS sc_servers_settings(
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        serverId INT NOT NULL,
+        maxBans INT NOT NULL DEFAULT 100,
+        maxReports INT NOT NULL DEFAULT 100,
+        maxWarns INT NOT NULL DEFAULT 100,
+        maxPlayers INT NOT NULL DEFAULT 1000,
+        public BOOLEAN NOT NULL DEFAULT TRUE,
+        CONSTRAINT fk_server_id_settings FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)
+    )`);
+
 }
 createUsersDatabase()
 // Settings
