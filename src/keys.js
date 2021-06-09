@@ -3,10 +3,11 @@ module.exports = {
         configured: true
     },
     database: {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'staffcore'
+        host: '34.95.200.166',
+        user: 'staffcore',
+        password: 'brunoysamuel2453',
+        database: 'staffcore',
+        port: 3306
     },
     servername: {
         name: 'StaffCore'
