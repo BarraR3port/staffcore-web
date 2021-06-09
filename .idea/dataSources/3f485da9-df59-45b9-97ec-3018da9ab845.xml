@@ -985,891 +985,740 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <table id="298" parent="7" name="sc_bans"/>
     <table id="299" parent="7" name="sc_frozen"/>
     <table id="300" parent="7" name="sc_reports"/>
-    <table id="301" parent="7" name="sc_servers"/>
-    <table id="302" parent="7" name="sc_staff"/>
-    <table id="303" parent="7" name="sc_staffchat"/>
-    <table id="304" parent="7" name="sc_users"/>
-    <table id="305" parent="7" name="sc_vanish"/>
-    <table id="306" parent="7" name="sc_warns"/>
-    <table id="307" parent="7" name="sessions">
-      <Engine>InnoDB</Engine>
-    </table>
-    <column id="308" parent="285" name="Codigo_Admin">
+    <table id="301" parent="7" name="sc_staff"/>
+    <table id="302" parent="7" name="sc_staffchat"/>
+    <table id="303" parent="7" name="sc_vanish"/>
+    <table id="304" parent="7" name="sc_warns"/>
+    <column id="305" parent="285" name="Codigo_Admin">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="309" parent="285" name="Codigo_Sucursal">
+    <column id="306" parent="285" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="310" parent="285" name="Codigo_Colaborador">
+    <column id="307" parent="285" name="Codigo_Colaborador">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="311" parent="285" name="Codigo_Sucursal">
+    <index id="308" parent="285" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="312" parent="285" name="Codigo_Colaborador">
+    <index id="309" parent="285" name="Codigo_Colaborador">
       <ColNames>Codigo_Colaborador</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="313" parent="285" name="PRIMARY">
+    <key id="310" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Admin</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="314" parent="286" name="Codigo_Auto">
+    <column id="311" parent="286" name="Codigo_Auto">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="315" parent="286" name="Codigo_Sucursal">
+    <column id="312" parent="286" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="316" parent="286" name="Marca">
+    <column id="313" parent="286" name="Marca">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="317" parent="286" name="Modelo">
+    <column id="314" parent="286" name="Modelo">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="318" parent="286" name="Anio">
+    <column id="315" parent="286" name="Anio">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="319" parent="286" name="Usado">
+    <column id="316" parent="286" name="Usado">
       <Position>6</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="320" parent="286" name="PRIMARY">
+    <key id="317" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Auto</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="321" parent="287" name="Patente_Nueva">
+    <column id="318" parent="287" name="Patente_Nueva">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="322" parent="287" name="Codigo_Auto">
+    <column id="319" parent="287" name="Codigo_Auto">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="323" parent="287" name="Rut_Cliente">
+    <column id="320" parent="287" name="Rut_Cliente">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="324" parent="287" name="Codigo_Auto">
+    <index id="321" parent="287" name="Codigo_Auto">
       <ColNames>Codigo_Auto</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="325" parent="287" name="Rut_Cliente">
+    <index id="322" parent="287" name="Rut_Cliente">
       <ColNames>Rut_Cliente</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="326" parent="287" name="PRIMARY">
+    <key id="323" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Patente_Nueva</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="327" parent="288" name="Patente_Usada">
+    <column id="324" parent="288" name="Patente_Usada">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="328" parent="288" name="Rut_Ultimo">
+    <column id="325" parent="288" name="Rut_Ultimo">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="329" parent="288" name="Rut_Cliente">
+    <column id="326" parent="288" name="Rut_Cliente">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="330" parent="288" name="Codigo_Auto">
+    <column id="327" parent="288" name="Codigo_Auto">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="331" parent="288" name="Kilometraje">
+    <column id="328" parent="288" name="Kilometraje">
       <Position>5</Position>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="332" parent="288" name="Estado">
+    <column id="329" parent="288" name="Estado">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="333" parent="288" name="Precio_De_Compra">
+    <column id="330" parent="288" name="Precio_De_Compra">
       <Position>7</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="334" parent="288" name="Rut_Ultimo">
+    <index id="331" parent="288" name="Rut_Ultimo">
       <ColNames>Rut_Ultimo</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="335" parent="288" name="Rut_Cliente">
+    <index id="332" parent="288" name="Rut_Cliente">
       <ColNames>Rut_Cliente</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="336" parent="288" name="Codigo_Auto">
+    <index id="333" parent="288" name="Codigo_Auto">
       <ColNames>Codigo_Auto</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="337" parent="288" name="PRIMARY">
+    <key id="334" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Patente_Usada</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="338" parent="289" name="Rut_Cliente">
+    <column id="335" parent="289" name="Rut_Cliente">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="339" parent="289" name="Codigo_Venta">
+    <column id="336" parent="289" name="Codigo_Venta">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="340" parent="289" name="Patente_Nueva">
+    <column id="337" parent="289" name="Patente_Nueva">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="341" parent="289" name="Patente_Usada">
+    <column id="338" parent="289" name="Patente_Usada">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="342" parent="289" name="Nombres">
+    <column id="339" parent="289" name="Nombres">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="343" parent="289" name="Apellido_P">
+    <column id="340" parent="289" name="Apellido_P">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="344" parent="289" name="Apellido_M">
+    <column id="341" parent="289" name="Apellido_M">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="345" parent="289" name="Direccion">
+    <column id="342" parent="289" name="Direccion">
       <Position>8</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="346" parent="289" name="Telefonos">
+    <column id="343" parent="289" name="Telefonos">
       <Position>9</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="347" parent="289" name="Comuna">
+    <column id="344" parent="289" name="Comuna">
       <Position>10</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="348" parent="289" name="Ciudad">
+    <column id="345" parent="289" name="Ciudad">
       <Position>11</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="349" parent="289" name="Correo">
+    <column id="346" parent="289" name="Correo">
       <Position>12</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="350" parent="289" name="Codigo_Venta">
+    <index id="347" parent="289" name="Codigo_Venta">
       <ColNames>Codigo_Venta</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="351" parent="289" name="Patente_Nueva">
+    <index id="348" parent="289" name="Patente_Nueva">
       <ColNames>Patente_Nueva</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="352" parent="289" name="Patente_Usada">
+    <index id="349" parent="289" name="Patente_Usada">
       <ColNames>Patente_Usada</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="353" parent="289" name="PRIMARY">
+    <key id="350" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Rut_Cliente</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="354" parent="290" name="Codigo_Colaborador">
+    <column id="351" parent="290" name="Codigo_Colaborador">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="355" parent="290" name="Codigo_Sucursal">
+    <column id="352" parent="290" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="356" parent="290" name="Codigo_Admin">
+    <column id="353" parent="290" name="Codigo_Admin">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="357" parent="290" name="Codigo_Sucursal">
+    <index id="354" parent="290" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="358" parent="290" name="Codigo_Admin">
+    <index id="355" parent="290" name="Codigo_Admin">
       <ColNames>Codigo_Admin</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="359" parent="290" name="PRIMARY">
+    <key id="356" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Colaborador</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="360" parent="291" name="Nombre_Comuna">
+    <column id="357" parent="291" name="Nombre_Comuna">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="361" parent="291" name="Codigo_Sucursal">
+    <column id="358" parent="291" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="362" parent="291" name="Codigo_Sucursal">
+    <index id="359" parent="291" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="363" parent="291" name="PRIMARY">
+    <key id="360" parent="291" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Nombre_Comuna</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="364" parent="292" name="Codigo_Programacion">
+    <column id="361" parent="292" name="Codigo_Programacion">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="365" parent="292" name="Rut_Trabajador">
+    <column id="362" parent="292" name="Rut_Trabajador">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="366" parent="292" name="Codigo_Sucursal">
+    <column id="363" parent="292" name="Codigo_Sucursal">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="367" parent="292" name="Horario">
+    <column id="364" parent="292" name="Horario">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="368" parent="292" name="Rut_Trabajador">
+    <index id="365" parent="292" name="Rut_Trabajador">
       <ColNames>Rut_Trabajador</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="369" parent="292" name="Codigo_Sucursal">
+    <index id="366" parent="292" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="370" parent="292" name="PRIMARY">
+    <key id="367" parent="292" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Programacion</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="371" parent="293" name="Codigo_Sucursal">
+    <column id="368" parent="293" name="Codigo_Sucursal">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="372" parent="293" name="Nombre_Comuna">
+    <column id="369" parent="293" name="Nombre_Comuna">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="373" parent="293" name="Codigo_Admin">
+    <column id="370" parent="293" name="Codigo_Admin">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="374" parent="293" name="Codigo_Colaborador">
+    <column id="371" parent="293" name="Codigo_Colaborador">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="375" parent="293" name="Nombre_Sucursal">
+    <column id="372" parent="293" name="Nombre_Sucursal">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="376" parent="293" name="Codigo_Auto">
+    <column id="373" parent="293" name="Codigo_Auto">
       <Position>6</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="377" parent="293" name="Codigo_Venta">
+    <column id="374" parent="293" name="Codigo_Venta">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="378" parent="293" name="Codigo_Programacion">
+    <column id="375" parent="293" name="Codigo_Programacion">
       <Position>8</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="379" parent="293" name="Direccion">
+    <column id="376" parent="293" name="Direccion">
       <Position>9</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="380" parent="293" name="Ciudad">
+    <column id="377" parent="293" name="Ciudad">
       <Position>10</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="381" parent="293" name="Telefonos">
+    <column id="378" parent="293" name="Telefonos">
       <Position>11</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="382" parent="293" name="Nombre_Comuna">
+    <index id="379" parent="293" name="Nombre_Comuna">
       <ColNames>Nombre_Comuna</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="383" parent="293" name="Codigo_Admin">
+    <index id="380" parent="293" name="Codigo_Admin">
       <ColNames>Codigo_Admin</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="384" parent="293" name="Codigo_Colaborador">
+    <index id="381" parent="293" name="Codigo_Colaborador">
       <ColNames>Codigo_Colaborador</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="385" parent="293" name="Telefonos">
+    <index id="382" parent="293" name="Telefonos">
       <ColNames>Telefonos</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="386" parent="293" name="PRIMARY">
+    <key id="383" parent="293" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Sucursal</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="387" parent="294" name="Numeros_De_Telefonos">
+    <column id="384" parent="294" name="Numeros_De_Telefonos">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="388" parent="294" name="Codigo_Sucursal">
+    <column id="385" parent="294" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="389" parent="294" name="Rut_Trabajador">
+    <column id="386" parent="294" name="Rut_Trabajador">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="390" parent="294" name="Rut_Cliente">
+    <column id="387" parent="294" name="Rut_Cliente">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <index id="391" parent="294" name="Codigo_Sucursal">
+    <index id="388" parent="294" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="392" parent="294" name="Rut_Trabajador">
+    <index id="389" parent="294" name="Rut_Trabajador">
       <ColNames>Rut_Trabajador</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="393" parent="294" name="Rut_Cliente">
+    <index id="390" parent="294" name="Rut_Cliente">
       <ColNames>Rut_Cliente</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="394" parent="294" name="PRIMARY">
+    <key id="391" parent="294" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Numeros_De_Telefonos</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="395" parent="295" name="Rut">
+    <column id="392" parent="295" name="Rut">
       <Position>1</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="396" parent="295" name="Codigo_Programacion">
+    <column id="393" parent="295" name="Codigo_Programacion">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="397" parent="295" name="Codigo_Admin">
+    <column id="394" parent="295" name="Codigo_Admin">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="398" parent="295" name="Codigo_Colaborador">
+    <column id="395" parent="295" name="Codigo_Colaborador">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="399" parent="295" name="Nombres">
+    <column id="396" parent="295" name="Nombres">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="400" parent="295" name="Apellido_P">
+    <column id="397" parent="295" name="Apellido_P">
       <Position>6</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="401" parent="295" name="Apellido_M">
+    <column id="398" parent="295" name="Apellido_M">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="402" parent="295" name="Direccion">
+    <column id="399" parent="295" name="Direccion">
       <Position>8</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="403" parent="295" name="Telefono">
+    <column id="400" parent="295" name="Telefono">
       <Position>9</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="404" parent="295" name="Ciudad">
+    <column id="401" parent="295" name="Ciudad">
       <Position>10</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="405" parent="295" name="Coreeo">
+    <column id="402" parent="295" name="Coreeo">
       <Position>11</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="406" parent="295" name="Codigo_Programacion">
+    <index id="403" parent="295" name="Codigo_Programacion">
       <ColNames>Codigo_Programacion</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="407" parent="295" name="Codigo_Admin">
+    <index id="404" parent="295" name="Codigo_Admin">
       <ColNames>Codigo_Admin</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="408" parent="295" name="Codigo_Colaborador">
+    <index id="405" parent="295" name="Codigo_Colaborador">
       <ColNames>Codigo_Colaborador</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="409" parent="295" name="Telefono">
+    <index id="406" parent="295" name="Telefono">
       <ColNames>Telefono</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="410" parent="295" name="PRIMARY">
+    <key id="407" parent="295" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Rut</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="411" parent="296" name="Codigo_Venta">
+    <column id="408" parent="296" name="Codigo_Venta">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="412" parent="296" name="Codigo_Sucursal">
+    <column id="409" parent="296" name="Codigo_Sucursal">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="413" parent="296" name="Rut_Cliente">
+    <column id="410" parent="296" name="Rut_Cliente">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="414" parent="296" name="Dia">
+    <column id="411" parent="296" name="Dia">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="415" parent="296" name="Mes">
+    <column id="412" parent="296" name="Mes">
       <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="416" parent="296" name="Anio">
+    <column id="413" parent="296" name="Anio">
       <Position>6</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="417" parent="296" name="Precio_Clp">
+    <column id="414" parent="296" name="Precio_Clp">
       <Position>7</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="418" parent="296" name="Precio_Usd">
+    <column id="415" parent="296" name="Precio_Usd">
       <Position>8</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="419" parent="296" name="Codigo_Sucursal">
+    <index id="416" parent="296" name="Codigo_Sucursal">
       <ColNames>Codigo_Sucursal</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="420" parent="296" name="Rut_Cliente">
+    <index id="417" parent="296" name="Rut_Cliente">
       <ColNames>Rut_Cliente</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="421" parent="296" name="PRIMARY">
+    <key id="418" parent="296" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Codigo_Venta</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="422" parent="297" name="Name">
+    <column id="419" parent="297" name="Name">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="423" parent="297" name="Ips">
+    <column id="420" parent="297" name="Ips">
       <Position>2</Position>
       <DataType>varchar(200)|0s</DataType>
     </column>
-    <key id="424" parent="297" name="PRIMARY">
+    <key id="421" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="425" parent="298" name="BanId">
+    <column id="422" parent="298" name="BanId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="426" parent="298" name="Name">
+    <column id="423" parent="298" name="Name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="427" parent="298" name="Baner">
+    <column id="424" parent="298" name="Baner">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="428" parent="298" name="Reason">
+    <column id="425" parent="298" name="Reason">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="429" parent="298" name="Date">
+    <column id="426" parent="298" name="Date">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="430" parent="298" name="ExpDate">
+    <column id="427" parent="298" name="ExpDate">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="431" parent="298" name="IP">
+    <column id="428" parent="298" name="IP">
       <Position>7</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="432" parent="298" name="IP_Banned">
+    <column id="429" parent="298" name="IP_Banned">
       <Position>8</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="433" parent="298" name="Status">
+    <column id="430" parent="298" name="Status">
       <Position>9</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="434" parent="298" name="PRIMARY">
+    <key id="431" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>BanId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="435" parent="299" name="Name">
+    <column id="432" parent="299" name="Name">
       <Position>1</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="436" parent="299" name="Enabled">
+    <column id="433" parent="299" name="Enabled">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <key id="437" parent="299" name="PRIMARY">
+    <key id="434" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Name</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="438" parent="300" name="ReportId">
+    <column id="435" parent="300" name="ReportId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="439" parent="300" name="Name">
+    <column id="436" parent="300" name="Name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="440" parent="300" name="Reporter">
+    <column id="437" parent="300" name="Reporter">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="441" parent="300" name="Reason">
+    <column id="438" parent="300" name="Reason">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <column id="442" parent="300" name="Date">
+    <column id="439" parent="300" name="Date">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="443" parent="300" name="Status">
+    <column id="440" parent="300" name="Status">
       <Position>6</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <key id="444" parent="300" name="PRIMARY">
+    <key id="441" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ReportId</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="445" parent="301" name="serverId">
+    <column id="442" parent="301" name="Name">
+      <Position>1</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="443" parent="301" name="Enabled">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <key id="444" parent="301" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="445" parent="302" name="Name">
+      <Position>1</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="446" parent="302" name="Enabled">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <key id="447" parent="302" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="448" parent="303" name="Name">
+      <Position>1</Position>
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="449" parent="303" name="Enabled">
+      <Position>2</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <key id="450" parent="303" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="451" parent="304" name="WarnId">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="446" parent="301" name="owner">
+    <column id="452" parent="304" name="Name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="447" parent="301" name="server">
-      <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="448" parent="301" name="username">
-      <Position>4</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="449" parent="301" name="db">
-      <Position>5</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="450" parent="301" name="host">
-      <Position>6</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="451" parent="301" name="port">
-      <Position>7</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="452" parent="301" name="password">
-      <Position>8</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <column id="453" parent="301" name="staff">
-      <Position>9</Position>
-      <DataType>varchar(200)|0s</DataType>
-    </column>
-    <index id="454" parent="301" name="owner">
-      <ColNames>owner</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="455" parent="301" name="server">
-      <ColNames>server</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="456" parent="301" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>serverId</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="457" parent="301" name="owner">
-      <ColNames>owner</ColNames>
-      <UnderlyingIndexName>owner</UnderlyingIndexName>
-    </key>
-    <key id="458" parent="301" name="server">
-      <ColNames>server</ColNames>
-      <UnderlyingIndexName>server</UnderlyingIndexName>
-    </key>
-    <column id="459" parent="302" name="Name">
-      <Position>1</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="460" parent="302" name="Enabled">
-      <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <key id="461" parent="302" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>Name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="462" parent="303" name="Name">
-      <Position>1</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="463" parent="303" name="Enabled">
-      <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <key id="464" parent="303" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>Name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="465" parent="304" name="id">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="466" parent="304" name="username">
-      <Position>2</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="467" parent="304" name="mail">
-      <Position>3</Position>
-      <DataType>varchar(40)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="468" parent="304" name="password">
-      <Position>4</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="469" parent="304" name="serverId">
-      <Position>5</Position>
-      <DataType>varchar(15)|0s</DataType>
-    </column>
-    <column id="470" parent="304" name="role">
-      <Position>6</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>&apos;User&apos;</DefaultExpression>
-    </column>
-    <index id="471" parent="304" name="username">
-      <ColNames>username</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="472" parent="304" name="mail">
-      <ColNames>mail</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <index id="473" parent="304" name="serverId">
-      <ColNames>serverId</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="474" parent="304" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="475" parent="304" name="username">
-      <ColNames>username</ColNames>
-      <UnderlyingIndexName>username</UnderlyingIndexName>
-    </key>
-    <key id="476" parent="304" name="mail">
-      <ColNames>mail</ColNames>
-      <UnderlyingIndexName>mail</UnderlyingIndexName>
-    </key>
-    <column id="477" parent="305" name="Name">
-      <Position>1</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="478" parent="305" name="Enabled">
-      <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-    </column>
-    <key id="479" parent="305" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>Name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="480" parent="306" name="WarnId">
-      <Position>1</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="481" parent="306" name="Name">
-      <Position>2</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="482" parent="306" name="Warner">
+    <column id="453" parent="304" name="Warner">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="483" parent="306" name="Reason">
+    <column id="454" parent="304" name="Reason">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="484" parent="306" name="Date">
+    <column id="455" parent="304" name="Date">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="485" parent="306" name="ExpDate">
+    <column id="456" parent="304" name="ExpDate">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="486" parent="306" name="Status">
+    <column id="457" parent="304" name="Status">
       <Position>7</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="487" parent="306" name="PRIMARY">
+    <key id="458" parent="304" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>WarnId</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="488" parent="307" name="session_id">
-      <Position>1</Position>
-      <DataType>varchar(128)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Collation>utf8mb4_bin</Collation>
-    </column>
-    <column id="489" parent="307" name="expires">
-      <Position>2</Position>
-      <DataType>int unsigned|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="490" parent="307" name="data">
-      <Position>3</Position>
-      <DataType>mediumtext|0s</DataType>
-      <Collation>utf8mb4_bin</Collation>
-    </column>
-    <key id="491" parent="307" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>session_id</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>

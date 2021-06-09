@@ -40,13 +40,10 @@ module.exports = {
         switch (type){
             case 'get-bans': return pool.query('SELECT * FROM sc_bans');
             case 'get-bans-count':
-                let i;
                 const result = await pool.query('SELECT * FROM sc_bans');
                 return result.length;
-        }
-
-        if (type === 'get-bans'){
-            return pool.query('SELECT * FROM sc_bans');
+            case 'get-server-info': return pool.query('SELECT * FROM sc_servers');
+            default: return pool.query('SELECT * FROM sc_bans');
         }
 
     }

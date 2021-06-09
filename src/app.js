@@ -5,8 +5,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const MysqlStore = require('express-mysql-session')
-const {database, config} = require('./keys');
-const {isLoggedIn, isConfigured} = require('./lib/auth')
+const {database} = require('./keys');
 const validator = require('express-validator');
 const passport = require('passport');
 const db = require('./database')
@@ -21,30 +20,42 @@ require('./lib/passport');
 
 // CREATE THE USERS TABLE
 async function createUsersDatabase ()  {
-    // Create the Users Table
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_users (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-    username VARCHAR (20) NOT NULL UNIQUE KEY, 
-    mail VARCHAR(40) NOT NULL UNIQUE KEY,
-    password VARCHAR(255) NOT NULL,
-    serverId VARCHAR(15),
-    role VARCHAR(20) NOT NULL DEFAULT 'User')`
+    // Create the Staff table
+
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_staff(
+        staffId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        role VARCHAR(20) NOT NULL UNIQUE KEY)`
     );
+    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('User')`);
+    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('Mod')`);
+    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('Admin')`);
+
     // Create the Servers Table
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers(
-    serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    owner VARCHAR(20) NOT NULL UNIQUE KEY,
-    server VARCHAR(30) NOT NULL UNIQUE KEY,
-    username VARCHAR(100) NOT NULL,
-    db VARCHAR(100) NOT NULL,
-    host VARCHAR(100) NOT NULL,
-    port VARCHAR(30) NOT NULL,
-    password VARCHAR(100),
-    staff VARCHAR(200),
-    FOREIGN KEY (owner) REFERENCES sc_users (username))`
+        serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        owner VARCHAR(20) NOT NULL UNIQUE KEY,
+        server VARCHAR(30) NOT NULL UNIQUE KEY,
+        address VARCHAR(30) NOT NULL UNIQUE KEY,
+        username VARCHAR(100) NOT NULL,
+        db VARCHAR(100) NOT NULL,
+        host VARCHAR(100) NOT NULL,
+        port VARCHAR(30) NOT NULL,
+        password VARCHAR(100),
+        staff VARCHAR(200))`
     );
-    // Alter the Users table by adding the FK
-    await db.query('ALTER TABLE sc_users ADD FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)')
+
+    // Create the Users Table
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_users (
+        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR (20) NOT NULL UNIQUE KEY,
+        mail VARCHAR(40) NOT NULL UNIQUE KEY,
+        password VARCHAR(255) NOT NULL,
+        serverId INT,
+        staffId INT NOT NULL DEFAULT 1,
+        FOREIGN KEY fk_staff_id(staffId) REFERENCES sc_servers_staff(staffId),
+        FOREIGN KEY fk_server_id(serverId) REFERENCES sc_servers(serverId))`
+    );
+
 }
 createUsersDatabase()
 // Settings

@@ -38,12 +38,13 @@ async function isPasswordCorrect(name , pass) {
 }
 async function addServer(database){
     try{
-        const { username, db, host, password, port} = database;
+        const { username, db, host, password, port, address } = database;
         let owner = decode2(database.owner);
         let server = decode2(database.server);
         const insert = {
             owner,
             server,
+            address,
             username,
             db,
             host,
@@ -53,8 +54,7 @@ async function addServer(database){
         await datab.query('INSERT INTO sc_servers SET ?', [insert]);
         const result = await datab.query('SELECT serverId FROM sc_servers WHERE server LIKE ?', [server]);
         const serverId = result[0].serverId;
-        const role = "Owner";
-        await datab.query('UPDATE sc_users SET serverId = ?, role = ? WHERE username = ?', [serverId,role,owner])
+        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [serverId,3,owner])
 
     } catch (Exception){
         console.log(Exception)
@@ -66,8 +66,7 @@ async function removeServer(database){
         const result = await datab.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [owner]);
         const serverId = result[0].serverId;
         await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
-        const role = "User";
-        await datab.query('UPDATE sc_users SET serverId = ?, role = ? WHERE username = ?', [null,role,owner])
+        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null,1,owner])
     } catch (Exception){
         console.log(Exception)
     }
@@ -106,7 +105,6 @@ router.get('/:base64', async (req, res) => {
                         if ( !await isServerRegistered(serverDecoded) ){
                             if ( !await isPlayerLinked( playerName ) ){
                                 await addServer(database);
-
                                 res.send("&aThe web and your server has successfully Linked")
                             } else {
                                 res.send("&cYou have already registered another server");
