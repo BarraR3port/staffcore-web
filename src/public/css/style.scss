@@ -563,3 +563,13 @@ html.modern .header-right {
   color: #0dcaf0;
   margin-right: .5rem!important;
 }
+.progress {
+  text-align:center;
+  width:50%;
+  margin:15px auto;
+}
+.progress-value {
+  position:absolute;
+  right:0;
+  left:0;
+}

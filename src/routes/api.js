@@ -40,6 +40,9 @@ async function addServer(database){
         const { username, db, host, password, port, address } = database;
         let owner = decode2(database.owner);
         let server = decode2(database.server);
+        let staff = {
+            owner
+        }
         const insert = {
             owner,
             server,
@@ -48,12 +51,22 @@ async function addServer(database){
             db,
             host,
             port,
-            password
+            password,
+            staff
         };
         await datab.query('INSERT INTO sc_servers SET ?', [insert]);
         const result = await datab.query('SELECT serverId FROM sc_servers WHERE server LIKE ?', [server]);
         const serverId = result[0].serverId;
-        await datab.query('INSERT INTO sc_servers_settings SET ?', [serverId]);
+        let maxBans = 100, maxReports = 100, maxWarns = 100, maxPlayers = 1000, isPublic = false;
+        const serverSettings = {
+            serverId,
+            maxBans,
+            maxReports,
+            maxWarns,
+            maxPlayers,
+            isPublic
+        }
+        await datab.query('INSERT INTO sc_servers_settings SET ?', [serverSettings]);
         await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [serverId,3,owner])
 
     } catch (Exception){
@@ -94,7 +107,6 @@ router.get('/:base64', async (req, res) => {
     try {
         const database = JSON.parse(decode(stringEncoded));
         const type = decode2(database.type);
-        console.log(database)
         if ( type === "link"){
             if (await isRegistered(decode(database.owner))) {
                 try {

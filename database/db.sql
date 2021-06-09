@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS sc_servers_settings(
     maxReports INT NOT NULL DEFAULT 100,
     maxWarns INT NOT NULL DEFAULT 100,
     maxPlayers INT NOT NULL DEFAULT 1000,
-    public BOOLEAN NOT NULL DEFAULT TRUE,
+    isPublic BOOLEAN NOT NULL DEFAULT TRUE,
     CONSTRAINT fk_server_id_settings FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)
 );
-
+INSERT INTO sc_servers_settings(public,serverId) VALUES (public =?, serverId= ?)
 
 

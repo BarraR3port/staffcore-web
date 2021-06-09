@@ -2,6 +2,12 @@ const mysql = require('mysql');
 const {promisify} = require('util');
 const db = require('../database')
 
+async function isAdmin( userId ){
+    //TODO CREATE THE ADMIN STUFF
+
+    return true;
+}
+
 module.exports = {
     isLoggedIn(req, res, next) {
         if (req.isAuthenticated()) {
@@ -9,12 +15,6 @@ module.exports = {
         }
         req.flash('error', `You must be logged in`);
         return res.redirect('/login');
-    },
-    isConfigured(req, res, next) {
-        if (config.configured) {
-            return next();
-        }
-        return res.redirect('/config');
     },
     async connectExternalDb(host, user, password, db, port, type){
         const database = {
@@ -31,25 +31,43 @@ module.exports = {
                 throw error;
             }
             if (connection) connection.release();
-            console.log('Database connected');
         });
 
         pool.query = promisify(pool.query);
         switch (type){
             case 'get-bans': return pool.query('SELECT * FROM sc_bans');
             case 'get-bans-length':
-                const result = await pool.query('SELECT * FROM sc_bans');
-                return result.length;
+                const lengthBans = await pool.query('SELECT * FROM sc_bans');
+                return await lengthBans.length;
+            case 'get-open-bans':
+                const openBans = await pool.query(`SELECT * FROM sc_bans WHERE Status LIKE 'open'`);
+                return await openBans.length;
+            case 'get-closed-bans':
+                const  closedBans = await pool.query(`SELECT * FROM sc_bans WHERE Status LIKE 'closed'`);
+                return await closedBans.length;
+            case 'get-reports': return pool.query('SELECT * FROM sc_reports');
+            case 'get-reports-length':
+                const lengthReports = await pool.query('SELECT * FROM sc_reports');
+                return await lengthReports.length;
+            case 'get-open-reports':
+                const openReports = await pool.query(`SELECT * FROM sc_reports WHERE Status LIKE 'open'`);
+                return await openReports.length;
+            case 'get-closed-reports':
+                const closedReports = await pool.query(`SELECT * FROM sc_reports WHERE Status LIKE 'closed'`);
+                return await closedReports.length;
             case 'get-server-info': return pool.query('SELECT * FROM sc_servers');
             case 'get-server-staff': return pool.query('SELECT * FROM sc_servers_staff');
             default: return pool.query('SELECT * FROM sc_bans');
         }
 
     },
-    isPublic(req, res, next) {
-        const serverId = req.user.serverId;
-        const result = db.query('SELECT public FROM sc_servers_settings WHERE serverId LIKE ?',[serverId])
-        if (result[0].public){
+    async isPublic(req, res, next) {
+        if (await isAdmin( 123 ) ){
+            return next();
+        }
+        const serverId = req.user.serverId
+        const result = await db.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?',[serverId])
+        if (await result[0].isPublic){
             return next();
         }
         req.flash('error', `You are not allowed to see the details of this server`);
