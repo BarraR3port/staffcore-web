@@ -1,7 +1,7 @@
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-const {isLoggedIn, connectExternalDb, isPublic, isAdmin} = require('../lib/auth');
+const {isLoggedIn, connectExternalDb, isPublic, isAdmin, isStaff} = require('../lib/auth');
 const db = require('../database');
 
 function decode(str) {
@@ -60,7 +60,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 })
 
 
-router.get('/:serv', isLoggedIn, isPublic, async (req, res) => {
+router.get('/:serv', isLoggedIn, isPublic, isStaff, async (req, res) => {
     const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?',[req.user.username]);
     const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
     const rawServerSettings = await db.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])

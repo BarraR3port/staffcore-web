@@ -73,6 +73,21 @@ module.exports = {
         req.flash('error', `You are not allowed to see the details of this server`);
         return res.redirect('/');
 
+    },
+    async isStaff(req,res,next){
+        const server = req.params.serv
+        const username = req.user.username
+        const response = await db.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?',[username,server])
+        if (response.length > 0){
+            const staff = response[0].staff.toString().split(',');
+            for (let i = 0; i < staff.length;i++){
+                console.log(staff[i])
+            }
+            return next();
+        } else {
+            req.flash('error', `You are not part of the staff of this server`);
+            return res.redirect('/');
+        }
     }
 
 }

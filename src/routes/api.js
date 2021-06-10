@@ -77,6 +77,7 @@ async function removeServer(database){
         const result = await datab.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [owner]);
         const serverId = result[0].serverId;
         await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null,1,owner])
+        await datab.query('DELETE FROM sc_servers_settings WHERE serverId = ?', [serverId]);
         await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
     } catch (Exception){
         console.log(Exception)
@@ -115,22 +116,40 @@ router.get('/:base64', async (req, res) => {
                         if ( !await isServerRegistered(serverDecoded) ){
                             if ( !await isPlayerLinked( playerName ) ){
                                 await addServer(database);
-                                res.send("&aThe web and your server has successfully Linked")
+                                res.json({
+                                    "type" : "success",
+                                    "msg" : "link_success"
+                                })
                             } else {
-                                res.send("&cYou have already registered another server");
+                                res.json({
+                                    "type" : "error",
+                                    "msg" : "error_already_registered"
+                                })
                             }
                         } else {
-                            res.send("&cThis server is already registered by another Player");
+                            res.json({
+                                "type" : "error",
+                                "msg" : "error_already_registered_by_other"
+                            })
                         }
                     } else {
-                        res.send("&cThe Password is not correct!");
+                        res.json({
+                            "type" : "error",
+                            "msg" : "error_incorrect_password"
+                        })
                     }
                 } catch (Exception) {
                     console.log(Exception)
-                    res.send("&cSomething went wrong")
+                    res.json({
+                        "type" : "error",
+                        "msg" : "error_catch"
+                    })
                 }
             } else {
-                res.send("&cYou are not registered, or your Username is different than the Web");
+                res.json({
+                    "type" : "error",
+                    "msg" : "error_incorrect_username"
+                })
             }
         } else if ( type === "unlink"){
             if (await isRegistered(decode(database.owner))) {
@@ -142,26 +161,43 @@ router.get('/:base64', async (req, res) => {
                         if ( await isServerRegistered(serverDecoded) ){
                             if ( await isPlayerLinked( playerName ) ){
                                 await removeServer(database);
-                                res.send("&aThe web and your server has successfully Un Linked")
+                                res.json({
+                                    "type" : "success",
+                                    "msg" : "unlink_success"
+                                })
                             } else {
-                                res.send("&cThat server does not correspond to you");
+                                res.json({
+                                    "type" : "error",
+                                    "msg" : "error_already_registered"
+                                })
                             }
                         } else {
-                            res.send("&cThis server is registered by another Player");
+                            res.json({
+                                "type" : "error",
+                                "msg" : "error_already_registered_by_other"
+                            })
                         }
                     } else {
-                        res.send("&cThe Password is not correct!");
+                        res.json({
+                            "type" : "error",
+                            "msg" : "error_incorrect_password"
+                        })
                     }
                 } catch (Exception) {
                     console.log(Exception)
-                    res.send("&cSomething went wrong")
+                    res.json({
+                        "type" : "error",
+                        "msg" : "error_catch"
+                    })
                 }
             } else {
-                res.send("&cYou are not registered, or your Username is different than the Web");
+                res.json({
+                    "type" : "error",
+                    "msg" : "error_incorrect_username"
+                })
             }
         }
     } catch (SyntaxError) {
-        console.log(SyntaxError)
         res.send("What are you doing?")
     }
 });
