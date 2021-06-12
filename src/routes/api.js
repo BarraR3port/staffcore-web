@@ -28,16 +28,18 @@ async function isRegistered(name) {
     const registeredPlayer = await datab.query('SELECT username FROM `sc_users` WHERE username LIKE ?', [name]);
     return registeredPlayer.length !== 0;
 }
-async function isPasswordCorrect(name , pass) {
+
+async function isPasswordCorrect(name, pass) {
     const registeredPlayer = await datab.query('SELECT password FROM `sc_users` WHERE username LIKE ?', [name]);
-    const booleanPassword = await bcrypt.compare(pass,registeredPlayer[0].password).then((result)=>{
+    const booleanPassword = await bcrypt.compare(pass, registeredPlayer[0].password).then((result) => {
         return result;
     });
     return booleanPassword;
 }
-async function addServer(database){
-    try{
-        const { username, db, host, password, port, address } = database;
+
+async function addServer(database) {
+    try {
+        const {username, db, host, password, port, address} = database;
         let owner = decode2(database.owner);
         let server = decode2(database.server);
         let staff = owner
@@ -65,32 +67,33 @@ async function addServer(database){
             isPublic
         }
         await datab.query('INSERT INTO sc_servers_settings SET ?', [serverSettings]);
-        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [serverId,3,owner])
+        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [serverId, 3, owner])
 
-    } catch (Exception){
+    } catch (Exception) {
         console.log(Exception)
     }
 }
-async function removeServer(database){
-    try{
+
+async function removeServer(database) {
+    try {
         let owner = decode2(database.owner);
         const result = await datab.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [owner]);
         const serverId = result[0].serverId;
-        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null,1,owner])
+        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null, 1, owner])
         await datab.query('DELETE FROM sc_servers_settings WHERE serverId = ?', [serverId]);
         await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
-    } catch (Exception){
+    } catch (Exception) {
         console.log(Exception)
     }
 }
 
 
-const isServerRegistered = async ( server ) =>{
+const isServerRegistered = async (server) => {
     const result = await datab.query('SELECT server FROM `sc_servers` WHERE server LIKE ?', [server]);
     return result.length !== 0;
 }
 
-const isPlayerLinked = async ( player )=>{
+const isPlayerLinked = async (player) => {
     const result = await datab.query('SELECT serverId FROM `sc_users` WHERE username LIKE ?', [player]);
     return result[0].serverId !== null;
 }
@@ -106,94 +109,94 @@ router.get('/:base64', async (req, res) => {
     try {
         const database = JSON.parse(decode(stringEncoded));
         const type = decode2(database.type);
-        if ( type === "link"){
+        if (type === "link") {
             if (await isRegistered(decode(database.owner))) {
                 try {
                     const playerName = decode2(database.owner);
                     const webPasswordDecoded = decode2(database.webPasswordEncoded);
                     const serverDecoded = decode2(database.server);
-                    if ( await isPasswordCorrect(playerName, webPasswordDecoded) ){
-                        if ( !await isServerRegistered(serverDecoded) ){
-                            if ( !await isPlayerLinked( playerName ) ){
+                    if (await isPasswordCorrect(playerName, webPasswordDecoded)) {
+                        if (!await isServerRegistered(serverDecoded)) {
+                            if (!await isPlayerLinked(playerName)) {
                                 await addServer(database);
                                 res.json({
-                                    "type" : "success",
-                                    "msg" : "link_success"
+                                    "type": "success",
+                                    "msg": "link_success"
                                 })
                             } else {
                                 res.json({
-                                    "type" : "error",
-                                    "msg" : "error_already_registered"
+                                    "type": "error",
+                                    "msg": "error_already_registered"
                                 })
                             }
                         } else {
                             res.json({
-                                "type" : "error",
-                                "msg" : "error_already_registered_by_other"
+                                "type": "error",
+                                "msg": "error_already_registered_by_other"
                             })
                         }
                     } else {
                         res.json({
-                            "type" : "error",
-                            "msg" : "error_incorrect_password"
+                            "type": "error",
+                            "msg": "error_incorrect_password"
                         })
                     }
                 } catch (Exception) {
                     console.log(Exception)
                     res.json({
-                        "type" : "error",
-                        "msg" : "error_catch"
+                        "type": "error",
+                        "msg": "error_catch"
                     })
                 }
             } else {
                 res.json({
-                    "type" : "error",
-                    "msg" : "error_incorrect_username"
+                    "type": "error",
+                    "msg": "error_incorrect_username"
                 })
             }
-        } else if ( type === "unlink"){
+        } else if (type === "unlink") {
             if (await isRegistered(decode(database.owner))) {
                 try {
                     const playerName = decode2(database.owner);
                     const webPasswordDecoded = decode2(database.webPasswordEncoded);
                     const serverDecoded = decode2(database.server);
-                    if ( await isPasswordCorrect(playerName, webPasswordDecoded) ){
-                        if ( await isServerRegistered(serverDecoded) ){
-                            if ( await isPlayerLinked( playerName ) ){
+                    if (await isPasswordCorrect(playerName, webPasswordDecoded)) {
+                        if (await isServerRegistered(serverDecoded)) {
+                            if (await isPlayerLinked(playerName)) {
                                 await removeServer(database);
                                 res.json({
-                                    "type" : "success",
-                                    "msg" : "unlink_success"
+                                    "type": "success",
+                                    "msg": "unlink_success"
                                 })
                             } else {
                                 res.json({
-                                    "type" : "error",
-                                    "msg" : "error_already_registered"
+                                    "type": "error",
+                                    "msg": "error_already_registered"
                                 })
                             }
                         } else {
                             res.json({
-                                "type" : "error",
-                                "msg" : "error_already_registered_by_other"
+                                "type": "error",
+                                "msg": "error_already_registered_by_other"
                             })
                         }
                     } else {
                         res.json({
-                            "type" : "error",
-                            "msg" : "error_incorrect_password"
+                            "type": "error",
+                            "msg": "error_incorrect_password"
                         })
                     }
                 } catch (Exception) {
                     console.log(Exception)
                     res.json({
-                        "type" : "error",
-                        "msg" : "error_catch"
+                        "type": "error",
+                        "msg": "error_catch"
                     })
                 }
             } else {
                 res.json({
-                    "type" : "error",
-                    "msg" : "error_incorrect_username"
+                    "type": "error",
+                    "msg": "error_incorrect_username"
                 })
             }
         }

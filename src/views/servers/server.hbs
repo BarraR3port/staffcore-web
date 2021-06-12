@@ -2,84 +2,179 @@
     <div class="main-body m-4">
         <!-- /Breadcrumb -->
         <div class="row gutters-sm">
-                <div class="col-md-4 mb-4">
-                    <div class="card profile">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center p-3">
-                                <img src="https://cravatar.eu/avatar/{{globalInfo.username}}/256.png" class="rounded" width="60%" alt="img">
-                                <div class="mt-3">
-                                    <h4>{{globalInfo.username}}</h4>
-                                </div>
+            <div class="col-md-4 mb-4">
+                <div class="card profile">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center p-3">
+                            <img src="https://cravatar.eu/avatar/{{globalInfo.username}}/256.png" class="rounded"
+                                 width="60%" alt="img">
+                            <div class="mt-3">
+                                <h4>{{globalInfo.username}}</h4>
                             </div>
                         </div>
                     </div>
-                    <div class="card mt-3 profile">
-                        <ul class="list-group list-group-flush ">
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
-                                <span class="mb-1"><span class="material-icons profile-from">dns</span></span>
-                                <span class="text-secondary">{{globalInfo.server}}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
-                                <span class="mb-1"><span class="material-icons profile-from">email</span></span>
-                                <span class="text-secondary">{{globalInfo.mail}}</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
-                                <span class="mb-1"><span class="material-icons profile-from">groups</span></span>
-                                <span class="text-secondary">{{globalInfo.staff}}</span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-            <div class="col-md-8" >
+                <div class="card mt-3 profile">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">dns</span></span>
+                            <span>{{globalInfo.server}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">email</span></span>
+                            <span>{{globalInfo.mail}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">groups</span></span>
+                            <span>{{globalInfo.staff}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card mt-3 profile">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">no_accounts</span></span>
+                            <span>{{globalInfo.bansLength}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">warning</span></span>
+                            <span>{{globalInfo.reportsLength}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">new_releases</span></span>
+                            <span>{{globalInfo.warnsLength}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">group</span></span>
+                            <span>{{globalInfo.playersLength}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
                 <div class="card mb-3 profile">
                     <div class="card-body">
                         <div class="row">
-                            <img class="rounded" alt="img" src="https://api.loohpjames.com/serverbanner.png?ip={{decode serverInfo.address}}&width=1224">
+                            <img class="rounded" alt="img" src="https://api.loohpjames.com/serverbanner.png?ip={{decode
+                                serverInfo.address}}&width=1224">
                         </div>
                     </div>
                 </div>
 
                 <div class="row gutters-sm">
+                    <!-- --------------= BANS =-------------- -->
                     <div class="col-sm-6 mb-3">
-                        <div class="card h-100 profile" >
+                        <div class="card h-100 profile">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Bans</h6>
+                                <h6 class="d-flex align-items-center"><span class="material-icons profile-from">no_accounts</span>Bans</h6>
                                 <small>Current Bans</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.bansLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.bansLengthPercentage}}%; " aria-valuenow="{{globalInfo.bansLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxBans}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.bansLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.bansLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
                                 <small>Open Bans</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.openBansLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.openBansLengthPercentage}}%; " aria-valuenow="{{globalInfo.openBansLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxBans}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.openBansLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.openBansLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
                                 <small>Closed Bans</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.closedBansLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.closedBansLengthPercentage}}%; " aria-valuenow="{{globalInfo.closedBansLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxBans}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.closedBansLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.closedBansLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxBans}}"></div>
+                                </div>
+                                <div class="row buttons-container">
+                                    <div class="button" id="button-6">
+                                        <div id="spin"></div>
+                                        <a href="/servers/{{globalInfo.server}}/bans">Ban List</a>
+                                    </div>
+                                    <div class="button" id="button-6">
+                                        <div id="spin"></div>
+                                        <a href="/servers/{{globalInfo.server}}/bans">Ban List</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- --------------= REPORTS =-------------- -->
                     <div class="col-sm-6 mb-3">
-                        <div class="card h-100 profile" >
+                        <div class="card h-100 profile">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Reports</h6>
+                                <h6 class="d-flex align-items-center mb-3"><span class="material-icons profile-from">warning</span>Reports</h6>
                                 <small>Current Reports</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.reportsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.reportsLengthPercentage}}%; " aria-valuenow="{{globalInfo.reportsLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxBans}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.reportsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.reportsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
                                 <small>Open Reports</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.openReportsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.openReportsLengthPercentage}}%; " aria-valuenow="{{globalInfo.openReportsLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxReports}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.openReportsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.openReportsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxReports}}"></div>
                                 </div>
                                 <small>Closed Reports</small>
-                                <div class="progress mb-3 " style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.closedReportsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{globalInfo.closedReportsLengthPercentage}}%; " aria-valuenow="{{globalInfo.closedReportsLengthPercentage}}" aria-valuemin="0" aria-valuemax="{{serverSettings.maxReports}}"></div>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar"
+                                         style="width: {{globalInfo.closedReportsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.closedReportsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- --------------= WARNS =-------------- -->
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100 profile">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><span class="material-icons profile-from">new_releases</span>Warns</h6>
+                                <small>Current Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.warnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.warnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.warnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                                <small>Open Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.openWarnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.openWarnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.openWarnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                                <small>Closed Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.closedWarnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar"
+                                         style="width: {{globalInfo.closedWarnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.closedWarnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
                                 </div>
                             </div>
                         </div>

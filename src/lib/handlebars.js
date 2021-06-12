@@ -33,16 +33,16 @@ helpers.configured = () => {
     return config.configured;
 }
 
-helpers.hasServerLinked = (serverId)=>{
+helpers.hasServerLinked = (serverId) => {
     return serverId !== null;
 }
 
-helpers.decode = (encodedString) =>{
+helpers.decode = (encodedString) => {
     return Buffer.from(encodedString, 'base64').toString('ascii');
 }
 
 helpers.getServerById = async (serverId) => {
-    const results = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?',[serverId])
+    const results = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?', [serverId])
     return results[0].serverId;
 }
 module.exports = helpers;

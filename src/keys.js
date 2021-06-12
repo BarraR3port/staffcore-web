@@ -6,13 +6,6 @@ module.exports = {
         database: 'staffcore',
         port: 3306
     },
-    /*database: {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'staffcore',
-        port: 3306
-    },*/
     servername: {
         name: 'StaffCore'
     }

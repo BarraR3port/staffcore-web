@@ -4,8 +4,8 @@ const passport = require('passport');
 const {isLoggedIn} = require('../lib/auth')
 const db = require('../database')
 
-async function hasServerLinked(user){
-    const result = await db.query('SELECT serverId FROM sc_users WHERE username LIKE ?',[user])
+async function hasServerLinked(user) {
+    const result = await db.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [user])
     return result[0].serverId !== null;
 }
 
@@ -35,14 +35,14 @@ router.post('/login', (req, res, next) => {
 })
 
 router.get('/profile', isLoggedIn, async (req, res) => {
-    console.log(req.user.username);
-    if ( await hasServerLinked( req.user.username ) ){
-        const serverId = await db.query('SELECT serverId FROM sc_users WHERE username LIKE ?',[req.user.username])
-        const server = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?',[serverId[0].serverId])
-        await res.render('profile', {server});
-        return;
-    }
-    await res.render('profile');
+        console.log(req.user.username);
+        if (await hasServerLinked(req.user.username)) {
+            const serverId = await db.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [req.user.username])
+            const server = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId[0].serverId])
+            await res.render('profile', {server});
+            return;
+        }
+        await res.render('profile');
     }
 )
 

@@ -1,3 +1,11 @@
+*,*:after, *:before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body, td {
   font-family: 'Titillium Web', sans-serif;
   text-decoration-color: #c5fff8;
@@ -409,8 +417,7 @@ ul {
         top: 0;
         right: 0;
         font-size: 25px;
-        padding: 15px;
-        padding-right: 40px;
+        padding: 15px 40px 15px 15px;
         color: white;
         opacity: 0;
         transition: all 0.3s ease-in-out;
@@ -541,35 +548,160 @@ html.modern .header-right {
 .navbar {
   background-color: rgba(62, 21, 102, 0.18) !important;
 }
+
 .dropdown-menu {
   background-color: rgba(62, 21, 102, 0.7) !important;
   color: white !important;
 }
-.dropdown-item{
+
+.dropdown-item {
   color: white !important;
 }
+
 .dropdown-item:focus, .dropdown-item:hover {
   color: #5d79cd !important;
   background-color: rgba(8, 23, 33, 0.65) !important;
 }
-.navbar-toggler-icon{
+
+.navbar-toggler-icon {
   color: white !important;
 }
-.profile{
+
+.profile {
   background-color: rgba(62, 21, 102, 0.7) !important;
   color: white;
 }
-.profile-from{
-  color: #0dcaf0;
-  margin-right: .5rem!important;
+
+.profile-from {
+  color: #0d6efd;
+  margin-right: .5rem !important;
 }
+
 .progress {
-  text-align:center;
-  width:50%;
-  margin:15px auto;
+  text-align: center;
+  width: 50%;
+  margin: 15px auto;
 }
+
 .progress-value {
-  position:absolute;
-  right:0;
-  left:0;
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+#contenedor_carga{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  z-index: 10000;
+}
+
+#carga{
+  border: 15px solid #ccc;
+  border-top: groove rgba(62, 21, 102, 0.7) !important;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  -webkit-animation: girar 1.5s linear infinite;
+  -o-animation: girar 1.5s linear infinite;
+  animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+.buttons-container {
+  width: 100%;
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  height: 40px;
+  width: 150px;
+  border: 2px solid #BFC0C0;
+  margin: 20px 20px 20px 20px;
+  color: #BFC0C0;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  font-size: .8em;
+  letter-spacing: 1.5px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#button-6 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#button-6 a {
+  position: relative;
+  transition: all .45s ease-Out;
+  text-decoration: none;
+}
+
+#spin {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  left: 70px;
+  top: 20px;
+  transform: rotate(0deg);
+  background: none;
+  position: absolute;
+  transition: all .5s ease-Out;
+}
+
+#button-6:hover #spin {
+  width: 200%;
+  height: 500%;
+  opacity: 1;
+  left: -70px;
+  top: -70px;
+  background: #BFC0C0;
+  transform: rotate(80deg);
+}
+
+#button-6:hover a {
+  color: #2D3142;
+}
+
+#spin {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  left: 70px;
+  top: 20px;
+  transform: rotate(0deg);
+  background: none;
+  position: absolute;
+  transition: all .5s ease-Out;
+}
+
+#button-6:hover #spin {
+  width: 200%;
+  height: 500%;
+  opacity: 1;
+  left: -70px;
+  top: -70px;
+  background: #BFC0C0;
+  transform: rotate(80deg);
+}
+
+#button-6:hover a {
+  color: #2D3142;
 }

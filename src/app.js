@@ -19,7 +19,7 @@ require('./lib/passport');
 
 
 // CREATE THE USERS TABLE
-async function createUsersDatabase ()  {
+async function createUsersDatabase() {
     // Create the Staff table
 
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_staff(
@@ -56,18 +56,24 @@ async function createUsersDatabase ()  {
         FOREIGN KEY fk_server_id(serverId) REFERENCES sc_servers(serverId))`
     );
 
-    await db.query( `CREATE TABLE IF NOT EXISTS sc_servers_settings(
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        serverId INT NOT NULL,
-        maxBans INT NOT NULL DEFAULT 100,
-        maxReports INT NOT NULL DEFAULT 100,
-        maxWarns INT NOT NULL DEFAULT 100,
-        maxPlayers INT NOT NULL DEFAULT 1000,
-        isPublic BOOLEAN NOT NULL DEFAULT TRUE,
-        CONSTRAINT fk_server_id_settings FOREIGN KEY (serverId) REFERENCES sc_servers(serverId)
-    )`);
-
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_settings
+                    ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                      serverId INT NOT NULL,
+                      maxBans INT NOT NULL DEFAULT 100,
+                      maxReports INT NOT NULL DEFAULT 100,
+                      maxWarns INT NOT NULL DEFAULT 100,
+                      maxPlayers INT NOT NULL DEFAULT 1000,
+                      isPublic BOOLEAN NOT NULL DEFAULT TRUE,
+                      CONSTRAINT fk_server_id_settings FOREIGN KEY
+                    ( serverId) REFERENCES sc_servers ( serverId ))`
+    );
+    await db.query( `CREATE TABLE IF NOT EXISTS sc_web_admins (
+                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                     username VARCHAR(30) NOT NULL UNIQUE KEY
+                     )`)
+    await db.query( `INSERT IGNORE INTO sc_web_admins(username) VALUES (?) `,['BarraR3port'])
 }
+
 createUsersDatabase()
 // Settings
 app.set('port', process.env.PORT || 82);
@@ -137,7 +143,8 @@ async function getIp(banned) {
                                  WHERE Name LIKE '${banned}'`)
     try {
         return rows[0].Ips;
-    } catch (error) {}
+    } catch (error) {
+    }
 }
 
 module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp}
@@ -149,8 +156,8 @@ app.use((req, res, next) => {
     next();
 })
 app.use('/config', require('./routes/config'));
-app.use( require('./routes'));
-app.use( require('./routes/autentication'));
+app.use(require('./routes'));
+app.use(require('./routes/autentication'));
 app.use('/bans', require('./routes/bans'));
 app.use('/api', require('./routes/api'));
 app.use('/reports', require('./routes/reports'));
