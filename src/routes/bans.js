@@ -65,9 +65,4 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 
 })
 
-
-router.get('/new', isLoggedIn, (req, res) => {
-    res.render('bans/bans');
-})
-
 module.exports = router;

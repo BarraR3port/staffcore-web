@@ -150,6 +150,69 @@ module.exports = {
             }
         }
 
+    },
+    async getDataFromExtDb(host, user, password, db, port, type , id) {
+        const database = {
+            host: host,
+            user: user,
+            password: password,
+            database: db,
+            port: port
+        }
+        mysql.createConnection({multipleStatements: true});
+        const pool = mysql.createPool(database);
+        pool.getConnection((error, connection) => {
+            if (error) throw error;
+
+            if (connection) connection.release();
+        });
+
+        pool.query = promisify(pool.query);
+        switch (type) {
+
+            /* --------------= BANS =-------------- */
+
+            case 'get-bans':
+                const bans = await pool.query('SELECT * FROM `sc_bans` WHERE BanId = ?', [id]);
+                pool.end();
+                return bans;
+            case 'delete-ban':
+                await pool.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
+                pool.end();
+                return true;
+            case 'edit-ban':
+                await pool.query('UPDATE sc_bans SET ? WHERE BanId = ?', [id[0],id[1]]);
+                pool.end();
+                return true;
+            case 'create-ban':
+                await pool.query('INSERT INTO sc_bans SET ? ', [id[0]]);
+                pool.end();
+                return true;
+            /* --------------= REPORTS =-------------- */
+
+            case 'get-reports':
+                const reports = await pool.query('SELECT * FROM staffcore.`sc_reports` WHERE ReportId = ?', [id]);
+                pool.end();
+                return reports;
+            case 'delete-report':
+                await db.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
+                pool.end();
+                return true;
+            case 'edit-report':
+                await pool.query('UPDATE sc_reports SET ? WHERE ReportId = ?', [id[0],id[1]]);
+                pool.end();
+                return true;
+            case 'create-report':
+                await pool.query('INSERT INTO sc_reports SET ? ', [id[0]]);
+                pool.end();
+                return true;
+            /* --------------= WARNS =-------------- */
+
+            case 'delete-warn':
+                await db.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
+                pool.end();
+                return true;
+        }
     }
 
 }

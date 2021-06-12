@@ -270,6 +270,8 @@ body, td {
 .icon {
   min-width: 50px;
   text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
 }
 
 .target-face {
@@ -349,6 +351,7 @@ body, td {
 
 ul {
   list-style: none;
+  margin-bottom: unset;
 }
 
 .price-table-wrapper {
@@ -360,140 +363,39 @@ ul {
 }
 .price-table-wrapper .pricing-table {
   display: inline-block;
-  border: 1px solid #C8C8C8;
-  background: #081721;
+  background: rgba(62, 21, 102, 0.7) !important;
   margin: 10px;
   transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 0.36);
 }
 .price-table-wrapper .pricing-table__header {
   padding: 20px;
   font-size: 20px;
   color: #000000;
-  background: rgba(210, 24, 24, 0.62);
+  background: #0d6efd;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .price-table-wrapper .pricing-table__price {
   margin: auto;
   font-weight: 500;
 }
-.price-table-wrapper .pricing-table__button {
-  display: inline-block;
-  background: #0a2537;
-  text-decoration: none;
-  padding: 20px;
-  color: white;
-  width: 50%;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  border-radius: 10%;
-  margin-top: 30px;
-}
-.price-table-wrapper .pricing-table__button:before {
-  position: absolute;
-  left: -20%;
-  top: -10%;
-  content: "";
-  width: 60%;
-  height: 220%;
-  transform: rotate(-30deg);
-  background: white;
-  opacity: 0.3;
-  transition: all 0.3s ease-in-out;
-}
-.price-table-wrapper .pricing-table__button:after {
-  position: absolute;
-  content: ">";
-  top: 0;
-  right: 0;
-  font-size: 25px;
-  padding: 15px 40px 15px 15px;
-  color: white;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-.price-table-wrapper .pricing-table__button:hover {
-  background: #00ff16;
-}
-.price-table-wrapper .pricing-table__redbutton {
-  display: inline-block;
-  background: #0a2537;
-  text-decoration: none;
-  border-radius: 10%;
-  padding: 20px;
-  color: white;
-  width: 50%;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  margin-top: 30px;
-}
-.price-table-wrapper .pricing-table__redbutton:before {
-  position: absolute;
-  left: -20%;
-  top: -10%;
-  content: "";
-  width: 60%;
-  height: 220%;
-  transform: rotate(-30deg);
-  background: white;
-  opacity: 0.3;
-  transition: all 0.3s ease-in-out;
-}
-.price-table-wrapper .pricing-table__redbutton:after {
-  position: absolute;
-  content: ">";
-  top: 0;
-  right: 0;
-  font-size: 25px;
-  padding: 15px;
-  padding-right: 40px;
-  color: white;
-  opacity: 0;
-  transition: all 0.3s ease-in-out;
-}
-.price-table-wrapper .pricing-table__redbutton:hover {
-  background: #d21818;
-}
 .price-table-wrapper .pricing-table__list {
-  padding: 20px;
+  padding: 10px;
   color: #ffffff;
   width: fit-content;
 }
 .price-table-wrapper .pricing-table__list li {
-  padding: 15px;
-  border-bottom: 1px solid #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 4%;
+  background-color: #6829b3 !important;
+  box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
 }
 .price-table-wrapper .pricing-table__list li:last-child {
   border: none;
-}
-.price-table-wrapper .pricing-table:hover {
-  box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 0.36);
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__button {
-  padding-left: 0;
-  padding-right: 35px;
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__button:before {
-  top: -80%;
-  transform: rotate(0deg);
-  width: 100%;
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__button:after {
-  opacity: 1;
-  padding-right: 15px;
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__redbutton {
-  padding-left: 0;
-  padding-right: 35px;
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__redbutton:before {
-  top: -80%;
-  transform: rotate(0deg);
-  width: 100%;
-}
-.price-table-wrapper .pricing-table:hover .pricing-table__redbutton:after {
-  opacity: 1;
-  padding-right: 15px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -551,6 +453,7 @@ html.modern .header-right {
   text-align: center;
   width: 50%;
   margin: 15px auto;
+  background-color: #6829b3 !important;
 }
 
 .progress-value {
@@ -571,7 +474,7 @@ html.modern .header-right {
 
 #carga {
   border: 15px solid #ccc;
-  border-top: groove rgba(62, 21, 102, 0.7) !important;
+  border-top: groove #6829b3 !important;
   height: 100px;
   width: 100px;
   border-radius: 100%;
@@ -595,17 +498,16 @@ html.modern .header-right {
   }
 }
 .buttons-container {
-  width: 100%;
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .button {
   display: inline-flex;
   height: 40px;
-  width: 150px;
-  border: 2px solid #BFC0C0;
+  width: 25%;
+  border: 2px solid #6829b3 !important;
   margin: 20px 20px 20px 20px;
-  color: #BFC0C0;
+  color: #6829b3 !important;
   text-transform: uppercase;
   text-decoration: none !important;
   font-size: 0.8em;
@@ -613,12 +515,14 @@ html.modern .header-right {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 #button-6 {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
 }
 
 #button-6 a {
@@ -645,12 +549,12 @@ html.modern .header-right {
   opacity: 1;
   left: -70px;
   top: -70px;
-  background: #BFC0C0;
+  background: #6829b3 !important;
   transform: rotate(80deg);
 }
 
 #button-6:hover a {
-  color: #2D3142;
+  color: #ffffff;
 }
 
 #spin {
@@ -671,12 +575,12 @@ html.modern .header-right {
   opacity: 1;
   left: -70px;
   top: -70px;
-  background: #BFC0C0;
+  background: #6829b3 !important;
   transform: rotate(80deg);
 }
 
 #button-6:hover a {
-  color: #2D3142;
+  color: #ffffff;
 }
 
 /*# sourceMappingURL=style.css.map */

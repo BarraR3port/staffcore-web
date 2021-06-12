@@ -1,7 +1,7 @@
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-const {isLoggedIn, connectExternalDb, isPublic, isAdmin} = require('../lib/auth');
+const {isLoggedIn, connectExternalDb, isPublic, getDataFromExtDb} = require('../lib/auth');
 const db = require('../database');
 
 function decode(str) {
@@ -26,6 +26,22 @@ async function getClosedBans(database) {
     return await connectExternalDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-closed-bans');
 }
 
+async function deleteBan(database, id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'delete-ban', id);
+}
+
+async function editBan(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'edit-ban', values);
+}
+
+async function getBansById(database,id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-bans', id);
+}
+
+async function createBan(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'create-ban', values);
+}
+
 /* --------------= REPORTS =-------------- */
 
 async function getReports(database) {
@@ -42,6 +58,22 @@ async function getOpenReports(database) {
 
 async function getClosedReports(database) {
     return await connectExternalDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-closed-reports');
+}
+
+async function deleteReport(database, id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'delete-report', id);
+}
+
+async function editReport(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'edit-report', values);
+}
+
+async function getReportsById(database,id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-reports', id);
+}
+
+async function createReport(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'create-report', values);
 }
 
 /* --------------= WARNS =-------------- */
@@ -101,7 +133,6 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server) ){
         const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-
         const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
         const rawServerSettings = await db.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])
 
@@ -223,5 +254,268 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     }
 })
 
+
+
+/* --------------= BANS =-------------- */
+
+router.get('/:server/bans', isLoggedIn, isPublic, async (req, res, next) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+        const bans = await getBans(database);
+        const server = req.params.server;
+        for (let i = 0; i< bans.length; i ++){
+            bans[i].server = req.params.server.toLowerCase( );
+        }
+        res.render('bans/bans', {bans,server});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.get('/:server/bans/delete/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const server = req.params.server;
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        if ( await deleteBan(database,id) ){
+            req.flash('success', 'Ban Deleted Correctly')
+            res.redirect('/servers/'+server+'/bans')
+        } else {
+            req.flash('error', `Ban couldn't be Deleted Correctly`)
+            res.redirect('/servers/'+server+'/bans/')
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.get('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        const bans = await getBansById(database, id);
+        bans[0].server = req.params.server.toLowerCase( );
+        res.render('bans/edit', {bans: bans[0]})
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.post('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const server = req.params.server;
+        try {
+            const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+            const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const id = req.params.id;
+            const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
+            const ExpDate = app.convertDate(expdate);
+            const info = {
+                Name,
+                Baner,
+                Reason,
+                ExpDate,
+                Ip_Banned
+            };
+            const values = [info,id];
+            await editBan(database,values)
+            req.flash('success', 'Ban Edited Correctly')
+            res.redirect('/servers/'+server+'/bans');
+
+        } catch (error){
+            req.flash('error', `Ban couldn't be Edited Correctly`)
+            res.redirect('/servers/'+server+'/bans/')
+
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+
+})
+router.get('/:server/bans/create', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    const server = req.params.server;
+    const username = req.user.username;
+    if (servers.includes(req.params.server.toLowerCase())) {
+        res.render('bans/create', {server, username});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.post('/:server/bans/create', isLoggedIn, isPublic, async (req, res) => {
+    const server = req.params.server;
+    const servers = await getServers();
+    if (servers.includes(req.params.server.toLowerCase())) {
+        try {
+            const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
+            const date = app.getDate();
+            const ExpDate = app.convertDate(expdate);
+            const Status = "open";
+            await app.getIp(Name).then(async Ip => {
+                const info = {
+                    Name,
+                    Baner,
+                    Reason,
+                    date,
+                    ExpDate,
+                    Ip,
+                    Ip_Banned,
+                    Status
+                };
+                const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+                const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                const values = [info];
+                await createBan(database, values)
+                req.flash('success', 'Ban Created Correctly')
+                res.redirect('/servers/' + server + '/bans');
+            });
+        } catch (e) {
+            req.flash('error', 'Could not create the Report')
+            res.redirect('/servers/' + server +'/bans/create');
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+/* --------------= REPORTS =-------------- */
+
+router.get('/:server/reports', isLoggedIn, isPublic, async (req, res, next) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+        const reports = await getReports(database);
+        for (let i = 0; i< reports.length; i ++){
+            reports[i].server = req.params.server.toLowerCase( );
+        }
+        res.render('reports/reports', {reports});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.get('/:server/reports/delete/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const server = req.params.server;
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        if ( await deleteReport(database,id) ){
+            req.flash('success', 'Report Deleted Correctly')
+            res.redirect('/servers/'+server+'/reports')
+        } else {
+            req.flash('error', `Report couldn't be Deleted Correctly`)
+            res.redirect('/servers/'+server+'/reports/')
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.get('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        const reports = await getReportsById(database, id);
+        reports[0].server = req.params.server.toLowerCase( );
+        res.render('reports/edit', {reports: reports[0]})
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.post('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const server = req.params.server;
+        try {
+            const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+            const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const id = req.params.id;
+            const {Name, Reporter, Reason} = req.body;
+            const info = {
+                Name,
+                Reporter,
+                Reason
+            };
+            const values = [info,id];
+            await editReport(database,values)
+            req.flash('success', 'Report Edited Correctly')
+            res.redirect('/servers/'+server+'/reports');
+
+        } catch (error){
+            req.flash('error', `Report couldn't be Edited Correctly`)
+            res.redirect('/servers/'+server+'/reports')
+
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+
+})
+
+router.get('/:server/reports/create', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if (servers.includes(req.params.server.toLowerCase())) {
+        res.render('reports/create');
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+router.post('/:server/reports/create', isLoggedIn, isPublic, async (req, res) => {
+    const server = req.params.server;
+    const servers = await getServers();
+    if (servers.includes(req.params.server.toLowerCase())) {
+        try {
+            const {Name, Reporter, Reason} = req.body;
+            const date = app.getDate();
+            const Status = "open";
+            await app.getIp(Name).then(async Ip => {
+                const info = {
+                    Name,
+                    Reporter,
+                    Reason,
+                    date,
+                    Status
+                };
+                const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+                const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                const values = [info];
+                await createReport(database, values)
+                req.flash('success', 'Report Created Correctly')
+                res.redirect('/servers/' + server + '/reports');
+            });
+        } catch (e) {
+            req.flash('error', 'Could not create the Report')
+            res.redirect('/servers/' + server +'/reports/create');
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
 
 module.exports = router;

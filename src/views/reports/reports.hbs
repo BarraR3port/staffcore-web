@@ -1,25 +1,35 @@
-<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700,100' rel='stylesheet' type='text/css'>
-
 <div class="price-table-wrapper">
     {{#each reports}}
         <div class="pricing-table">
             <h2 class="pricing-table__header">{{Name}}  </h2>
-            <i><img src="https://cravatar.eu/avatar/{{Name}}/130.png" id="reported-image" class="target-face"></i>
+            <div style="padding-top: 20px"><img src="https://cravatar.eu/avatar/{{Name}}/128.png" id="banned-image" class="icon"></div>
             <ul class="pricing-table__list">
                 <li>Reported by: {{Reporter}} {{timeago Date}}</li>
                 <li>Reason: {{Reason}}</li>
                 <li>Status: {{status Status}}</li>
                 <li>Report id: {{ReportId}}</li>
-                <a class="pricing-table__button" href="/reports/edit/{{ReportId}}"><i class="fas fa-pencil-alt"></i></a><a
-                    class="pricing-table__redbutton" href="/reports/delete/{{ReportId}}"><i
-                    class="fas fa-minus-circle "></i></a>
+                <div class="row buttons-container">
+                    <div class="button" id="button-6">
+                        <div id="spin"></div>
+                        <a href="/servers/{{server}}/reports/edit/{{ReportId}}"><i class="fas fa-pencil-alt"></i></a>
+                    </div>
+                    <div class="button" id="button-6">
+                        <div id="spin"></div>
+                        <a href="/servers/{{server}}/reports/delete/{{ReportId}}"><i class="fas fa-minus-circle "></i></a>
+                    </div>
+                </div>
             </ul>
         </div>
     {{else}}
         <div class="pricing-table">
             <h2 class="pricing-table__header">No Players Reported</h2>
             <div class="mb-2 p-2">Report a Player</div>
-            <a class="pricing-table__button mb-2" href="/reports/create"><i class="fas fa-plus-square"></i></a>
+            <div class="row buttons-container">
+                <div class="button" id="button-6">
+                    <div id="spin"></div>
+                    <a class="pricing-table__button mb-2" href="/servers/{{server}}/reports/create"><i class="fas fa-plus-square"></i></a>
+                </div>
+            </div>
         </div>
     {{/each}}
 </div>

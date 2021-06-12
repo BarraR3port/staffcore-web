@@ -1,7 +1,7 @@
 <div class="create-form form-check-inline">
     <div class="card-header">Ban a Player</div>
     <div class="card-body">
-        <form action="/bans/create" method="POST" id="create-form" autocomplete="on">
+        <form action="/servers/{{server}}/bans/create" method="POST" id="create-form" autocomplete="on">
             <label for="banned" class="mb-2">Player Name</label>
             <div class="input-icons" id="banned-input">
                 <i><img src="" id="banned-image" class="icon"></i>
@@ -11,12 +11,12 @@
 
             <label for="user" class="mb-2">Your Nick Name</label>
             <div class="input-icons" id="user-input">
-                <i><img src="" id="player-image" class="icon" alt=""></i>
-                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Nick Name"
-                                                  class="input-field" style="text-decoration-width: auto" required>
+                <i><img src="" id="staff-image" class="icon"></i>
+                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Name" class="input-field" value="{{username}}"
+                                                 style="text-decoration-width: auto" required>
             </div>
 
-            <div class="input-icons" id="user-input">
+            <div class="input-icons" id="user-input-2">
                 <label for="reason">Reason</label>
                 <input type="text" id="Reason" name="Reason" class="input-field" style="text-decoration-width: auto"
                        placeholder="Type the Reason" required>
@@ -89,9 +89,9 @@
     });
     const form2 = document.getElementById("user-input");
     form2.addEventListener("input", () => {
-        changeImg("player-image", "Baner");
+        changeImg("staff-image", "Baner");
     });
-
+    changeImg("staff-image", "Baner");
     function myFunction() {
         document.getElementById("expdate").value = date;
         document.getElementById('expdate').min = date;

@@ -3,8 +3,8 @@
 <div class="price-table-wrapper">
     {{#each bans}}
         <div class="pricing-table">
-            <h2 class="pricing-table__header">{{Name}}  </h2>
-            <i><img src="https://cravatar.eu/avatar/{{Name}}/128.png" id="banned-image" class="icon"></i>
+            <h2 class="pricing-table__header">{{Name}}</h2>
+            <div style="padding-top: 20px"><img src="https://cravatar.eu/avatar/{{Name}}/128.png" id="banned-image" class="icon"></div>
             <ul class="pricing-table__list">
                 <li>Banned by: {{Baner}} {{timeago Date}}</li>
                 <li>Reason: {{Reason}}</li>
@@ -12,16 +12,28 @@
                 <li>Ip Banned: {{IP_Banned}}</li>
                 <li>Status: {{status Status}}</li>
                 <li>Ban id: {{BanId}}</li>
-                <a class="pricing-table__button" href="/bans/edit/{{BanId}}"><i class="fas fa-pencil-alt"></i></a><a
-                    class="pricing-table__redbutton" href="/bans/delete/{{BanId}}"><i class="fas fa-minus-circle "></i></a>
+                <div class="row buttons-container">
+                    <div class="button" id="button-6">
+                        <div id="spin"></div>
+                        <a href="/servers/{{server}}/bans/edit/{{BanId}}"><i class="fas fa-pencil-alt"></i></a>
+                    </div>
+                    <div class="button" id="button-6">
+                        <div id="spin"></div>
+                        <a href="/servers/{{server}}/bans/delete/{{BanId}}"><i class="fas fa-minus-circle "></i></a>
+                    </div>
+                </div>
             </ul>
         </div>
     {{else}}
         <div class="pricing-table">
             <h2 class="pricing-table__header">No Players Banned</h2>
             <div class="mb-2 p-2">Ban a Player</div>
-            <a class="pricing-table__button mb-2" href="/bans/create"><i class="fas fa-plus-square"></i></a>
-
+            <div class="row buttons-container">
+                <div class="button" id="button-6">
+                    <div id="spin"></div>
+                    <a class="pricing-table__button mb-2" href="/servers/{{server}}/bans/create"><i class="fas fa-plus-square"></i></a>
+                </div>
+            </div>
         </div>
     {{/each}}
 </div>

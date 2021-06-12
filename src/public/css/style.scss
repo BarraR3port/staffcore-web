@@ -273,6 +273,8 @@ body, td {
 .icon {
   min-width: 50px;
   text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
 }
 
 .target-face {
@@ -356,28 +358,31 @@ body, td {
 
 ul {
   list-style: none;
+  margin-bottom: unset;
 }
 
 .price-table-wrapper {
   text-align: center;
   margin-top: 30px;
-
   .featured-table {
     box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 1);
   }
 
   .pricing-table {
     display: inline-block;
-    border: 1px solid #C8C8C8;
-    background: #081721;
+    background: rgba(62, 21, 102, 0.7) !important;
     margin: 10px;
     transition: all 0.3s ease-in-out;
-
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 0.36);
     &__header {
       padding: 20px;
       font-size: 20px;
       color: #000000;
-      background: rgba(210, 24, 24, 0.62);
+      background: #0d6efd;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
 
     &__price {
@@ -385,143 +390,23 @@ ul {
       font-weight: 500;
     }
 
-    &__button {
-      display: inline-block;
-      background: #0a2537;
-      text-decoration: none;
-      padding: 20px;
-      color: white;
-      width: 50%;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease-in-out;
-      border-radius: 10%;
-      margin-top: 30px;
-
-      &:before {
-        position: absolute;
-        left: -20%;
-        top: -10%;
-        content: '';
-        width: 60%;
-        height: 220%;
-        transform: rotate(-30deg);
-        background: white;
-        opacity: .3;
-        transition: all 0.3s ease-in-out;
-      }
-
-      &:after {
-        position: absolute;
-        content: '>';
-        top: 0;
-        right: 0;
-        font-size: 25px;
-        padding: 15px 40px 15px 15px;
-        color: white;
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-      }
-
-      &:hover {
-        background: #00ff16;
-      }
-    }
-
-    &__redbutton {
-      display: inline-block;
-      background: #0a2537;
-      text-decoration: none;
-      border-radius: 10%;
-      padding: 20px;
-      color: white;
-      width: 50%;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease-in-out;
-      margin-top: 30px;
-
-      &:before {
-        position: absolute;
-        left: -20%;
-        top: -10%;
-        content: '';
-        width: 60%;
-        height: 220%;
-        transform: rotate(-30deg);
-        background: white;
-        opacity: .3;
-        transition: all 0.3s ease-in-out;
-      }
-
-      &:after {
-        position: absolute;
-        content: '>';
-        top: 0;
-        right: 0;
-        font-size: 25px;
-        padding: 15px;
-        padding-right: 40px;
-        color: white;
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-      }
-
-      &:hover {
-        background: rgb(210, 24, 24);
-      }
-    }
-
     &__list {
-      padding: 20px;
+      padding: 10px;
       color: #ffffff;
       width: fit-content;
-
       li {
-        padding: 15px;
-        border-bottom: 1px solid #ffffff;
-
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 4%;
+        background-color: rgb(104, 41, 179) !important;
+        box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
         &:last-child {
           border: none;
         }
+
       }
     }
 
-    &:hover {
-      box-shadow: 0px 0px 19px -3px rgba(0, 0, 0, 0.36);
-
-      .pricing-table__button {
-        padding-left: 0;
-        padding-right: 35px;
-
-        &:before {
-          top: -80%;
-          transform: rotate(0deg);
-          width: 100%;
-        }
-
-        &:after {
-          opacity: 1;
-          padding-right: 15px;
-        }
-      }
-
-      .pricing-table__redbutton {
-        padding-left: 0;
-        padding-right: 35px;
-
-        &:before {
-          top: -80%;
-          transform: rotate(0deg);
-          width: 100%;
-        }
-
-        &:after {
-          opacity: 1;
-          padding-right: 15px;
-        }
-      }
-    }
   }
 }
 
@@ -581,6 +466,7 @@ html.modern .header-right {
   text-align: center;
   width: 50%;
   margin: 15px auto;
+  background-color: rgb(104, 41, 179) !important;
 }
 
 .progress-value {
@@ -600,7 +486,7 @@ html.modern .header-right {
 
 #carga{
   border: 15px solid #ccc;
-  border-top: groove rgba(62, 21, 102, 0.7) !important;
+  border-top: groove rgb(104, 41, 179) !important;
   height: 100px;
   width: 100px;
   border-radius: 100%;
@@ -622,17 +508,16 @@ html.modern .header-right {
 
 
 .buttons-container {
-  width: 100%;
-  justify-content: center;
+  justify-content: center !important;
 }
 
 .button {
   display: inline-flex;
   height: 40px;
-  width: 150px;
-  border: 2px solid #BFC0C0;
+  width: 25%;
+  border: 2px solid rgb(104, 41, 179) !important;
   margin: 20px 20px 20px 20px;
-  color: #BFC0C0;
+  color: rgb(104, 41, 179) !important;
   text-transform: uppercase;
   text-decoration: none !important;
   font-size: .8em;
@@ -640,12 +525,14 @@ html.modern .header-right {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 10px;
 }
 
 #button-6 {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  box-shadow: 0 0 19px -3px rgba(0, 0, 0, 0.36);
 }
 
 #button-6 a {
@@ -672,12 +559,12 @@ html.modern .header-right {
   opacity: 1;
   left: -70px;
   top: -70px;
-  background: #BFC0C0;
+  background: rgb(104, 41, 179) !important;
   transform: rotate(80deg);
 }
 
 #button-6:hover a {
-  color: #2D3142;
+  color: #ffffff;
 }
 
 #spin {
@@ -698,10 +585,10 @@ html.modern .header-right {
   opacity: 1;
   left: -70px;
   top: -70px;
-  background: #BFC0C0;
+  background: rgb(104, 41, 179) !important;
   transform: rotate(80deg);
 }
 
 #button-6:hover a {
-  color: #2D3142;
+  color: #ffffff;
 }

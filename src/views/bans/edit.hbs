@@ -1,7 +1,7 @@
 <div class="create-form form-check-inline p-4" style="font-size: large">
     <div class="text-center p-4" style="font-size: x-large">Edit the Ban {{bans.BanId}}</div>
     <div class="card-body">
-        <form action="/bans/edit/{{bans.BanId}}" method="POST" id="create-form" autocomplete="on">
+        <form action="{{bans.BanId}}" method="POST" id="create-form" autocomplete="on">
             <label for="banned" class="mb-2">The Banned Name</label>
             <div class="input-icons" id="banned-input">
                 <i><img src="https://cravatar.eu/avatar/{{bans.Name}}/32.png" id="banned-image" class="icon"></i>
@@ -38,7 +38,7 @@
             </div>
             <div style=" text-align: center;">
                 <button type="submit" class="btn btn-primary btn-save" tabindex="5">Confirm Edit</button>
-                <a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
+                <a href="/servers/{{bans.server}}/bans" class="btn btn-primary btn-cancel">Cancel</a>
             </div>
         </form>
     </div>

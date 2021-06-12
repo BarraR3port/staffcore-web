@@ -1,7 +1,7 @@
 <div class="create-form form-check-inline p-4" style="font-size: large">
     <div class="text-center p-4" style="font-size: x-large">Edit the Report {{reports.ReportId}}</div>
     <div class="card-body">
-        <form action="/reports/edit/{{reports.ReportId}}" method="POST" id="create-form" autocomplete="on">
+        <form action="{{reports.ReportId}}" method="POST" id="create-form" autocomplete="on">
             <label for="reported" class="mb-2">The Reported Name</label>
             <div class="input-icons" id="reported-input">
                 <i><img src="https://cravatar.eu/avatar/{{reports.Name}}/32.png" id="reported-image" class="icon"></i>
@@ -25,7 +25,7 @@
 
             <div style=" text-align: center;">
                 <button type="submit" class="btn btn-primary btn-save" tabindex="5">Confirm Edit</button>
-                <a href="/reports" class="btn btn-primary btn-cancel">Cancel</a>
+                <a href="/servers/{{bans.server}}/reports" class="btn btn-primary btn-cancel">Cancel</a>
             </div>
         </form>
     </div>
