@@ -1,7 +1,7 @@
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-const {isLoggedIn, connectExternalDb, isPublic, getDataFromExtDb} = require('../lib/auth');
+const {isLoggedIn, connectExternalDb, isPublic, getDataFromExtDb, isStaff } = require('../lib/auth');
 const db = require('../database');
 
 function decode(str) {
@@ -255,6 +255,73 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
 })
 
 
+router.get('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server) ){
+        const profile = await db.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+        const rawServerSettings = await db.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])
+
+        const rawServerInfo = await getServerInfo(database);
+
+        const stringServerInfo = JSON.stringify(rawServerInfo[0])
+        const serverInfo = JSON.parse(stringServerInfo)
+
+        const stringGlobalInfo = JSON.stringify(profile[0])
+        const globalInfo = JSON.parse(stringGlobalInfo)
+
+        const stringServerSettings = JSON.stringify(rawServerSettings[0])
+        const serverSettings = JSON.parse(stringServerSettings)
+
+        const staffRaw = await db.query('SELECT role FROM sc_servers_staff WHERE staffId LIKE ?', [globalInfo.staffId]);
+        globalInfo.staff = staffRaw[0].role;
+        globalInfo.server = serverInfo.server
+        const staff = serverInfo.staff.toString().split(',');
+        for ( let i = 0; i < staff.length; i++ ) {
+            console.log(staff[i]);
+        }
+        serverSettings.isPublic = !!serverSettings.isPublic;
+        console.log(globalInfo);
+        console.log(serverInfo);
+        console.log(serverSettings);
+        res.render('servers/settings', {globalInfo, serverInfo, serverSettings});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server) ){
+        console.log(req.body);
+        const server = req.params.server;
+        res.redirect('/servers/' + server );
+
+        //const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
+        /*const date = app.getDate();
+        const ExpDate = app.convertDate(expdate);
+        const Status = "open";
+        await app.getIp(Name).then(Ip => {
+            const info = {
+                Name,
+                Baner,
+                Reason,
+                date,
+                ExpDate,
+                Ip,
+                Ip_Banned,
+                Status
+            };
+            db.query(`INSERT INTO sc_bans SET ? `, [info]);
+            req.flash('success', 'Ban Created Correctly')
+            res.redirect('/bans');
+        });*/
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
 
 /* --------------= BANS =-------------- */
 

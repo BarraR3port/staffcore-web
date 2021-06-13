@@ -1,0 +1,160 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<div class="container">
+    <div class="main-body m-4">
+        <!-- /Breadcrumb -->
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-4">
+                <div class="card profile">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center p-3">
+                            <img src="https://cravatar.eu/avatar/{{globalInfo.username}}/256.png" class="rounded"
+                                 width="60%" alt="img">
+                            <div class="mt-3">
+                                <h4>{{globalInfo.username}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3 profile">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">dns</span></span>
+                            <span>{{globalInfo.server}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">email</span></span>
+                            <span>{{globalInfo.mail}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">groups</span></span>
+                            <span>{{globalInfo.staff}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3 profile">
+                    <div class="card-body">
+                        <div class="row">
+                            <img class="rounded" alt="img" src="https://api.loohpjames.com/serverbanner.png?ip={{decode
+                                serverInfo.address}}&width=1224">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gutters-sm">
+                    <!-- --------------= SERVER SETTINGS =-------------- -->
+                    <div class="">
+                        <div class="card h-100 profile">
+                            <div class="card-body">
+                                <form action="/" method="POST" id="create-form" autocomplete="on" class="form">
+                                    <div class="form-title">{{globalInfo.server}} Settings</div>
+                                    <div class="input-container ic2">
+                                        <input id="owner" class="input" type="text" placeholder=" " value="{{serverInfo.owner}}" readonly required/>
+                                        <div class="cut"></div>
+                                        <label for="owner" class="placeholder">Server Owner</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="server" class="input" type="text" placeholder=" " value="{{serverInfo.server}}" required/>
+                                        <div class="cut"></div>
+                                        <label for="server" class="placeholder">Server Name</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="address" class="input" type="text" placeholder=" " value="{{decode serverInfo.address}}" required />
+                                        <div class="cut"></div>
+                                        <label for="address" class="placeholder">Address</label>
+                                    </div>
+                                    <div class="form-title">Database Settings</div>
+                                    <div class="input-container ic2">
+                                        <input id="username" class="input" type="text" placeholder=" " value="{{decode serverInfo.username}}" required />
+                                        <div class="cut"></div>
+                                        <label for="username" class="placeholder">Db Username</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="db" class="input" type="text" placeholder=" " value="{{decode serverInfo.db}}" required />
+                                        <div class="cut"></div>
+                                        <label for="db" class="placeholder">Db</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="host" class="input" type="text" placeholder=" " value="{{decode serverInfo.host}}" required />
+                                        <div class="cut"></div>
+                                        <label for="host" class="placeholder">Host</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="port" class="input" type="text" placeholder=" " value="{{decode serverInfo.port}}" required />
+                                        <div class="cut"></div>
+                                        <label for="port" class="placeholder">Port</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="password" class="input" type="text" placeholder=" " value="{{decode serverInfo.password}}" required />
+                                        <div class="cut"></div>
+                                        <label for="password" class="placeholder">Password</label>
+                                    </div>
+                                    <div class="form-title">Staff Settings (add a , after each name)</div>
+                                    <div class="input-container ic2">
+                                        <input id="staff" class="input" type="text" placeholder=" " value="{{serverInfo.staff}}" required />
+                                        <div class="cut"></div>
+                                        <label for="staff" class="placeholder">Staff Members</label>
+                                    </div>
+
+                                    <div class="form-title">Stats Settings</div>
+                                    <div class="input-container ic2">
+                                        <input id="maxBans" class="input" type="text" placeholder=" " value="{{serverSettings.maxBans}}" required />
+                                        <div class="cut"></div>
+                                        <label for="maxBans" class="placeholder">Max Bans</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="maxReports" class="input" type="text" placeholder=" " value="{{serverSettings.maxReports}}" required />
+                                        <div class="cut"></div>
+                                        <label for="maxReports" class="placeholder">Max Reports</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="maxWarns" class="input" type="text" placeholder=" " value="{{serverSettings.maxWarns}}" required />
+                                        <div class="cut"></div>
+                                        <label for="maxWarns" class="placeholder">Max Warns</label>
+                                    </div>
+                                    <div class="input-container ic2">
+                                        <input id="maxPlayers" class="input" type="text" placeholder=" " value="{{serverSettings.maxPlayers}}" required />
+                                        <div class="cut"></div>
+                                        <label for="maxPlayers" class="placeholder">Max Players</label>
+                                    </div>
+
+                                    <div class="radio">
+                                        <label for="ban-ip" class="form-title">Is the server Public?
+                                            <input label="Yes" type="radio" id="isPublic_true" name="isPublic" value="true"
+                                                   alt="{{serverSettings.isPublic}}">
+                                            <input label="No" type="radio" id="isPublic_false" name="isPublic" value="false"
+                                                   alt="{{serverSettings.isPublic}}">
+                                        </label>
+                                    </div>
+                                    <div class="row buttons-container">
+                                        <button class="submit button" id="button-6">
+                                            <div id="spin"></div>
+                                            Confirm Settings
+                                        </button>
+                                        <button class="submit button" id="button-6">
+                                            <div id="spin"></div>
+                                            Cancel
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const radioTrue = document.getElementById('isPublic_true');
+    const radioFalse = document.getElementById('isPublic_false');
+    const date = document.getElementById('expdate');
+    if (radioTrue.alt.match('true')) {
+        radioTrue.checked = true;
+    } else if (radioFalse.alt.match('false')) {
+        radioFalse.checked = true;
+    }
+</script>

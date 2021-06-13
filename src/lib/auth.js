@@ -149,6 +149,38 @@ module.exports = {
                 return res.redirect('/');
             }
         }
+    },
+    async isStaff(req, res, next) {
+        if (await isAdmin( req.user.username ) ) {
+            return next();
+        }
+        const server = req.params.server
+        const username = req.user.username
+        const serverId = req.user.serverId
+        const result = await db.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
+        if (await result[0].isPublic) {
+            return next();
+        } else {
+            const response = await db.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?', [username, server]);
+            if (response.length > 0) {
+                const staff = response[0].staff.toString().split(',');
+                if (staff.contains('username')) {
+                    const staffId = await db.query('SELECT staffId FROM staffcore.sc_users WHERE username LIKE ?', [username]);
+                    if ( staffId[0].staffId === 1 || staffId[0].staffId === 2 ){
+                        req.flash('error', `You are not allowed to edit the configuration of this server`);
+                        return res.redirect('/');
+                    } else if ( staffId[0].staffId === 3 ){
+                        return next();
+                    }
+                } else {
+                    req.flash('error', `You are not allowed to see the details of this server`);
+                    return res.redirect('/');
+                }
+            } else {
+                req.flash('error', `You are not part of the staff of this server`);
+                return res.redirect('/');
+            }
+        }
 
     },
     async getDataFromExtDb(host, user, password, db, port, type , id) {
