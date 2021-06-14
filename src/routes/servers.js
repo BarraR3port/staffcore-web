@@ -182,7 +182,6 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
         globalInfo.staff = staffRaw[0].role;
         globalInfo.server = serverInfo.server
 
-
         /* --------------= BANS =-------------- */
 
         globalInfo.bansLength = bansLength;

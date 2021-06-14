@@ -18,13 +18,26 @@ $wipe: rgba(255, 255, 255, 0);
 }
 
 body, td {
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', sans-serif !important;
   text-decoration-color: white;
   font-weight: 400;
   margin: auto;
   color: white !important;
   text-align: center;
-  background: $global-background-color;
+  background: $global-background-color !important;
+}
+#home {
+  width: 100%; background-image: url('/img/mc-1.png');
+  background-size: inherit;
+  background-repeat: no-repeat;
+}
+
+#features{
+  background-color: $navbar !important;
+}
+
+.footer{
+  background-color: $navbar !important;
 }
 
 .icon {
@@ -280,6 +293,7 @@ html.modern .header-right {
 
 .navbar {
   background-color: $navbar;
+  color: $blue;
 }
 
 .dropdown-menu {
@@ -360,20 +374,21 @@ html.modern .header-right {
 }
 
 .button {
-  display: inline-flex;
-  height: 40px;
-  width: 25%;
-  border: 2px solid $violet-color-2;
-  margin: 20px 20px 20px 20px;
-  color: $violet-color-2;
-  text-transform: uppercase;
+  display: inline-flex !important;
+  width: 25%!important;
+  border: 2px solid $violet-color-2!important;
+  margin: 20px 20px 20px 20px!important;
+  color: $violet-color-2!important;
+  text-transform: uppercase!important;
   text-decoration: none !important;
-  font-size: .8em;
-  letter-spacing: 1.5px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 10px;
+  letter-spacing: 1.5px!important;
+  align-items: center!important;
+  justify-content: center!important;
+  overflow: hidden!important;
+  border-radius: 10px!important;
+  height: calc(1.5rem + .75rem + 2px);
+  padding: 0.375rem calc(.75rem + 1rem);
+  font-size: 0.8rem;
 }
 
 #button-6 {
@@ -440,4 +455,7 @@ html.modern .header-right {
 
 #button-6:hover a {
   color: #ffffff;
+}
+.img-index{
+
 }

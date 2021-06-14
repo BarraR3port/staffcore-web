@@ -199,6 +199,52 @@
                             </div>
                         </div>
                     </div>
+                    <!-- --------------= WEB STAFF =-------------- -->
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100 profile">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3"><span class="material-icons profile-from">new_releases</span>Web Staff</h6>
+                                <small>Current Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.warnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.warnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.warnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                                <small>Open Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.openWarnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" style="width: {{globalInfo.openWarnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.openWarnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                                <small>Closed Warns</small>
+                                <div class="progress mb-3 "
+                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
+                                    <span class="progress-value">{{globalInfo.closedWarnsLengthPercentage}}%</span>
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar"
+                                         style="width: {{globalInfo.closedWarnsLengthPercentage}}%; "
+                                         aria-valuenow="{{globalInfo.closedWarnsLengthPercentage}}" aria-valuemin="0"
+                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
+                                </div>
+                                <div class="row buttons-container">
+                                    <div class="button" id="button-6">
+                                        <div id="spin"></div>
+                                        <a href="/servers/{{globalInfo.server}}/warns">Warn List</a>
+                                    </div>
+                                    <div class="button" id="button-6">
+                                        <div id="spin"></div>
+                                        <a href="/servers/{{globalInfo.server}}/warns/create">Warn a Player</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

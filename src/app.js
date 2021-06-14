@@ -6,11 +6,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const MysqlStore = require('express-mysql-session')
 const {database} = require('./keys');
-const validator = require('express-validator');
 const passport = require('passport');
 const db = require('./database')
-const https = require('https');
-const fs = require('fs');
 const bodyParser = require('body-parser');
 
 // Initializations
@@ -100,9 +97,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
-//app.use(validator());
 
-// Global Variables
 
 function getDate() {
     const dNow = new Date();
@@ -143,8 +138,7 @@ async function getIp(banned) {
                                  WHERE Name LIKE '${banned}'`)
     try {
         return rows[0].Ips;
-    } catch (error) {
-    }
+    } catch (error) {}
 }
 
 module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp}
@@ -153,6 +147,7 @@ app.use((req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
     app.locals.user = req.user;
+    app.locals.download = 'https://github.com/BarraR3port/staffcore/releases/tag/4.4.3'
     next();
 })
 app.use('/config', require('./routes/config'));
@@ -167,21 +162,6 @@ app.use('/servers', require('./routes/servers'));
 // Public
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-const options = {
-    key: fs.readFileSync(path.join(__dirname, 'keys', 'key.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'keys', 'cert.pem'))
-};
-
-// Starting The Server
-/*
-const secure = https.createServer(options, app);
-
-secure.listen(app.get('port'), function() {
-    console.log('localhost started on', app.get('port'))
-})
-
- */
 
 app.listen(app.get('port'), () => {
     console.log('Server is in port', app.get('port'));
