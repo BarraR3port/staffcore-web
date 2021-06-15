@@ -157,6 +157,8 @@ app.use('/bans', require('./routes/bans'));
 app.use('/api', require('./routes/api'));
 app.use('/reports', require('./routes/reports'));
 app.use('/servers', require('./routes/servers'));
+app.use('/features', require('./routes/features'));
+app.use('/download', require('./routes/download'));
 
 
 // Public

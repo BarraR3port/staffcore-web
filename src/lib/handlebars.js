@@ -49,4 +49,20 @@ helpers.getServerById = async (serverId) => {
 helpers.toLowerCase = (string) =>{
     return string.toLowerCase();
 }
+
+helpers.discord = () => {
+    const discord = "https://discord.gg/fZAWztxQbm"
+    return discord;
+}
+
+helpers.github = () => {
+    const github = "https://github.com/BarraR3port"
+    return github;
+}
+
+helpers.spigot = ()=>{
+    const spigot = "https://www.spigotmc.org/resources/staff-core.82324"
+    return spigot;
+}
+
 module.exports = helpers;

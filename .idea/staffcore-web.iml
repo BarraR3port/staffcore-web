@@ -17,5 +17,6 @@
     <orderEntry type="library" name="slick-theme" level="application" />
     <orderEntry type="library" name="uicons-regular-rounded" level="application" />
     <orderEntry type="library" name="smooth-scroll.polyfills" level="application" />
+    <orderEntry type="library" name="feather-icons" level="application" />
   </component>
 </module>

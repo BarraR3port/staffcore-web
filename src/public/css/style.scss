@@ -32,7 +32,14 @@ body, td {
   background-repeat: no-repeat;
 }
 
-#features{
+.navbar-text-s{
+  text-decoration: none;
+  color: $blue;
+  text-underline: none;
+  padding: 8px;
+}
+
+.features{
   background-color: $navbar !important;
 }
 

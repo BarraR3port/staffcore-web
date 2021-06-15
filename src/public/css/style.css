@@ -23,7 +23,14 @@ body, td {
   background-repeat: no-repeat;
 }
 
-#features {
+.navbar-text-s {
+  text-decoration: none;
+  color: #0d6efd;
+  text-underline: none;
+  padding: 8px;
+}
+
+.features {
   background-color: rgba(62, 21, 102, 0.18) !important;
 }
 

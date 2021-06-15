@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@popperjs/core, all, jquery-3.6.0, shorthandcss, slick-carousel, slick-theme, smooth-scroll.polyfills, tailwindcss, uicons-regular-rounded}" />
+    <file url="PROJECT" libraries="{@popperjs/core, all, feather-icons, jquery-3.6.0, shorthandcss, slick-carousel, slick-theme, smooth-scroll.polyfills, tailwindcss, uicons-regular-rounded}" />
     <includedPredefinedLibrary name="Node.js Core" />
   </component>
 </project>
