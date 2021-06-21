@@ -1,26 +1,38 @@
-<div class="container p-4">
-    <div class="row">
-        <div class="col-md-4 mx-auto">
-            <div class="card text-center auth-form">
-                <div class="card-header">
-                    <h3>Login</h3>
-                </div>
-                <div class="card-body">
-                    <img src="/img/logo.svg" alt="Logo StaffCore" class="card-img-top mx-auto m-2 w-50">
-                    <form action="/login" method="POST" class="" aria-autocomplete="both">
-                        <div class="form-group">
-                            <input type="text" name="username" placeholder="Username" autofocus class="form-control"
-                                   required>
+<div class="auth-form">
+    <div class="container" style="width: 700px;">
+        <div class="row">
+            <div class="mx-auto">
+                <div class="row gutters-sm">
+                    <div class="col" style="align-content: center">
+                        <div class="row gutters-sm">
+                            <!-- --------------= SERVER SETTINGS =-------------- -->
+                            <div class="card h-100 profile" >
+                                <div class="card-body">
+                                    <form action="/login" method="POST" id="create-form" autocomplete="on" class="form">
+                                        <div class="form-title">StaffCore Log In</div>
+                                        <div class="input-container ic2">
+                                            <input id="username" name="username" class="input" type="text" placeholder=" " required autocomplete="on" />
+                                            <div class="cut"></div>
+                                            <label for="username" class="placeholder">User Name</label>
+                                        </div>
+                                        <div class="input-container ic2">
+                                            <input id="password" name="password" class="input" type="password" placeholder=" " required autocomplete="on" />
+                                            <div class="cut"></div>
+                                            <label for="password" class="placeholder">Password</label>
+                                        </div>
+                                        <div class="row buttons-container">
+                                            <button class="submit button" id="button-6">
+                                                Log in
+                                            </button>
+                                            <a class="submit button" id="button-6" href="/register">
+                                                Register
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="password" name="password" placeholder="Password" class="form-control"
-                                   pattern=".{4,}" required>
-                        </div>
-                        <div style=" text-align: center;">
-                            <button type="submit" class="btn btn-primary btn-save" tabindex="5">Login</button>
-                            <a href="/register" class="btn btn-primary btn-register">Register</a>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    console.log(req.body)
     res.redirect('/profile')
     // config.configured = req.body;
 })

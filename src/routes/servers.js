@@ -141,7 +141,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 
 router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
-    if ( servers.includes(req.params.server) ){
+    if ( servers.includes(req.params.server.toLowerCase()) ){
         const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
         const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])

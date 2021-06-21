@@ -45,102 +45,100 @@
 
                 <div class="row gutters-sm">
                     <!-- --------------= SERVER SETTINGS =-------------- -->
-                    <div class="">
-                        <div class="card h-100 profile">
-                            <div class="card-body">
-                                <form action="/servers/{{toLowerCase serverInfo.server}}/settings" method="POST" id="create-form" autocomplete="on" class="form">
-                                    <div class="form-title">{{globalInfo.server}} Settings</div>
-                                    <div class="input-container ic2">
-                                        <input id="owner" name="owner" class="input" type="text" placeholder=" " value="{{serverInfo.owner}}" readonly required/>
-                                        <div class="cut"></div>
-                                        <label for="owner" class="placeholder">Server Owner</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="server" name="server" class="input" type="text" placeholder=" " value="{{serverInfo.server}}" required/>
-                                        <div class="cut"></div>
-                                        <label for="server" class="placeholder">Server Name</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="address" name="address" class="input" type="text" placeholder=" " value="{{decode serverInfo.address}}" required />
-                                        <div class="cut"></div>
-                                        <label for="address" class="placeholder">Address</label>
-                                    </div>
-                                    <div class="form-title">Database Settings</div>
-                                    <div class="input-container ic2">
-                                        <input id="username" name="username" class="input" type="text" placeholder=" " value="{{decode serverInfo.username}}" required />
-                                        <div class="cut"></div>
-                                        <label for="username" class="placeholder">Db Username</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="db" name="db" class="input" type="text" placeholder=" " value="{{decode serverInfo.db}}" required />
-                                        <div class="cut"></div>
-                                        <label for="db" class="placeholder">Db</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="host" name="host" class="input" type="text" placeholder=" " value="{{decode serverInfo.host}}" required />
-                                        <div class="cut"></div>
-                                        <label for="host" class="placeholder">Host</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="port" name="port" class="input" type="text" placeholder=" " value="{{decode serverInfo.port}}" required />
-                                        <div class="cut"></div>
-                                        <label for="port" class="placeholder">Port</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="password" name="password" class="input" type="text" placeholder=" " value="{{decode serverInfo.password}}" required />
-                                        <div class="cut"></div>
-                                        <label for="password" class="placeholder">Password</label>
-                                    </div>
-                                    <div class="form-title">Staff Settings (add a , after each name)</div>
-                                    <div class="input-container ic2">
-                                        <input id="staff" name="staff" class="input" type="text" placeholder=" " value="{{serverInfo.staff}}" required />
-                                        <div class="cut"></div>
-                                        <label for="staff" class="placeholder">Staff Members</label>
-                                    </div>
+                    <div class="card h-100 profile">
+                        <div class="card-body">
+                            <form action="/servers/{{toLowerCase serverInfo.server}}/settings" method="POST" id="create-form" autocomplete="on" class="form">
+                                <div class="form-title">{{globalInfo.server}} Settings</div>
+                                <div class="input-container ic2">
+                                    <input id="owner" name="owner" class="input" type="text" placeholder=" " value="{{serverInfo.owner}}" readonly required/>
+                                    <div class="cut"></div>
+                                    <label for="owner" class="placeholder">Server Owner</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="server" name="server" class="input" type="text" placeholder=" " value="{{serverInfo.server}}" required/>
+                                    <div class="cut"></div>
+                                    <label for="server" class="placeholder">Server Name</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="address" name="address" class="input" type="text" placeholder=" " value="{{decode serverInfo.address}}" required />
+                                    <div class="cut"></div>
+                                    <label for="address" class="placeholder">Address</label>
+                                </div>
+                                <div class="form-title">Database Settings</div>
+                                <div class="input-container ic2">
+                                    <input id="username" name="username" class="input" type="text" placeholder=" " value="{{decode serverInfo.username}}" required />
+                                    <div class="cut"></div>
+                                    <label for="username" class="placeholder">Db Username</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="db" name="db" class="input" type="text" placeholder=" " value="{{decode serverInfo.db}}" required />
+                                    <div class="cut"></div>
+                                    <label for="db" class="placeholder">Db</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="host" name="host" class="input" type="text" placeholder=" " value="{{decode serverInfo.host}}" required />
+                                    <div class="cut"></div>
+                                    <label for="host" class="placeholder">Host</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="port" name="port" class="input" type="text" placeholder=" " value="{{decode serverInfo.port}}" required />
+                                    <div class="cut"></div>
+                                    <label for="port" class="placeholder">Port</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="password" name="password" class="input" type="text" placeholder=" " value="{{decode serverInfo.password}}" required />
+                                    <div class="cut"></div>
+                                    <label for="password" class="placeholder">Password</label>
+                                </div>
+                                <div class="form-title">Staff Settings (add a , after each name)</div>
+                                <div class="input-container ic2">
+                                    <input id="staff" name="staff" class="input" type="text" placeholder=" " value="{{serverInfo.staff}}" required />
+                                    <div class="cut"></div>
+                                    <label for="staff" class="placeholder">Staff Members</label>
+                                </div>
 
-                                    <div class="form-title">Stats Settings</div>
-                                    <div class="input-container ic2">
-                                        <input id="maxBans" name="maxBans" class="input" type="text" placeholder=" " value="{{serverSettings.maxBans}}" required />
-                                        <div class="cut"></div>
-                                        <label for="maxBans" class="placeholder">Max Bans</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="maxReports" name="maxReports" class="input" type="text" placeholder=" " value="{{serverSettings.maxReports}}" required />
-                                        <div class="cut"></div>
-                                        <label for="maxReports" class="placeholder">Max Reports</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="maxWarns" name="maxWarns" class="input" type="text" placeholder=" " value="{{serverSettings.maxWarns}}" required />
-                                        <div class="cut"></div>
-                                        <label for="maxWarns" class="placeholder">Max Warns</label>
-                                    </div>
-                                    <div class="input-container ic2">
-                                        <input id="maxPlayers" name="maxPlayers" class="input" type="text" placeholder=" " value="{{serverSettings.maxPlayers}}" required />
-                                        <div class="cut"></div>
-                                        <label for="maxPlayers" class="placeholder">Max Players</label>
-                                    </div>
+                                <div class="form-title">Stats Settings</div>
+                                <div class="input-container ic2">
+                                    <input id="maxBans" name="maxBans" class="input" type="text" placeholder=" " value="{{serverSettings.maxBans}}" required />
+                                    <div class="cut"></div>
+                                    <label for="maxBans" class="placeholder">Max Bans</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="maxReports" name="maxReports" class="input" type="text" placeholder=" " value="{{serverSettings.maxReports}}" required />
+                                    <div class="cut"></div>
+                                    <label for="maxReports" class="placeholder">Max Reports</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="maxWarns" name="maxWarns" class="input" type="text" placeholder=" " value="{{serverSettings.maxWarns}}" required />
+                                    <div class="cut"></div>
+                                    <label for="maxWarns" class="placeholder">Max Warns</label>
+                                </div>
+                                <div class="input-container ic2">
+                                    <input id="maxPlayers" name="maxPlayers" class="input" type="text" placeholder=" " value="{{serverSettings.maxPlayers}}" required />
+                                    <div class="cut"></div>
+                                    <label for="maxPlayers" class="placeholder">Max Players</label>
+                                </div>
 
-                                    <div class="radio">
-                                        <label for="ban-ip" class="form-title">Is the server Public?
-                                            <input label="Yes" type="radio" id="isPublic_true" name="isPublic" value="true"
-                                                   alt="{{serverSettings.isPublic}}">
-                                            <input label="No" type="radio" id="isPublic_false" name="isPublic" value="false"
-                                                   alt="{{serverSettings.isPublic}}">
-                                        </label>
-                                    </div>
-                                    <div class="row buttons-container">
-                                        <button class="submit button" id="button-6">
-                                            <div id="spin"></div>
-                                            Confirm Settings
-                                        </button>
-                                        <button class="submit button" id="button-6">
-                                            <div id="spin"></div>
-                                            Cancel
-                                        </button>
-                                    </div>
+                                <div class="radio">
+                                    <label for="ban-ip" class="form-title">Is the server Public?
+                                        <input label="Yes" type="radio" id="isPublic_true" name="isPublic" value="true"
+                                               alt="{{serverSettings.isPublic}}">
+                                        <input label="No" type="radio" id="isPublic_false" name="isPublic" value="false"
+                                               alt="{{serverSettings.isPublic}}">
+                                    </label>
+                                </div>
+                                <div class="row buttons-container">
+                                    <button class="submit button" id="button-6">
+                                        <div id="spin"></div>
+                                        Confirm Settings
+                                    </button>
+                                    <button class="submit button" id="button-6">
+                                        <div id="spin"></div>
+                                        Cancel
+                                    </button>
+                                </div>
 
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

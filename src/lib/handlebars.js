@@ -43,7 +43,7 @@ helpers.decode = (encodedString) => {
 
 helpers.getServerById = async (serverId) => {
     const results = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?', [serverId])
-    return results[0].serverId;
+    return await results[0].serverId;
 }
 
 helpers.toLowerCase = (string) =>{
@@ -63,6 +63,10 @@ helpers.github = () => {
 helpers.spigot = ()=>{
     const spigot = "https://www.spigotmc.org/resources/staff-core.82324"
     return spigot;
+}
+
+helpers.version = () =>{
+    return '4.4.3';
 }
 
 module.exports = helpers;

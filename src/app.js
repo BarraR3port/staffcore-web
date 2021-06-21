@@ -20,8 +20,8 @@ async function createUsersDatabase() {
     // Create the Staff table
 
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_staff(
-        staffId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        role VARCHAR(20) NOT NULL UNIQUE KEY)`
+                                                                   staffId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                                   role VARCHAR(20) NOT NULL UNIQUE KEY)`
     );
     await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('User')`);
     await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('Mod')`);
@@ -29,8 +29,8 @@ async function createUsersDatabase() {
 
     // Create the Servers Table
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers(
-        serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        owner VARCHAR(20) NOT NULL UNIQUE KEY,
+                                                             serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                             owner VARCHAR(20) NOT NULL UNIQUE KEY,
         server VARCHAR(30) NOT NULL UNIQUE KEY,
         address VARCHAR(30) NOT NULL UNIQUE KEY,
         username VARCHAR(100) NOT NULL,
@@ -43,8 +43,8 @@ async function createUsersDatabase() {
 
     // Create the Users Table
     await db.query(`CREATE TABLE IF NOT EXISTS sc_users (
-        id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR (20) NOT NULL UNIQUE KEY,
+                                                            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                            username VARCHAR (20) NOT NULL UNIQUE KEY,
         mail VARCHAR(40) NOT NULL UNIQUE KEY,
         password VARCHAR(255) NOT NULL,
         serverId INT,
@@ -65,9 +65,9 @@ async function createUsersDatabase() {
                     ( serverId) REFERENCES sc_servers ( serverId ))`
     );
     await db.query( `CREATE TABLE IF NOT EXISTS sc_web_admins (
-                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                     username VARCHAR(30) NOT NULL UNIQUE KEY
-                     )`)
+                                                                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                                                                  username VARCHAR(30) NOT NULL UNIQUE KEY
+        )`)
     await db.query( `INSERT IGNORE INTO sc_web_admins(username) VALUES (?) `,['BarraR3port'])
 }
 
@@ -143,12 +143,24 @@ async function getIp(banned) {
 
 module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp}
 // Routes
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
+    if (req.user !== undefined){
+        const rawServer = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?',[req.user.serverId]);
+        if (rawServer !== undefined){
+            if ( rawServer.length > 0 ){
+                req.user.server = rawServer[0].server;
+            } else {
+                req.user.server = null;
+            }
+        } else {
+            req.user.server = null;
+        }
+    }
     app.locals.user = req.user;
     app.locals.download = 'https://github.com/BarraR3port/staffcore/releases/tag/4.4.3'
-    next();
+    await next();
 })
 app.use('/config', require('./routes/config'));
 app.use(require('./routes'));

@@ -29,10 +29,41 @@ body, td {
 #home {
   width: 100%;
   background-image: url('/img/mc-1.png');
-  background-size: inherit;
+  background-size: cover;
+  background-position-y: center;
   background-repeat: no-repeat;
 }
+.download-img {
+  width: 100%;
+  background-image: url('/img/mc-2.png');
+  background-size: cover;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+.download {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  width: 70%;
+  align-content: center;
+  margin: auto;
+}
 
+.auth-form{
+  padding-top: 100px !important;
+  padding-bottom: 200px !important;
+}
+.dropdown-menu{
+  max-width: 100px !important;
+  text-align: center !important;
+}
+
+.removecaret.dropdown-toggle::after {
+  display: none;
+  position:relative;
+  top:-3px;
+  margin-left:5px;
+}
 .navbar-text-s{
   text-decoration: none;
   color: $blue;
@@ -46,6 +77,12 @@ body, td {
 
 .footer{
   background-color: $navbar !important;
+  position: relative !important;
+  bottom: 0!important;
+  left: 0!important;
+  right: 0!important;
+  height: auto !important;
+  padding-top: 40px;
 }
 
 .icon {
@@ -96,13 +133,13 @@ body, td {
 .input {
   background-color: $wipe;
   border-radius: 10px;
-  border: 1px solid $violet-color-2;
-  color: $blue;
+  border: 1px solid $violet-color-2 !important;
+  color: $blue !important;
   box-sizing: border-box;
   font-size: 18px;
   height: 100%;
   outline: 0;
-  padding: 4px 20px 0;
+  padding: 4px 20px 0 !important;
   width: 100%;
 }
 
@@ -386,7 +423,7 @@ html.modern .header-right {
   width: 25%!important;
   border: 2px solid $violet-color-2!important;
   margin: 20px 20px 20px 20px!important;
-  color: $violet-color-2!important;
+  color: $blue!important;
   text-transform: uppercase!important;
   text-decoration: none !important;
   letter-spacing: 1.5px!important;
