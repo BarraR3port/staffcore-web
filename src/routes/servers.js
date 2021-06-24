@@ -138,6 +138,9 @@ router.get('/', isLoggedIn, async (req, res) => {
     res.redirect('/servers/' + server);
 })
 
+router.get('/link', isLoggedIn, async (req, res) => {
+    res.render('servers/link');
+})
 
 router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();

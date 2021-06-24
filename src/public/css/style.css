@@ -26,7 +26,6 @@ body, td {
 
 .download-img {
   width: 100%;
-  background-image: url("/img/mc-2.png");
   background-size: cover;
   background-position-y: center;
   background-repeat: no-repeat;
@@ -66,7 +65,21 @@ body, td {
 }
 
 .features {
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
+  align-content: center;
+  margin: auto;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.features-items {
   background-color: rgba(62, 21, 102, 0.18) !important;
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  align-content: center;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .footer {
@@ -77,6 +90,23 @@ body, td {
   right: 0 !important;
   height: auto !important;
   padding-top: 40px;
+}
+
+.footer-bottom {
+  background-color: rgba(62, 21, 102, 0.18);
+  padding: 16px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  word-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.footer-bottom span {
+  color: #6829b3;
+  text-transform: uppercase;
+  font-weight: 200;
 }
 
 .icon {

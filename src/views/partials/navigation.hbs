@@ -3,11 +3,17 @@
         <a class="navbar-brand" href="/">{{servername}}</a>
         <a class="navbar-text-s" href="/download">Download</a>
         <a class="navbar-text-s" href="/features">Features</a>
+        {{#if user}}
+            {{#if (hasServerLinked user.serverId) }}
+            {{else}}
+                <a class="navbar-text-s" href="/servers/link">Link your Server</a>
+            {{/if}}
+        {{/if}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="material-icons" style="color: rgba(62, 21, 102, 0.7) !important;">reorder</span>
         </button>
-        <div class="collapse navbar-collapse " id="navbarScroll">
+        <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-3 my-lg-1 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 {{#if user}}
                     {{#if (hasServerLinked user.serverId) }}
@@ -47,44 +53,6 @@
                                 </li>
                             </ul>
                         </li>
-                    {{else}}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                Link your Server
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                                <li>
-                                    <a href="/servers/{{user.server}}" class="dropdown-item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <rect x="3" y="4" width="18" height="16" rx="3"></rect>
-                                            <circle cx="9" cy="10" r="2"></circle>
-                                            <line x1="15" y1="8" x2="17" y2="8"></line>
-                                            <line x1="15" y1="12" x2="17" y2="12"></line>
-                                            <line x1="7" y1="16" x2="17" y2="16"></line>
-                                        </svg>
-                                        Details</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a href="/register" class="dropdown-item">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clipboard-list" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                            <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
-                                            <rect x="9" y="3" width="6" height="4" rx="2"></rect>
-                                            <line x1="9" y1="12" x2="9.01" y2="12"></line>
-                                            <line x1="13" y1="12" x2="15" y2="12"></line>
-                                            <line x1="9" y1="16" x2="9.01" y2="16"></line>
-                                            <line x1="13" y1="16" x2="15" y2="16"></line>
-                                        </svg>
-                                        Register</a>
-                                </li>
-                            </ul>
-                        </li>
-
                     {{/if}}
 
                 {{/if}}
@@ -105,7 +73,7 @@
                         </div>
                     {{else}}
                         <p class="dropdown-toggle user-action removecaret " data-bs-toggle="dropdown" data-toggle="dropdown">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-tabler icon-tabler-login icon"
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon-tabler icon-tabler-login icon mt-5"
                                  width="32" height="32" viewBox="6 -4 10 32" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
