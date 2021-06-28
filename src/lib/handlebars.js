@@ -1,6 +1,7 @@
 const {format} = require('timeago.js');
 
-const {servername} = require('../keys');
+const {servername, version} = require('../keys');
+
 const {config} = require('../keys');
 
 const db = require('../database')
@@ -66,7 +67,7 @@ helpers.spigot = ()=>{
 }
 
 helpers.version = () =>{
-    return '4.4.3';
+    return version;
 }
 
 module.exports = helpers;

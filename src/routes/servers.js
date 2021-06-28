@@ -337,6 +337,22 @@ router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res)
     }
 })
 
+router.get('/:server/settings/unlink', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const serverId = await getServerId(req.params.server);
+        const owner = req.user;
+        await datab.query('UPDATE sc_users SET serverId = ?, staffId = ? WHERE username = ?', [null, 1, owner])
+        await datab.query('DELETE FROM sc_servers_settings WHERE serverId = ?', [serverId]);
+        await datab.query('DELETE FROM sc_servers WHERE serverId = ?', [serverId]);
+        req.flash('success', 'Server Un Linked Successfully',)
+        res.redirect('/')
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
 /* --------------= BANS =-------------- */
 
 router.get('/:server/bans', isLoggedIn, isPublic, async (req, res, next) => {

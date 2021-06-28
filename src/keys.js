@@ -8,6 +8,9 @@ module.exports = {
     },
     servername: {
         name: 'StaffCore'
+    },
+    version: {
+        latest: '4.4.4'
     }
 
 

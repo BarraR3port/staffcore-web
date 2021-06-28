@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const got = require('got');
-const {database, config} = require('../keys');
-const passport = require('passport');
+const { version } = require('../keys');
 const datab = require('../database')
 const bcrypt = require('bcrypt');
 'use strict';
@@ -101,6 +99,10 @@ const isPlayerLinked = async (player) => {
 
 router.get('/', (req, res) => {
     res.redirect('/')
+});
+
+router.get('/version', (req, res) => {
+    res.send(version);
 })
 
 router.get('/:base64', async (req, res) => {
