@@ -88,6 +88,16 @@ body, td {
   border-radius: 10px;
 }
 
+.index-items{
+  background-color: $navbar !important;
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  align-content: center;
+  margin: auto;
+  border-radius: 10px;
+  width: 76%;
+}
+
 .footer{
   background-color: $navbar !important;
   position: relative !important;
