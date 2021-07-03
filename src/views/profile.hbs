@@ -68,13 +68,13 @@
                     </ul>
                 </div>
             </div>
-            {{#each server}}
-                <div class="col-md-7">
-                    <div class="card mb-3 profile">
-                        <div class="card-body" style="text-align: center;">
-                            SERVERS
-                        </div>
+            <div class="col-md-7">
+                <div class="card mb-3 profile">
+                    <div class="card-body" style="text-align: center;">
+                        SERVERS
                     </div>
+                </div>
+                {{#each server}}
                     <div class="card mb-3 profile">
                         <div class="card-body">
                             <h6 class="d-flex align-items-center">
@@ -85,18 +85,25 @@
                                     <line x1="7" y1="8" x2="7" y2="8.01"></line>
                                     <line x1="7" y1="16" x2="7" y2="16.01"></line>
                                 </svg>
-                                {{server}}
+                                <a href="/servers/{{server}}" style="text-decoration: none !important; color: white !important;">
+                                    {{server}}
+                                </a>
                             </h6>
                             <a href="/servers/{{server}}">
                                 <img class="rounded" alt="img" src="https://api.loohpjames.com/serverbanner.png?ip={{decode address}}&width=1224">
                             </a>
                         </div>
                     </div>
-
-                </div>
-            {{else}}
-
-            {{/each}}
+                {{else}}
+                    <div class="card mb-3 profile">
+                        <div class="card-body">
+                            <h6 class="align-items-center">
+                                You don't have any server Linked with your account, follow <a href="/servers/link">this steps</a> to link your account to your Server/Network
+                            </h6>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
         </div>
     </div>
 </div>

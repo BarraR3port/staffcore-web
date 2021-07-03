@@ -66,7 +66,7 @@
                     </ul>
                 </div>
                 <div class="card mt-3 profile">
-                    <ul class="list-group list-group-flush ">
+                    <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
                             <span class="mb-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -135,7 +135,7 @@
                     <div class="col-sm-6 mb-3">
                         <div class="card h-100 profile">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center">
+                                <h6 class="d-flex align-items-center text-center">
                                     <span class="mb-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -146,7 +146,9 @@
                                     </span>
                                     Bans
                                 </h6>
-                                <small>Current Bans</small>
+                                <div class="text-center">
+                                    <small>Current Bans</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.bansLengthPercentage}}%</span>
@@ -155,7 +157,9 @@
                                          aria-valuenow="{{globalInfo.bansLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
-                                <small>Open Bans</small>
+                                <div class="text-center">
+                                    <small>Open Bans</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.openBansLengthPercentage}}%</span>
@@ -164,7 +168,9 @@
                                          aria-valuenow="{{globalInfo.openBansLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
-                                <small>Closed Bans</small>
+                                <div class="text-center">
+                                    <small>Closed Bans</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.closedBansLengthPercentage}}%</span>
@@ -215,7 +221,9 @@
                                     </svg>
                                     Reports
                                 </h6>
-                                <small>Current Reports</small>
+                                <div class="text-center">
+                                    <small>Current Reports</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.reportsLengthPercentage}}%</span>
@@ -224,7 +232,9 @@
                                          aria-valuenow="{{globalInfo.reportsLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxBans}}"></div>
                                 </div>
-                                <small>Open Reports</small>
+                                <div class="text-center">
+                                    <small>Open Reports</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.openReportsLengthPercentage}}%</span>
@@ -233,7 +243,9 @@
                                          aria-valuenow="{{globalInfo.openReportsLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxReports}}"></div>
                                 </div>
-                                <small>Closed Reports</small>
+                                <div class="text-center">
+                                    <small>Closed Reports</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.closedReportsLengthPercentage}}%</span>
@@ -286,7 +298,9 @@
                                     </span>
                                     Warns
                                 </h6>
-                                <small>Current Warns</small>
+                                <div class="text-center">
+                                    <small>Current Warns</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.warnsLengthPercentage}}%</span>
@@ -295,7 +309,9 @@
                                          aria-valuenow="{{globalInfo.warnsLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxWarns}}"></div>
                                 </div>
-                                <small>Open Warns</small>
+                                <div class="text-center">
+                                    <small>Open Warns</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.openWarnsLengthPercentage}}%</span>
@@ -304,7 +320,9 @@
                                          aria-valuenow="{{globalInfo.openWarnsLengthPercentage}}" aria-valuemin="0"
                                          aria-valuemax="{{serverSettings.maxWarns}}"></div>
                                 </div>
-                                <small>Closed Warns</small>
+                                <div class="text-center">
+                                    <small>Closed Warns</small>
+                                </div>
                                 <div class="progress mb-3 "
                                      style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
                                     <span class="progress-value">{{globalInfo.closedWarnsLengthPercentage}}%</span>
@@ -349,42 +367,40 @@
                             <div class="card-body">
                                 <h6 class="d-flex align-items-center mb-3">
                                     <span class="mb-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                           <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                           <path d="M12 9v2m0 4v.01"></path>
-                                           <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-server" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <rect x="3" y="4" width="18" height="8" rx="3"></rect>
+                                            <rect x="3" y="12" width="18" height="8" rx="3"></rect>
+                                            <line x1="7" y1="8" x2="7" y2="8.01"></line>
+                                            <line x1="7" y1="16" x2="7" y2="16.01"></line>
                                         </svg>
                                     </span>
-                                    Web Staff
+                                    <small>{{globalInfo.server}}</small>
                                 </h6>
-                                <small>Current Warns</small>
-                                <div class="progress mb-3 "
-                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
-                                    <span class="progress-value">{{globalInfo.warnsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                         role="progressbar" style="width: {{globalInfo.warnsLengthPercentage}}%; "
-                                         aria-valuenow="{{globalInfo.warnsLengthPercentage}}" aria-valuemin="0"
-                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
-                                </div>
-                                <small>Open Warns</small>
-                                <div class="progress mb-3 "
-                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
-                                    <span class="progress-value">{{globalInfo.openWarnsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                         role="progressbar" style="width: {{globalInfo.openWarnsLengthPercentage}}%; "
-                                         aria-valuenow="{{globalInfo.openWarnsLengthPercentage}}" aria-valuemin="0"
-                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
-                                </div>
-                                <small>Closed Warns</small>
-                                <div class="progress mb-3 "
-                                     style="height: 20px; background-color: rgba(62, 21, 102, 0.7);">
-                                    <span class="progress-value">{{globalInfo.closedWarnsLengthPercentage}}%</span>
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                         role="progressbar"
-                                         style="width: {{globalInfo.closedWarnsLengthPercentage}}%; "
-                                         aria-valuenow="{{globalInfo.closedWarnsLengthPercentage}}" aria-valuemin="0"
-                                         aria-valuemax="{{serverSettings.maxWarns}}"></div>
-                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                                        <span class="mb-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                               <path d="M14.274 10.291a4 4 0 1 0 -5.554 -5.58m-.548 3.453a4.01 4.01 0 0 0 2.62 2.65"></path>
+                                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 1.147 .167m2.685 2.681a4 4 0 0 1 .168 1.152v2"></path>
+                                               <line x1="3" y1="3" x2="21" y2="21"></line>
+                                            </svg>
+                                        </span>
+                                        <span>{{globalInfo.bansLength}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                                        <span class="mb-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                               <path d="M14.274 10.291a4 4 0 1 0 -5.554 -5.58m-.548 3.453a4.01 4.01 0 0 0 2.62 2.65"></path>
+                                               <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 1.147 .167m2.685 2.681a4 4 0 0 1 .168 1.152v2"></path>
+                                               <line x1="3" y1="3" x2="21" y2="21"></line>
+                                            </svg>
+                                        </span>
+                                        <span>{{globalInfo.bansLength}}</span>
+                                    </li>
+                                </ul>
                                 <div class="row buttons-container">
                                     <div class="button" id="button-6">
                                         <div id="spin"></div>

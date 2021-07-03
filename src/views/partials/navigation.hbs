@@ -33,7 +33,8 @@
                                             <line x1="15" y1="12" x2="17" y2="12"></line>
                                             <line x1="7" y1="16" x2="17" y2="16"></line>
                                         </svg>
-                                        Details</a>
+                                        Details
+                                    </a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
@@ -49,7 +50,8 @@
                                             <line x1="9" y1="16" x2="9.01" y2="16"></line>
                                             <line x1="13" y1="16" x2="15" y2="16"></line>
                                         </svg>
-                                        Settings</a>
+                                        Settings
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -63,13 +65,28 @@
                     {{#if user}}
                         <a class="nav-link dropdown-toggle" href="/profile" id="navbarScrollingDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i><img src="https://cravatar.eu/avatar/{{user.username}}/32.png"
-                                    id="player-image" class="icon" alt=""></i>
+                            <i>
+                                <img src="https://cravatar.eu/avatar/{{user.username}}/32.png" id="player-image" class="icon" alt="">
+                            </i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end" style="text-align: center">
-                            <a href="/profile" class="dropdown-item"><i class="far fa-user"></i> Profile</a>
+                            <a href="/profile" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                </svg>
+                                Profile
+                            </a>
                             <div class="divider dropdown-divider"></div>
-                            <a href="/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <a href="/logout" class="dropdown-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                                    <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+                                </svg>
+                                Logout
+                            </a>
                         </div>
                     {{else}}
                         <p class="dropdown-toggle user-action removecaret " data-bs-toggle="dropdown" data-toggle="dropdown">
@@ -83,10 +100,12 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="/login" class="dropdown-item">
                                 <i class="ti ti-login"></i>
-                                LogIn</a>
+                                LogIn
+                            </a>
                             <a href="/register" class="dropdown-item">
                                 <i class="ti ti-clipboard-list"></i>
-                                Register</a>
+                                Register
+                            </a>
                         </div>
                     {{/if}}
                 </div>

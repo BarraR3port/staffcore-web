@@ -30,6 +30,7 @@ body, td {
   background-position-y: center;
   background-repeat: no-repeat;
   border-radius: 10px;
+  background-color: #2e1652;
 }
 
 .download {
@@ -38,6 +39,12 @@ body, td {
   width: 70%;
   align-content: center;
   margin: auto;
+}
+
+.listas {
+  background-color: #5d79cd;
+  border-radius: 10px !important;
+  color: white;
 }
 
 .auth-form {
