@@ -94,6 +94,21 @@ async function getClosedWarns(database) {
     return await connectExternalDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-closed-warns');
 }
 
+async function deleteWarn(database, id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'delete-warn', id);
+}
+
+async function editWarn(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'edit-warn', values);
+}
+
+async function getWarnsById(database,id) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-warn', id);
+}
+
+async function createWarn(database, values) {
+    return await getDataFromExtDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'create-warn', values);
+}
 /* --------------= SERVER =-------------- */
 
 async function getServerName(serverId) {
@@ -111,6 +126,11 @@ async function getPlayers(database) {
 
 async function getPlayersLength(database) {
     return await connectExternalDb(decode(database[0].host), decode(database[0].username), decode(database[0].password), decode(database[0].db), decode(database[0].port), 'get-players-length');
+}
+
+async function getRole(staffId){
+    const role = await datab.query('SELECT role FROM staffcore.sc_servers_staff WHERE staffId LIKE ?', [staffId]);
+    return role[0].role;
 }
 
 function encode( str ) {
@@ -269,7 +289,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
 
 router.get('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) => {
     const servers = await getServers();
-    if ( servers.includes(req.params.server) ){
+    if ( servers.includes(req.params.server.toLowerCase()) ){
         const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
         const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])
@@ -307,7 +327,7 @@ router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res)
         let host = encode(req.body.host);
         let port = encode(req.body.port);
         let password = encode(req.body.password);
-        const serverId = await getServerId(server);
+        const serverId = await getServerId(serverRaw);
         const saveServer = {
             owner,
             server,
@@ -326,11 +346,9 @@ router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res)
             maxPlayers,
             isPublic
         }
-        console.log(saveServer);
-        console.log(saveServerSettingsExport);
         datab.query(`UPDATE sc_servers SET ? WHERE serverId = ? `, [saveServer, serverId]);
         datab.query(`UPDATE sc_servers_settings SET ? WHERE serverId = ? `, [saveServerSettingsExport, serverId]);
-        res.redirect('/servers/' + serverRaw );
+        res.redirect('/servers/' + server );
     }  else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');
@@ -400,7 +418,8 @@ router.get('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
         const bans = await getBansById(database, id);
         bans[0].server = req.params.server.toLowerCase( );
-        res.render('bans/edit', {bans: bans[0]})
+        req.user.role = await getRole(req.user.staffId);
+        await res.render('bans/edit', {bans: bans[0]})
     } else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');
@@ -409,6 +428,7 @@ router.get('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
 
 router.post('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
+    console.log(req.body);
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         const server = req.params.server;
         try {
@@ -609,6 +629,141 @@ router.post('/:server/reports/create', isLoggedIn, isPublic, async (req, res) =>
             req.flash('error', 'Could not create the Report')
             res.redirect('/servers/' + server +'/reports/create');
         }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+/* --------------= WARNS =-------------- */
+
+router.get('/:server/warns', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+        const warns = await getWarns(database);
+        for (let i = 0; i< warns.length; i ++){
+            warns[i].server = req.params.server.toLowerCase( );
+        }
+        res.render('warns/warns', {warns});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.get('/:server/warns/delete/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const server = req.params.server;
+        const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        if ( await deleteWarn(database,id) ){
+            req.flash('success', 'Warn Deleted Correctly')
+            res.redirect('/servers/'+server+'/warns')
+        } else {
+            req.flash('error', `Warn couldn't be Deleted Correctly`)
+            res.redirect('/servers/'+server+'/warns/')
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.get('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const id = req.params.id;
+        const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+        const reports = await getWarnsById(database, id);
+        reports[0].server = req.params.server.toLowerCase( );
+        res.render('warns/edit', {reports: reports[0]})
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+});
+
+router.post('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        const server = req.params.server;
+        try {
+            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const id = req.params.id;
+            const {Name, Warner, Reason} = req.body;
+            const info = {
+                Name,
+                Warner,
+                Reason
+            };
+            const values = [info,id];
+            await editWarn(database,values)
+            req.flash('success', 'Warn Edited Correctly')
+            res.redirect('/servers/'+server+'/warns');
+        } catch (error){
+            req.flash('error', `Warn couldn't be Edited Correctly`)
+            res.redirect('/servers/'+server+'/warns')
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.get('/:server/warns/create', isLoggedIn, isPublic, async (req, res) => {
+    const servers = await getServers();
+    if (servers.includes(req.params.server.toLowerCase())) {
+        res.render('warns/create');
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+router.post('/:server/warns/create', isLoggedIn, isPublic, async (req, res) => {
+    const server = req.params.server;
+    const servers = await getServers();
+    if (servers.includes(req.params.server.toLowerCase())) {
+        try {
+            const {Name, Warner, Reason} = req.body;
+            const date = app.getDate();
+            const Status = "open";
+            await app.getIp(Name).then(async Ip => {
+                const info = {
+                    Name,
+                    Warner,
+                    Reason,
+                    date,
+                    Status
+                };
+                const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                const values = [info];
+                await createWarn(database, values)
+                req.flash('success', 'Warn Created Correctly')
+                res.redirect('/servers/' + server + '/warns');
+            });
+        } catch (e) {
+            req.flash('error', 'Could not create the Warn')
+            res.redirect('/servers/' + server +'/warns/create');
+        }
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+/* --------------= PLAYERS =-------------- */
+
+router.get('/:server/players', isLoggedIn, isPublic, async (req, res, next) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase( ) ) ){
+        res.render('servers/players');
     } else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');

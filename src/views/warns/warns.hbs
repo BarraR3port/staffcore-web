@@ -1,17 +1,17 @@
 <div class="price-table-wrapper">
-    {{#each reports}}
+    {{#each warns}}
         <div class="pricing-table">
             <h2 class="pricing-table__header">{{Name}}  </h2>
             <div style="padding-top: 20px"><img src="https://cravatar.eu/avatar/{{Name}}/128.png" id="banned-image" class="icon"></div>
             <ul class="pricing-table__list">
-                <li>Reported by: {{Reporter}} {{timeago Date}}</li>
+                <li>Warned by: {{Warner}} {{timeago Date}}</li>
                 <li>Reason: {{Reason}}</li>
                 <li>Status: {{status Status}}</li>
-                <li>Report id: {{ReportId}}</li>
+                <li>Warn id: {{WarnId}}</li>
                 <div class="row buttons-container">
                     <div class="button" id="button-6">
                         <div id="spin"></div>
-                        <a href="/servers/{{server}}/reports/edit/{{ReportId}}">
+                        <a href="/servers/{{server}}/warns/edit/{{WarnId}}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"></path>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="button" id="button-6">
                         <div id="spin"></div>
-                        <a href="/servers/{{server}}/reports/delete/{{ReportId}}">
+                        <a href="/servers/{{server}}/warns/delete/{{WarnId}}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -34,12 +34,12 @@
         </div>
     {{else}}
         <div class="pricing-table">
-            <h2 class="pricing-table__header">No Players Reported</h2>
-            <div class="mb-2 p-2">Report a Player</div>
+            <h2 class="pricing-table__header">No Players Warned</h2>
+            <div class="mb-2 p-2">Warn a Player</div>
             <div class="row buttons-container">
                 <div class="button" id="button-6">
                     <div id="spin"></div>
-                    <a href="/servers/{{server}}/reports/create" class="pricing-table__button mb-2">
+                    <a href="/servers/{{server}}/warns/create" class="pricing-table__button mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <line x1="12" y1="5" x2="12" y2="19"></line>

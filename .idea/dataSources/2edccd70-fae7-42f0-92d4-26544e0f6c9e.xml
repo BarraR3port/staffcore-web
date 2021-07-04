@@ -977,237 +977,232 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="292" parent="283" name="Fuente">
+    <column id="292" parent="283" name="Especie">
       <Position>2</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="293" parent="283" name="Especie">
-      <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="294" parent="283" name="Edad">
-      <Position>4</Position>
+    <column id="293" parent="283" name="Edad">
+      <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="295" parent="283" name="NumArbol">
-      <Position>5</Position>
+    <column id="294" parent="283" name="NumArbol">
+      <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="296" parent="283" name="Diametro">
+    <column id="295" parent="283" name="Diametro">
+      <Position>5</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="296" parent="283" name="Altura">
       <Position>6</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="297" parent="283" name="Altura">
+    <column id="297" parent="283" name="CodigoSitio">
       <Position>7</Position>
-      <DataType>double|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="298" parent="283" name="CodigoSitio">
+    <column id="298" parent="283" name="FechaPlan">
       <Position>8</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="299" parent="283" name="FechaPlan">
-      <Position>9</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="300" parent="283" name="CodigoSitio">
+    <index id="299" parent="283" name="CodigoSitio">
       <ColNames>CodigoSitio</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="301" parent="283" name="PRIMARY">
+    <key id="300" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdArbol</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="302" parent="284" name="IdContrato">
+    <column id="301" parent="284" name="IdContrato">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="303" parent="284" name="Contrato">
+    <column id="302" parent="284" name="Contrato">
       <Position>2</Position>
       <DataType>varchar(12)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="304" parent="284" name="CodigoPredio">
+    <column id="303" parent="284" name="CodigoPredio">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="305" parent="284" name="fk_cod_Predido">
+    <index id="304" parent="284" name="fk_cod_Predido">
       <ColNames>CodigoPredio</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="306" parent="284" name="PRIMARY">
+    <key id="305" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdContrato</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="307" parent="285" name="IdInventario">
+    <column id="306" parent="285" name="IdInventario">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="308" parent="285" name="Realizo">
+    <column id="307" parent="285" name="Realizo">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="309" parent="285" name="PRIMARY">
+    <key id="308" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdInventario</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="310" parent="286" name="idorden">
+    <column id="309" parent="286" name="idorden">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="311" parent="286" name="anoplanta">
+    <column id="310" parent="286" name="anoplanta">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="312" parent="286" name="superficie">
+    <column id="311" parent="286" name="superficie">
       <Position>3</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="313" parent="286" name="Bloque">
+    <column id="312" parent="286" name="Bloque">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="314" parent="286" name="codigocontrato">
+    <column id="313" parent="286" name="codigocontrato">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="315" parent="286" name="codigocontrato">
+    <index id="314" parent="286" name="codigocontrato">
       <ColNames>codigocontrato</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="316" parent="286" name="PRIMARY">
+    <key id="315" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idorden</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="317" parent="287" name="idPerfil">
+    <column id="316" parent="287" name="idPerfil">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="318" parent="287" name="Nombre">
+    <column id="317" parent="287" name="Nombre">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <column id="319" parent="287" name="Descripcion">
+    <column id="318" parent="287" name="Descripcion">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
     </column>
-    <key id="320" parent="287" name="PRIMARY">
+    <key id="319" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>idPerfil</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="321" parent="288" name="IdPredio">
+    <column id="320" parent="288" name="IdPredio">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="322" parent="288" name="Predio">
+    <column id="321" parent="288" name="Predio">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="323" parent="288" name="Zona">
+    <column id="322" parent="288" name="Zona">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="324" parent="288" name="codigoinventario">
+    <column id="323" parent="288" name="codigoinventario">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="325" parent="288" name="PRIMARY">
+    <key id="324" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdPredio</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="326" parent="289" name="IdSitio">
+    <column id="325" parent="289" name="IdSitio">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="327" parent="289" name="Sitio">
+    <column id="326" parent="289" name="Sitio">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="328" parent="289" name="CodigoOrden">
+    <column id="327" parent="289" name="CodigoOrden">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="329" parent="289" name="PRIMARY">
+    <key id="328" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdSitio</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="330" parent="290" name="Contraseniha">
+    <column id="329" parent="290" name="Contraseniha">
       <Position>1</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="331" parent="290" name="NombreUsuario">
+    <column id="330" parent="290" name="NombreUsuario">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="332" parent="290" name="Estado">
+    <column id="331" parent="290" name="Estado">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="333" parent="290" name="IdUsuario">
+    <column id="332" parent="290" name="IdUsuario">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="334" parent="290" name="IdPersona">
+    <column id="333" parent="290" name="IdPersona">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="335" parent="290" name="IdPerfil">
+    <column id="334" parent="290" name="IdPerfil">
       <Position>6</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="336" parent="290" name="IdPersona">
+    <index id="335" parent="290" name="IdPersona">
       <ColNames>IdPersona</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="337" parent="290" name="IdPerfil">
+    <index id="336" parent="290" name="IdPerfil">
       <ColNames>IdPerfil</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="338" parent="290" name="PRIMARY">
+    <key id="337" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdUsuario</ColNames>
       <Primary>1</Primary>

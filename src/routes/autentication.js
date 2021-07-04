@@ -38,7 +38,6 @@ router.get('/profile', isLoggedIn, async (req, res) => {
         if ( await hasServerLinked(req.user.username ) ) {
             const serverId = await db.query('SELECT serverId FROM sc_users WHERE username LIKE ?', [req.user.username])
             const server = await db.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId[0].serverId])
-            console.log(server);
             await res.render('profile', {server});
             return;
         }

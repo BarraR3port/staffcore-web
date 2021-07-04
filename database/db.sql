@@ -194,6 +194,8 @@ SELECT username FROM sc_web_admins WHERE username LIKE ('BarraR3port');
 INSERT INTO sc_servers(owner, server, address, username, db, host, port, password, staff)
  VALUES ('Bermudas','servertest','c3RhZmZjb3Jl','c3RhZmZjb3Jl','c3RhZmZjb3Jl','c3RhZmZjb3JlLmNsYmxncDNicWNtZS51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20','MzMwNg','YnJ1bm95c2FtdWVsMjQ1Mw','Bermudas,Alfredo');
 
+SELECT  * FROM sc_bans;
+SELECT Name, BanId from sc_bans where BanId between 5 and 12 order by Name;
 
 ALTER TABLE sc_servers_settings change maxBans maxBans varchar(40);
 --

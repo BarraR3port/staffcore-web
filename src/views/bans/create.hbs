@@ -12,8 +12,10 @@
             <label for="user" class="mb-2">Your Nick Name</label>
             <div class="input-icons" id="user-input">
                 <i><img src="" id="staff-image" class="icon"></i>
-                <label for="Baner"></label><input type="text" id="Baner" name="Baner" placeholder="Type your Name" class="input-field" value="{{username}}"
-                                                 style="text-decoration-width: auto" required>
+                <label for="Baner">
+
+                </label>
+                <input type="text" id="Baner" name="Baner" placeholder="Type your Name" class="input-field" value="{{username}}" style="text-decoration-width: auto" required>
             </div>
 
             <div class="input-icons" id="user-input-2">
@@ -42,6 +44,102 @@
                 <a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="main-body m-4">
+        <!-- /Breadcrumb -->
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-4">
+                <div class="card profile">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center p-3">
+                            <img src="https://cravatar.eu/avatar/{{user.username}}/256.png" class="rounded"
+                                 width="60%" alt="img">
+                            <div class="mt-3">
+                                <h4>{{user.username}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3 profile">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">dns</span></span>
+                            <span>{{user.server}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">email</span></span>
+                            <span>{{user.mail}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">groups</span></span>
+                            <span>{{user.role}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row gutters-sm">
+                    <!-- --------------= EDIT BANS =-------------- -->
+                    <div class="card h-100 profile">
+                        <div class="card-body">
+                            <form action="/servers/{{server}}/bans/create" method="POST" autocomplete="on" class="form">
+                                <div class="form-title">Edit the Ban {{bans.BanId}}</div>
+                                <div class="input-container ic2">
+                                    <input id="Name" name="Name" class="input" type="text" placeholder=" " value=" " required/>
+                                    <img src="https://cravatar.eu/avatar/{{bans.Name}}/32.png" id="banned-img" alt="" class="input_img">
+                                    <div class="cut cut4"></div>
+                                    <label for="Name" class="placeholder">Banned Name</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="Baner" name="Baner" class="input" type="text" placeholder=" " value="" required/>
+                                    <img src="https://cravatar.eu/avatar/{{bans.Baner}}/32.png" id="banner-img" alt="" class="input_img">
+                                    <div class="cut cut4"></div>
+                                    <label for="Baner" class="placeholder">Banner Name</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="Reason" name="Reason" class="input" type="text" placeholder=" " value=" " required/>
+                                    <div class="cut cut1"></div>
+                                    <label for="Reason" class="placeholder">Reason</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="expdate" name="expdate" class="input create-form datemin" type="datetime-local" placeholder=" " value=" " alt=" " step="1" required/>
+                                    <div class="cut cut9"></div>
+                                    <label for="expdate" class="placeholder">Enter the date To Expire</label>
+                                </div>
+
+                                <div class="radio ic2">
+                                    <label for="ban-ip">Ban IP?
+                                        <input label="Yes" type="radio" id="Ip_Banned_true" name="Ip_Banned" value="true" alt=" ">
+                                        <input label="No" type="radio" id="Ip_Banned_false" name="Ip_Banned" value="false" alt=" ">
+                                    </label>
+                                </div>
+                                <div class="row buttons-container">
+                                    <button type="submit" class="button" tabindex="5" id="button-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M5 12l5 5l10 -10"></path>
+                                        </svg>
+                                    </button>
+                                    <a href="/servers/{{bans.server}}/bans" class="button" id="button-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -83,13 +181,13 @@
 
     }
 
-    const form = document.getElementById("banned-input");
+    const form = document.getElementById("Name");
     form.addEventListener("input", () => {
-        changeImg("banned-image", "Name");
+        changeImg("banned-img", "Name");
     });
-    const form2 = document.getElementById("user-input");
+    const form2 = document.getElementById("Baner");
     form2.addEventListener("input", () => {
-        changeImg("staff-image", "Baner");
+        changeImg("banner-img", "Baner");
     });
     changeImg("staff-image", "Baner");
     function myFunction() {

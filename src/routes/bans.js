@@ -44,6 +44,7 @@ router.get('/delete/:id', isLoggedIn, async (req, res) => {
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const id = req.params.id;
     const bans = await db.query('SELECT * FROM `sc_bans` WHERE BanId = ?', [id]);
+
     res.render('bans/edit', {bans: bans[0]})
 });
 

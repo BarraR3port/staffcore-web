@@ -165,7 +165,7 @@ module.exports = {
             if (response.length > 0) {
                 const staff = response[0].staff.toString().split(',');
                 if (staff.contains('username')) {
-                    const staffId = await db.query('SELECT staffId FROM staffcore.sc_users WHERE username LIKE ?', [username]);
+                    const staffId = await db.query('SELECT staffId FROM sc_users WHERE username LIKE ?', [username]);
                     if ( staffId[0].staffId === 1 || staffId[0].staffId === 2 ){
                         req.flash('error', `You are not allowed to edit the configuration of this server`);
                         return res.redirect('/');
@@ -205,7 +205,7 @@ module.exports = {
             /* --------------= BANS =-------------- */
 
             case 'get-bans':
-                const bans = await pool.query('SELECT * FROM `sc_bans` WHERE BanId = ?', [id]);
+                const bans = await pool.query('SELECT * FROM sc_bans WHERE BanId = ?', [id]);
                 pool.end();
                 return bans;
             case 'delete-ban':
@@ -223,11 +223,11 @@ module.exports = {
             /* --------------= REPORTS =-------------- */
 
             case 'get-reports':
-                const reports = await pool.query('SELECT * FROM staffcore.`sc_reports` WHERE ReportId = ?', [id]);
+                const reports = await pool.query('SELECT * FROM sc_reports WHERE ReportId = ?', [id]);
                 pool.end();
                 return reports;
             case 'delete-report':
-                await db.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
+                await db.query('DELETE FROM sc_reports WHERE ReportId = ?', [id]);
                 pool.end();
                 return true;
             case 'edit-report':
@@ -240,8 +240,20 @@ module.exports = {
                 return true;
             /* --------------= WARNS =-------------- */
 
+            case 'get-warn':
+                const warns = await pool.query('SELECT * FROM sc_warns WHERE WarnId = ?', [id]);
+                pool.end();
+                return warns;
             case 'delete-warn':
-                await db.query('DELETE FROM sc_bans WHERE BanId = ?', [id]);
+                await db.query('DELETE FROM sc_warns WHERE WarnId = ?', [id]);
+                pool.end();
+                return true;
+            case 'edit-warn':
+                await pool.query('UPDATE sc_warns SET ? WHERE WarnId = ?', [id[0],id[1]]);
+                pool.end();
+                return true;
+            case 'create-warn':
+                await pool.query('INSERT INTO sc_warns SET ? ', [id[0]]);
                 pool.end();
                 return true;
         }
