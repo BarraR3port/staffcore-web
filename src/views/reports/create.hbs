@@ -1,60 +1,88 @@
-<div class="create-form form-check-inline">
-    <div class="card-header">Report a Player</div>
-    <div class="card-body">
-        <form action="/reports/create" method="POST" id="create-form" autocomplete="on">
-            <label for="reported" class="mb-2">Player Name</label>
-            <div class="input-icons" id="reported-input">
-                <i><img src="" id="reported-image" class="icon"></i>
-                <input type="text" id="Name" name="Name" placeholder="Type the Player Name" class="input-field"
-                       style="text-decoration-width: auto" required>
+<div class="container">
+    <div class="main-body m-4">
+        <!-- /Breadcrumb -->
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-4">
+                <div class="card profile">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center p-3">
+                            <img src="https://cravatar.eu/avatar/{{user.username}}/256.png" class="rounded"
+                                 width="60%" alt="img">
+                            <div class="mt-3">
+                                <h4>{{user.username}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mt-3 profile">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">dns</span></span>
+                            <span>{{user.server}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">email</span></span>
+                            <span>{{user.mail}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                            <span class="mb-1"><span class="material-icons profile-from">groups</span></span>
+                            <span>{{user.role}}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <div class="col-md-8">
+                <div class="row gutters-sm">
+                    <!-- --------------= CREATE REPORTS =-------------- -->
+                    <div class="card h-100 profile">
+                        <div class="card-body">
+                            <form action="" method="POST" id="create-form" autocomplete="on" class="form">
+                                <div class="form-title">Report a Player</div>
+                                <div class="input-container ic2">
+                                    <input id="Name" name="Name" class="input" type="text" placeholder=" " value="" required/>
+                                    <img src="" id="reported-img" alt="" class="input_img">
+                                    <div class="cut cut4"></div>
+                                    <label for="Name" class="placeholder">Reported Name</label>
+                                </div>
 
-            <label for="user" class="mb-2">Your Nick Name</label>
-            <div class="input-icons" id="user-input">
-                <i><img src="" id="player-image" class="icon" alt=""></i>
-                <label for="Reporter"></label><input type="text" id="Reporter" name="Reporter"
-                                                     placeholder="Type your Nick Name" class="input-field"
-                                                     style="text-decoration-width: auto" required>
-            </div>
+                                <div class="input-container ic2">
+                                    <input id="Reporter" name="Reporter" class="input" type="text" placeholder=" " value="{{user.username}}" required/>
+                                    <img src="https://cravatar.eu/avatar/{{user.username}}/32.png" id="banner-img" alt="" class="input_img">
+                                    <div class="cut cut4"></div>
+                                    <label for="Reporter" class="placeholder">Reporter Name</label>
+                                </div>
 
-            <div class="input-icons" id="user-input">
-                <label for="reason">Reason</label>
-                <input type="text" id="Reason" name="Reason" class="input-field" style="text-decoration-width: auto"
-                       placeholder="Type the Reason" required>
-            </div>
+                                <div class="input-container ic2">
+                                    <input id="Reason" name="Reason" class="input" type="text" placeholder=" " value="" required/>
+                                    <div class="cut cut1"></div>
+                                    <label for="Reason" class="placeholder">Reason</label>
+                                </div>
 
-            <div>
-                <button type="submit" class="btn btn-primary btn-save " tabindex="5">Report</button>
-                <a href="/reports" class="btn btn-primary btn-cancel">Cancel</a>
+                                <div class="row buttons-container">
+                                    <button type="submit" class="button" tabindex="5" id="button-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M5 12l5 5l10 -10"></path>
+                                        </svg>
+                                    </button>
+                                    <a href="/servers/{{bans.server}}/bans" class="button" id="button-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
 <script>
-    const dNow = new Date();
-    let month = (dNow.getMonth() + 1);
-    if (month <= 9) {
-        month = "0" + month.toString();
-    }
-    let day = dNow.getDate();
-    if (day <= 9) {
-        day = "0" + day.toString();
-    }
-    let hours = dNow.getHours();
-    if (hours <= 9) {
-        hours = "0" + hours.toString();
-    }
-    let minutes = dNow.getMinutes();
-    if (minutes <= 9) {
-        minutes = "0" + minutes.toString();
-    }
-    let seconds = dNow.getSeconds();
-    if (seconds <= 9) {
-        seconds = "0" + seconds.toString();
-    }
-
-    const date = dNow.getFullYear() + '-' + month + '-' + day + 'T' + hours + ':' + minutes + ':' + seconds;
 
     function changeImg(image, input) {
         const player_image = document.getElementById(image);
@@ -69,22 +97,135 @@
 
     }
 
-    const form = document.getElementById("reported-input");
+    const form = document.getElementById("Name");
     form.addEventListener("input", () => {
-        changeImg("reported-image", "Name");
+        changeImg("reported-img", "Name");
     });
-    const form2 = document.getElementById("user-input");
+    const form2 = document.getElementById("Reporter");
     form2.addEventListener("input", () => {
-        changeImg("player-image", "Reporter");
+        changeImg("banner-img", "Reporter");
     });
+    changeImg("staff-image", "Reporter");
 
-    function myFunction() {
-        document.getElementById("expdate").value = date;
-        document.getElementById('expdate').min = date;
-    }
-
-    myFunction();
 
 </script>
+
+
+
+<!--<div class="container">-->
+<!--    <div class="main-body m-4">-->
+<!--        &lt;!&ndash; /Breadcrumb &ndash;&gt;-->
+<!--        <div class="row gutters-sm">-->
+<!--            <div class="col-md-4 mb-4">-->
+<!--                <div class="card profile">-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="d-flex flex-column align-items-center text-center p-3">-->
+<!--                            <img src="https://cravatar.eu/avatar/{{user.username}}/256.png" class="rounded"-->
+<!--                                 width="60%" alt="img">-->
+<!--                            <div class="mt-3">-->
+<!--                                <h4>{{user.username}}</h4>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="card mt-3 profile">-->
+<!--                    <ul class="list-group list-group-flush ">-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">-->
+<!--                            <span class="mb-1"><span class="material-icons profile-from">dns</span></span>-->
+<!--                            <span>{{user.server}}</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">-->
+<!--                            <span class="mb-1"><span class="material-icons profile-from">email</span></span>-->
+<!--                            <span>{{user.mail}}</span>-->
+<!--                        </li>-->
+<!--                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">-->
+<!--                            <span class="mb-1"><span class="material-icons profile-from">groups</span></span>-->
+<!--                            <span>{{user.role}}</span>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-8">-->
+<!--                <div class="row gutters-sm">-->
+<!--                    &lt;!&ndash; --------------= CREATE REPORTS =-------------- &ndash;&gt;-->
+<!--                    <div class="card h-100 profile">-->
+<!--                        <div class="card-body">-->
+<!--                            <form action="" method="POST" id="create-form" autocomplete="on" class="form">-->
+<!--                                <div class="form-title">Report a Player</div>-->
+<!--                                <div class="input-container ic2">-->
+<!--                                    <input id="asdasdasd" name="Name" class="input" type="text" placeholder=" " value="" required/>-->
+<!--                                    <img src="" id="reported-img" alt="" class="input_img">-->
+<!--                                    <div class="cut cut4"></div>-->
+<!--                                    <label for="Name" class="placeholder">Reported Name</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="input-container ic2">-->
+<!--                                    <input id="Reporter" name="Reporter" class="input" type="text" placeholder=" " value="" required/>-->
+<!--                                    <img src="" id="reporter-img" alt="" class="input_img">-->
+<!--                                    <div class="cut cut4"></div>-->
+<!--                                    <label for="Reporter" class="placeholder">Reporter Name</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="input-container ic2">-->
+<!--                                    <input id="Reason" name="Reason" class="input" type="text" placeholder=" " value="" required/>-->
+<!--                                    <div class="cut cut1"></div>-->
+<!--                                    <label for="Reason" class="placeholder">Reason</label>-->
+<!--                                </div>-->
+
+<!--                                <div class="row buttons-container">-->
+<!--                                    <button type="submit" class="button" tabindex="5" id="button-6">-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>-->
+<!--                                            <path d="M5 12l5 5l10 -10"></path>-->
+<!--                                        </svg>-->
+<!--                                    </button>-->
+<!--                                    <a href="/servers/{{bans.server}}/bans" class="button" id="button-6">-->
+<!--                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">-->
+<!--                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>-->
+<!--                                            <line x1="18" y1="6" x2="6" y2="18"></line>-->
+<!--                                            <line x1="6" y1="6" x2="18" y2="18"></line>-->
+<!--                                        </svg>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    const date = dNow.getFullYear() + '-' + month + '-' + day + 'T' + hours + ':' + minutes + ':' + seconds;-->
+
+<!--    function changeImg(image, input) {-->
+<!--        const player_image = document.getElementById(image);-->
+<!--        const player_input = document.getElementById(input).value;-->
+
+<!--        if (player_input !== undefined) {-->
+<!--            player_image.src = `https://cravatar.eu/avatar/${player_input}/32.png`;-->
+<!--        }-->
+<!--        if (player_input === "") {-->
+<!--            player_input.src = "";-->
+<!--        }-->
+
+<!--    }-->
+
+<!--    const form = document.getElementById("asdasdasd");-->
+<!--    form.addEventListener("input", () => {-->
+<!--        changeImg("reported-img", "Name");-->
+<!--        console.log('aaaaaaaaaaaa')-->
+<!--    });-->
+<!--    const form2 = document.getElementById("Reporter");-->
+<!--    form2.addEventListener("input", () => {-->
+<!--        changeImg("reporter-img", "Reporter");-->
+<!--    });-->
+<!--    changeImg("staff-image", "Reporter");-->
+
+<!--    myFunction();-->
+
+<!--    const radios = document.getElementsByName('ip-reported');-->
+<!--</script>-->
 
 

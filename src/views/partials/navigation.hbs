@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-sm" id="navbar">
     <div class="container">
         <a class="navbar-brand" href="/">{{servername}}</a>
         <a class="navbar-text-s" href="/download">Download</a>
@@ -113,3 +113,17 @@
         </div>
     </div>
 </nav>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    let navbar = document.getElementById("navbar");
+    let sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky")
+        } else {
+            navbar.classList.remove("sticky");
+        }
+    }
+</script>

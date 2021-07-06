@@ -1,52 +1,3 @@
-<div class="create-form form-check-inline">
-    <div class="card-header">Ban a Player</div>
-    <div class="card-body">
-        <form action="/servers/{{server}}/bans/create" method="POST" id="create-form" autocomplete="on">
-            <label for="banned" class="mb-2">Player Name</label>
-            <div class="input-icons" id="banned-input">
-                <i><img src="" id="banned-image" class="icon"></i>
-                <input type="text" id="Name" name="Name" placeholder="Type the Player Name" class="input-field"
-                       style="text-decoration-width: auto" required>
-            </div>
-
-            <label for="user" class="mb-2">Your Nick Name</label>
-            <div class="input-icons" id="user-input">
-                <i><img src="" id="staff-image" class="icon"></i>
-                <label for="Baner">
-
-                </label>
-                <input type="text" id="Baner" name="Baner" placeholder="Type your Name" class="input-field" value="{{username}}" style="text-decoration-width: auto" required>
-            </div>
-
-            <div class="input-icons" id="user-input-2">
-                <label for="reason">Reason</label>
-                <input type="text" id="Reason" name="Reason" class="input-field" style="text-decoration-width: auto"
-                       placeholder="Type the Reason" required>
-            </div>
-
-            <div>
-                <label for="datemin">Enter the date To Expire</label>
-                <input type="datetime-local" class="create-form datemin" id="expdate" value="" min="" name="expdate"
-                       step="1">
-            </div>
-
-
-            <div class="radio">
-                <label for="ban-ip">Ban IP?
-                    <input label="Yes" type="radio" id="Ip_Banned" name="Ip_Banned" value="true">
-                    <input label="No" type="radio" id="Ip_Banned" name="Ip_Banned" value="false" checked>
-                </label>
-            </div>
-
-
-            <div>
-                <button type="submit" class="btn btn-primary btn-save " tabindex="5">Ban</button>
-                <a href="/bans" class="btn btn-primary btn-cancel">Cancel</a>
-            </div>
-        </form>
-    </div>
-</div>
-
 <div class="container">
     <div class="main-body m-4">
         <!-- /Breadcrumb -->
@@ -82,33 +33,33 @@
             </div>
             <div class="col-md-8">
                 <div class="row gutters-sm">
-                    <!-- --------------= EDIT BANS =-------------- -->
+                    <!-- --------------= CREATE BANS =-------------- -->
                     <div class="card h-100 profile">
                         <div class="card-body">
-                            <form action="/servers/{{server}}/bans/create" method="POST" autocomplete="on" class="form">
-                                <div class="form-title">Edit the Ban {{bans.BanId}}</div>
+                            <form action="" method="POST" id="create-form" autocomplete="on" class="form">
+                                <div class="form-title">Ban a Player</div>
                                 <div class="input-container ic2">
-                                    <input id="Name" name="Name" class="input" type="text" placeholder=" " value=" " required/>
-                                    <img src="https://cravatar.eu/avatar/{{bans.Name}}/32.png" id="banned-img" alt="" class="input_img">
+                                    <input id="Name" name="Name" class="input" type="text" placeholder=" " value="" required/>
+                                    <img src="" id="banned-img" alt="" class="input_img">
                                     <div class="cut cut4"></div>
                                     <label for="Name" class="placeholder">Banned Name</label>
                                 </div>
 
                                 <div class="input-container ic2">
-                                    <input id="Baner" name="Baner" class="input" type="text" placeholder=" " value="" required/>
-                                    <img src="https://cravatar.eu/avatar/{{bans.Baner}}/32.png" id="banner-img" alt="" class="input_img">
+                                    <input id="Baner" name="Baner" class="input" type="text" placeholder=" " value="{{user.username}}" required/>
+                                    <img src="https://cravatar.eu/avatar/{{user.username}}/32.png" id="banner-img" alt="" class="input_img">
                                     <div class="cut cut4"></div>
                                     <label for="Baner" class="placeholder">Banner Name</label>
                                 </div>
 
                                 <div class="input-container ic2">
-                                    <input id="Reason" name="Reason" class="input" type="text" placeholder=" " value=" " required/>
+                                    <input id="Reason" name="Reason" class="input" type="text" placeholder=" " value="" required/>
                                     <div class="cut cut1"></div>
                                     <label for="Reason" class="placeholder">Reason</label>
                                 </div>
 
                                 <div class="input-container ic2">
-                                    <input id="expdate" name="expdate" class="input create-form datemin" type="datetime-local" placeholder=" " value=" " alt=" " step="1" required/>
+                                    <input type="datetime-local" class="input create-form datemin" id="expdate" value="" min="" name="expdate" step="1" required>
                                     <div class="cut cut9"></div>
                                     <label for="expdate" class="placeholder">Enter the date To Expire</label>
                                 </div>
@@ -172,6 +123,10 @@
         const player_image = document.getElementById(image);
         const player_input = document.getElementById(input).value;
 
+        document.getElementById("expdate").value = date;
+
+        document.getElementById('expdate').min = date;
+
         if (player_input !== undefined) {
             player_image.src = `https://cravatar.eu/avatar/${player_input}/32.png`;
         }
@@ -190,12 +145,6 @@
         changeImg("banner-img", "Baner");
     });
     changeImg("staff-image", "Baner");
-    function myFunction() {
-        document.getElementById("expdate").value = date;
-        document.getElementById('expdate').min = date;
-    }
-
-    myFunction();
 
     const radios = document.getElementsByName('ip-banned');
 

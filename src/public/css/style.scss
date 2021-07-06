@@ -6,7 +6,7 @@ $shadow: rgba(0, 0, 0, 0.36);
 $navbar: #ffff;
 $blue: #0d6efd;
 $blue-2: #5d79cd;
-$violet-color-4: rgba(62, 21, 102, 0.18);
+$violet-color-4: rgb(33, 16, 53);
 $wipe: rgba(255, 255, 255, 0);
 
 *,*:after, *:before {
@@ -72,12 +72,7 @@ body, td {
   top:-3px;
   margin-left:5px;
 }
-.navbar-text-s{
-  text-decoration: none;
-  color: $blue;
-  text-underline: none;
-  padding: 8px;
-}
+
 
 .features{
   padding-top: 50px !important;
@@ -110,9 +105,9 @@ body, td {
 .footer{
   background-color: $violet-color-4 !important;
   position: relative !important;
-  bottom: 0!important;
-  left: 0!important;
-  right: 0!important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   height: auto !important;
   padding-top: 40px;
 }
@@ -352,7 +347,6 @@ ul {
 
 .price-table-wrapper {
   text-align: center;
-  margin-top: 30px;
   .featured-table {
     box-shadow: 0 0 19px -3px $shadow;
   }
@@ -363,7 +357,6 @@ ul {
     margin: 10px;
     transition: all 0.3s ease-in-out;
     border-radius: 10px;
-    width: 300px;
     box-shadow: 0 0 19px -3px $shadow;
     &__header {
       padding: 20px;
@@ -423,6 +416,23 @@ html.modern .header-right {
   background-color: $violet-color-4;
   color: $blue;
 }
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar-text-s{
+  text-decoration: none;
+  color: $blue;
+  text-underline: none;
+  padding: 8px;
+}
+
+.list-group-item{
+  position: inherit !important;
+}
+
 
 .dropdown-menu {
   background-color: $violet-color;
@@ -457,6 +467,9 @@ html.modern .header-right {
   width: 50%;
   margin: 15px auto;
   background-color: $violet-color-2;
+}
+.card{
+  position: initial !important;
 }
 
 .progress-value {

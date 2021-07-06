@@ -194,7 +194,10 @@ module.exports = {
         mysql.createConnection({multipleStatements: true});
         const pool = mysql.createPool(database);
         pool.getConnection((error, connection) => {
-            if (error) throw error;
+            if (error) {
+                console.log(error);
+                return "error";
+            }
 
             if (connection) connection.release();
         });
@@ -227,7 +230,7 @@ module.exports = {
                 pool.end();
                 return reports;
             case 'delete-report':
-                await db.query('DELETE FROM sc_reports WHERE ReportId = ?', [id]);
+                await pool.query('DELETE FROM sc_reports WHERE ReportId = ?', [id]);
                 pool.end();
                 return true;
             case 'edit-report':
@@ -245,7 +248,7 @@ module.exports = {
                 pool.end();
                 return warns;
             case 'delete-warn':
-                await db.query('DELETE FROM sc_warns WHERE WarnId = ?', [id]);
+                await pool.query('DELETE FROM sc_warns WHERE WarnId = ?', [id]);
                 pool.end();
                 return true;
             case 'edit-warn':

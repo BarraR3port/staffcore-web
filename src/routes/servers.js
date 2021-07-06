@@ -428,7 +428,6 @@ router.get('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
 
 router.post('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
-    console.log(req.body);
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         const server = req.params.server;
         try {
@@ -465,6 +464,7 @@ router.get('/:server/bans/create', isLoggedIn, isPublic, async (req, res) => {
     const server = req.params.server;
     const username = req.user.username;
     if (servers.includes(req.params.server.toLowerCase())) {
+        req.user.role = await getRole(req.user.staffId);
         res.render('bans/create', {server, username});
     } else {
         req.flash('error', `This server is not registered`);
@@ -555,6 +555,7 @@ router.get('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) =
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
         const reports = await getReportsById(database, id);
         reports[0].server = req.params.server.toLowerCase( );
+        req.user.role = await getRole(req.user.staffId);
         res.render('reports/edit', {reports: reports[0]})
     } else {
         req.flash('error', `This server is not registered`);
@@ -595,8 +596,11 @@ router.post('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) 
 
 router.get('/:server/reports/create', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
+    const server = req.params.server;
+    const username = req.user.username;
     if (servers.includes(req.params.server.toLowerCase())) {
-        res.render('reports/create');
+        req.user.role = await getRole(req.user.staffId);
+        res.render('reports/create',{server, username});
     } else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');
@@ -643,6 +647,7 @@ router.get('/:server/warns', isLoggedIn, isPublic, async (req, res) => {
         const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
         const warns = await getWarns(database);
+        req.user.role = await getRole(req.user.staffId);
         for (let i = 0; i< warns.length; i ++){
             warns[i].server = req.params.server.toLowerCase( );
         }
@@ -679,9 +684,10 @@ router.get('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) => 
         const id = req.params.id;
         const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
         const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
-        const reports = await getWarnsById(database, id);
-        reports[0].server = req.params.server.toLowerCase( );
-        res.render('warns/edit', {reports: reports[0]})
+        const warns = await getWarnsById(database, id);
+        warns[0].server = req.params.server.toLowerCase( );
+        req.user.role = await getRole(req.user.staffId);
+        res.render('warns/edit', {warns: warns[0]})
     } else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');
@@ -719,6 +725,7 @@ router.post('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) =>
 router.get('/:server/warns/create', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if (servers.includes(req.params.server.toLowerCase())) {
+        req.user.role = await getRole(req.user.staffId);
         res.render('warns/create');
     } else {
         req.flash('error', `This server is not registered`);
