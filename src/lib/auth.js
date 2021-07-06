@@ -26,7 +26,10 @@ module.exports = {
         mysql.createConnection({multipleStatements: true});
         const pool = mysql.createPool(database);
         pool.getConnection((error, connection) => {
-            if (error) throw error;
+            if (error) {
+                console.log(error);
+                return "error";
+            }
 
             if (connection) connection.release();
         });
