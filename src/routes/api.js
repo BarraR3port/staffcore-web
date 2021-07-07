@@ -27,7 +27,7 @@ async function isRegistered(name) {
     return registeredPlayer.length !== 0;
 }
 
-async function isServerRegistered( server ) {
+async function isWebServerRegistered( server ) {
     const registeredPlayer = await datab.query('SELECT server FROM sc_servers WHERE server LIKE ?', [server]);
     return registeredPlayer.length !== 0;
 }
@@ -107,7 +107,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/version', (req, res) => {
-    res.send(version);
+    res.json({
+        "latest": version
+    })
 })
 
 router.get('/:base64', async (req, res) => {
@@ -208,7 +210,7 @@ router.get('/:base64', async (req, res) => {
             }
         } else if (type === "islinked") {
             await res.json({
-                "is_Registered": await isServerRegistered(decode2(database.server))
+                "is_Registered": await isWebServerRegistered(decode2(database.server))
             });
         }
     } catch (SyntaxError) {
