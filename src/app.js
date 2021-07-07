@@ -141,7 +141,7 @@ async function getIp(banned) {
     } catch (error) {}
 }
 
-module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp}
+module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp, app: app}
 // Routes
 app.use(async (req, res, next) => {
     app.locals.success = req.flash('success');
