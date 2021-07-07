@@ -27,6 +27,11 @@ async function isRegistered(name) {
     return registeredPlayer.length !== 0;
 }
 
+async function isServerRegistered( server ) {
+    const registeredPlayer = await datab.query('SELECT server FROM sc_servers WHERE server LIKE ?', [server]);
+    return registeredPlayer.length !== 0;
+}
+
 async function isPasswordCorrect(name, pass) {
     const registeredPlayer = await datab.query('SELECT password FROM `sc_users` WHERE username LIKE ?', [name]);
     const booleanPassword = await bcrypt.compare(pass, registeredPlayer[0].password).then((result) => {
@@ -201,6 +206,10 @@ router.get('/:base64', async (req, res) => {
                     "msg": "error_incorrect_username"
                 })
             }
+        } else if (type === "islinked") {
+            await res.json({
+                "is_Registered": await isServerRegistered(decode2(database.server))
+            });
         }
     } catch (SyntaxError) {
         res.send("What are you doing?")
