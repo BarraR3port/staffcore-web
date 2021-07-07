@@ -401,27 +401,20 @@ router.get('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, re
 
 router.post('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, res) => {
     const servers = await getServers();
-    const serverRaw = req.params.server.toLowerCase( );
-    if ( await servers.includes( serverRaw ) === true ){
-
-        let {owner, server, staff} = req.body;
-        let address = encode(req.body.address);
+    const server = req.params.server.toLowerCase( );
+    if ( await servers.includes( server ) === true ){
         let username = encode(req.body.username);
         let db = encode(req.body.db);
         let host = encode(req.body.host);
         let port = encode(req.body.port);
         let password = encode(req.body.password);
-        const serverId = await getServerId(serverRaw);
+        const serverId = await getServerId(server);
         const saveServer = {
-            owner,
-            server,
-            address,
             username,
             db,
             host,
             port,
-            password,
-            staff
+            password
         }
         datab.query(`UPDATE sc_servers SET ? WHERE serverId = ? `, [saveServer, serverId]);
         req.flash('success', `Server Db Settings saved correctly`);
