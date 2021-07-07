@@ -172,6 +172,22 @@ body, td {
   margin-top: 25px;
 }
 
+.cutminus1 {
+  width: 45px !important;
+}
+
+.cutminus2 {
+  width: 35px !important;
+}
+
+.cutminus3 {
+  width: 30px !important;
+}
+
+.cut1 {
+  width: 60px !important;
+}
+
 .cut1 {
   width: 60px !important;
 }

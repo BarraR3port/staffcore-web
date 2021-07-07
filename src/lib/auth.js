@@ -50,14 +50,14 @@ module.exports = {
                     return await lengthBans.length;
                 case 'get-open-bans':
                     const openBans = await pool.query(`SELECT *
-                                                   FROM sc_bans
-                                                   WHERE Status LIKE 'open'`);
+                                                       FROM sc_bans
+                                                       WHERE Status LIKE 'open'`);
                     pool.end();
                     return await openBans.length;
                 case 'get-closed-bans':
                     const closedBans = await pool.query(`SELECT *
-                                                     FROM sc_bans
-                                                     WHERE Status LIKE 'closed'`);
+                                                         FROM sc_bans
+                                                         WHERE Status LIKE 'closed'`);
                     pool.end();
                     return await closedBans.length;
 
@@ -73,14 +73,14 @@ module.exports = {
                     return await lengthReports.length;
                 case 'get-open-reports':
                     const openReports = await pool.query(`SELECT *
-                                                      FROM sc_reports
-                                                      WHERE Status LIKE 'open'`);
+                                                          FROM sc_reports
+                                                          WHERE Status LIKE 'open'`);
                     pool.end();
                     return await openReports.length;
                 case 'get-closed-reports':
                     const closedReports = await pool.query(`SELECT *
-                                                        FROM sc_reports
-                                                        WHERE Status LIKE 'closed'`);
+                                                            FROM sc_reports
+                                                            WHERE Status LIKE 'closed'`);
                     pool.end();
                     return await closedReports.length;
 
@@ -125,12 +125,10 @@ module.exports = {
                     const def = await pool.query('SELECT * FROM sc_bans');
                     pool.end();
                     return def;
-
             }
         } catch (e) {
             return e;
         }
-
 
     },
     async isPublic(req, res, next) {
