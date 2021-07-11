@@ -16,7 +16,8 @@
                 </div>
                 <div class="card mt-3 profile">
                     <ul class="list-group list-group-flush ">
-                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                        {{#each server}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
                             <span class="mb-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-server" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -26,8 +27,22 @@
                                     <line x1="7" y1="16" x2="7" y2="16.01"></line>
                                 </svg>
                             </span>
-                            <span>{{user.serverId}}</span>
-                        </li>
+                                <span>{{user.serverId}}</span>
+                            </li>
+                        {{else}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
+                                <span class="mb-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-server" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <rect x="3" y="4" width="18" height="8" rx="3"></rect>
+                                        <rect x="3" y="12" width="18" height="8" rx="3"></rect>
+                                        <line x1="7" y1="8" x2="7" y2="8.01"></line>
+                                        <line x1="7" y1="16" x2="7" y2="16.01"></line>
+                                    </svg>
+                                </span>
+                                <span><a href="/servers/link" class="link">link</a></span>
+                            </li>
+                        {{/each}}
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap profile">
                             <span class="mb-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -85,7 +100,7 @@
                                     <line x1="7" y1="8" x2="7" y2="8.01"></line>
                                     <line x1="7" y1="16" x2="7" y2="16.01"></line>
                                 </svg>
-                                <a href="/servers/{{server}}" style="text-decoration: none !important; color: white !important;">
+                                <a href="/servers/{{server}}" class="link">
                                     {{server}}
                                 </a>
                             </h6>
@@ -98,7 +113,7 @@
                     <div class="card mb-3 profile">
                         <div class="card-body">
                             <h6 class="align-items-center">
-                                You don't have any server Linked with your account, follow <a href="/servers/link">this steps</a> to link your account to your Server/Network
+                                You don't have any server Linked with your account, follow <a href="/servers/link" class="link">this steps</a> to link your account to your Server/Network
                             </h6>
                         </div>
                     </div>

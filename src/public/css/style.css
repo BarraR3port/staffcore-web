@@ -52,6 +52,11 @@ body, td {
   padding-bottom: 200px !important;
 }
 
+.link {
+  text-decoration: none !important;
+  color: #6829b3 !important;
+}
+
 .dropdown-menu {
   max-width: 100px !important;
   text-align: center !important;

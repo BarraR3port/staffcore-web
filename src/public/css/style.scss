@@ -61,6 +61,11 @@ body, td {
   padding-top: 100px !important;
   padding-bottom: 200px !important;
 }
+
+.link {
+  text-decoration: none !important;
+  color: $violet-color-2 !important;
+}
 .dropdown-menu{
   max-width: 100px !important;
   text-align: center !important;
