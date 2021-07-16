@@ -118,26 +118,22 @@ router.get('/head/:username', async (req, res) => {
 
     let responseId = await got.get('https://api.mojang.com/users/profiles/minecraft/'+username, {responseType: 'json'})
         .then(res => {
-            const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
-            console.log('Status Code:', res.statusCode);
-            console.log('Date in Response header:', headerDate);
             return JSON.parse(res.body);
         })
         .catch(err => {
             console.log('Error: ', err.message);
+            res.json( {"type": "error"})
         });
     let responseFinal = await got.get('https://sessionserver.mojang.com/session/minecraft/profile/'+responseId.id, {responseType: 'json'})
         .then(res => {
-            const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
-            console.log('Status Code:', res.statusCode);
-            console.log('Date in Response header:', headerDate);
             return JSON.parse(res.body);
         })
         .catch(err => {
             console.log('Error: ', err.message);
+            res.json( {"type": "error"})
         });
     let value = responseFinal.properties[0].value;
-    await res.json( {"value": value})
+    await res.json( {"type":"success","value": value})
 })
 
 
