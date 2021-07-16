@@ -3,6 +3,7 @@ const router = express.Router();
 const { version } = require('../keys');
 const datab = require('../database')
 const bcrypt = require('bcrypt');
+const got = require('got');
 'use strict';
 
 function encode(str) {
@@ -111,6 +112,34 @@ router.get('/version', (req, res) => {
         "latest": version
     })
 })
+
+router.get('/head/:username', async (req, res) => {
+    let username = req.params.username;
+
+    let responseId = await got.get('https://api.mojang.com/users/profiles/minecraft/'+username, {responseType: 'json'})
+        .then(res => {
+            const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+            console.log('Status Code:', res.statusCode);
+            console.log('Date in Response header:', headerDate);
+            return JSON.parse(res.body);
+        })
+        .catch(err => {
+            console.log('Error: ', err.message);
+        });
+    let responseFinal = await got.get('https://sessionserver.mojang.com/session/minecraft/profile/'+responseId.id, {responseType: 'json'})
+        .then(res => {
+            const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+            console.log('Status Code:', res.statusCode);
+            console.log('Date in Response header:', headerDate);
+            return JSON.parse(res.body);
+        })
+        .catch(err => {
+            console.log('Error: ', err.message);
+        });
+    let value = responseFinal.properties[0].value;
+    await res.json( {"value": value})
+})
+
 
 router.get('/:base64', async (req, res) => {
     const base64 = req.params.base64;
