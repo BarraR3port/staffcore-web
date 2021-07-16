@@ -6,6 +6,10 @@ async function isAdmin(username) {
     const admins = await datab.query('SELECT * FROM sc_web_admins WHERE username LIKE ?', [username])
     return admins.length > 0 ;
 }
+async function getServerId(server){
+    const serversRaw = await datab.query('SELECT serverId FROM sc_servers WHERE server LIKE ?', [server]);
+    return serversRaw[0].serverId;
+}
 
 module.exports = {
     isLoggedIn(req, res, next) {
@@ -169,15 +173,15 @@ module.exports = {
         }
         const server = req.params.server
         const username = req.user.username
-        const serverId = req.user.serverId
+        let serverId = getServerId( server);
         const result = await datab.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
         if (await result[0].isPublic) {
             return next();
         } else {
-            const response = await datab.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?', [username, server]);
+            const response = await datab.query('SELECT staff FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             if (response.length > 0) {
                 const staff = response[0].staff.toString().split(',');
-                if (staff.contains('username')) {
+                if (staff.includes(username)) {
                     const staffId = await datab.query('SELECT staffId FROM sc_users WHERE username LIKE ?', [username]);
                     if ( staffId[0].staffId === 1 || staffId[0].staffId === 2 ){
                         req.flash('error', `You are not allowed to edit the configuration of this server`);

@@ -427,21 +427,20 @@ router.post('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (
     const servers = await getServers();
     const server = req.params.server.toLowerCase( );
     if ( await servers.includes( server ) === true ){
-        let username = encode(req.body.username);
-        let db = encode(req.body.db);
-        let host = encode(req.body.host);
-        let port = encode(req.body.port);
-        let password = encode(req.body.password);
-        const serverId = await getServerId(server);
-        const saveServer = {
-            username,
-            db,
-            host,
-            port,
-            password
+        let serverId = await getServerId(req.params.server.toLowerCase())
+        let {username, role} = req.body;
+        if ( role === 'admin' ){
+            datab.query(`UPDATE sc_users SET serverId = ?, staffId = 3 WHERE username LIKE ? `, [serverId, username]);
+        } else {
+            datab.query(`UPDATE sc_users SET serverId = ?, staffId = 2 WHERE username LIKE ? `, [serverId, username]);
         }
-        datab.query(`UPDATE sc_servers SET ? WHERE serverId = ? `, [saveServer, serverId]);
-        req.flash('success', `Server Db Settings saved correctly`);
+        let staffMembers = await datab.query(`SELECT staff FROM sc_servers WHERE serverId LIKE ?`,[serverId])
+        const staffRaw = staffMembers[0].staff.toString().split(',');
+        if (!staffRaw.includes(username)) {
+            let staff = staffRaw + "," + username
+            datab.query(`UPDATE sc_servers SET staff = ? WHERE serverId LIKE ? `, [staff, serverId]);
+        }
+        req.flash('success', `Staff Added Successfully`);
         res.redirect('/servers/' + server );
     }  else {
         req.flash('error', `This server is not registered`);
