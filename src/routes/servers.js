@@ -166,10 +166,10 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
         try{
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
-            const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])
-
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
+            const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [serverId])
             const rawServerInfo = await getServerInfo(database);
 
             /* --------------= BANS =-------------- */
@@ -282,6 +282,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             res.render('servers/server', {globalInfo, serverInfo, serverSettings});
 
         } catch (e) {
+            console.log(e)
             req.flash('error', `You may have some errors in your Database, you can change it here`);
             res.redirect('/servers/'+req.params.server.toLowerCase() + '/settings/db');
         }
@@ -297,9 +298,10 @@ router.get('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) 
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
         try{
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
-            const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId])
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
+            const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [serverId])
 
             const rawServerInfo = await getServerInfo(database);
 
@@ -375,9 +377,10 @@ router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res)
 router.get('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
+        let serverId = await getServerId(req.params.server.toLowerCase())
         const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
-        const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [profile[0].serverId]);
+        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
+        const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
 
 
         const stringServerInfo = JSON.stringify(database[0])
@@ -394,6 +397,53 @@ router.get('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, re
         serverSettings.isPublic = !!serverSettings.isPublic;
         res.render('servers/dbsettings', {globalInfo, serverSettings, serverInfo});
     } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+router.get('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (req, res) => {
+    const servers = await getServers();
+    if ( servers.includes(req.params.server.toLowerCase()) ){
+        let serverId = await getServerId(req.params.server.toLowerCase())
+        const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
+        const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
+
+        const stringServerInfo = JSON.stringify(database[0])
+        const serverInfo = JSON.parse(stringServerInfo)
+
+        const stringGlobalInfo = JSON.stringify(profile[0])
+        const globalInfo = JSON.parse(stringGlobalInfo)
+
+        const staffRaw = await datab.query('SELECT role FROM sc_servers_staff WHERE staffId LIKE ?', [globalInfo.staffId]);
+        globalInfo.staff = staffRaw[0].role;
+        res.render('servers/addStaff', {globalInfo, serverInfo});
+    } else {
+        req.flash('error', `This server is not registered`);
+        return res.redirect('/');
+    }
+})
+
+router.post('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (req, res) => {
+    const servers = await getServers();
+    const server = req.params.server.toLowerCase( );
+    if ( await servers.includes( server ) === true ){
+        let username = encode(req.body.username);
+        let db = encode(req.body.db);
+        let host = encode(req.body.host);
+        let port = encode(req.body.port);
+        let password = encode(req.body.password);
+        const serverId = await getServerId(server);
+        const saveServer = {
+            username,
+            db,
+            host,
+            port,
+            password
+        }
+        datab.query(`UPDATE sc_servers SET ? WHERE serverId = ? `, [saveServer, serverId]);
+        req.flash('success', `Server Db Settings saved correctly`);
+        res.redirect('/servers/' + server );
+    }  else {
         req.flash('error', `This server is not registered`);
         return res.redirect('/');
     }
@@ -452,8 +502,8 @@ router.get('/:server/bans', isLoggedIn, isPublic, async (req, res, next) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+            let serverId = await getServerId(req.params.server.toLowerCase())
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
             const bans = await getBans(database);
             const server = req.params.server;
             for (let i = 0; i< bans.length; i ++){
@@ -474,10 +524,10 @@ router.get('/:server/bans/delete/:id', isLoggedIn, isPublic, async (req, res) =>
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try{
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
             const server = req.params.server;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             if ( await deleteBan(database,id) ){
                 req.flash('success', 'Ban Deleted Correctly')
                 res.redirect('/servers/'+server+'/bans')
@@ -499,9 +549,9 @@ router.get('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             const bans = await getBansById(database, id);
             bans[0].server = req.params.server.toLowerCase( );
             req.user.role = await getRole(req.user.staffId);
@@ -522,8 +572,8 @@ router.post('/:server/bans/edit/:id', isLoggedIn, isPublic, async (req, res) => 
         try {
             const server = req.params.server;
             try {
-                const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                let serverId = await getServerId(req.params.server.toLowerCase())
+                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                 const id = req.params.id;
                 const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
                 const ExpDate = app.convertDate(expdate);
@@ -577,6 +627,8 @@ router.post('/:server/bans/create', isLoggedIn, isPublic, async (req, res) => {
     if (servers.includes(req.params.server.toLowerCase())) {
         try{
             try {
+
+                let serverId = await getServerId(req.params.server.toLowerCase())
                 const {Name, Baner, Reason, expdate, Ip_Banned} = req.body;
                 const date = app.getDate();
                 const ExpDate = app.convertDate(expdate);
@@ -592,8 +644,7 @@ router.post('/:server/bans/create', isLoggedIn, isPublic, async (req, res) => {
                         Ip_Banned,
                         Status
                     };
-                    const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                     const values = [info];
                     await createBan(database, values)
                     req.flash('success', 'Ban Created Correctly')
@@ -619,8 +670,8 @@ router.get('/:server/reports', isLoggedIn, isPublic, async (req, res, next) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+            let serverId = await getServerId(req.params.server.toLowerCase())
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
             const reports = await getReports(database);
             for (let i = 0; i< reports.length; i ++){
                 reports[i].server = req.params.server.toLowerCase( );
@@ -640,10 +691,10 @@ router.get('/:server/reports/delete/:id', isLoggedIn, isPublic, async (req, res)
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
             const server = req.params.server;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             if ( await deleteReport(database,id) ){
                 req.flash('success', 'Report Deleted Correctly')
                 res.redirect('/servers/'+server+'/reports')
@@ -665,9 +716,9 @@ router.get('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) =
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             const reports = await getReportsById(database, id);
             reports[0].server = req.params.server.toLowerCase( );
             req.user.role = await getRole(req.user.staffId);
@@ -688,8 +739,8 @@ router.post('/:server/reports/edit/:id', isLoggedIn, isPublic, async (req, res) 
         try {
             const server = req.params.server;
             try {
-                const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                let serverId = await getServerId(req.params.server.toLowerCase())
+                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                 const id = req.params.id;
                 const {Name, Reporter, Reason} = req.body;
                 const info = {
@@ -741,6 +792,7 @@ router.post('/:server/reports/create', isLoggedIn, isPublic, async (req, res) =>
     if (servers.includes(req.params.server.toLowerCase())) {
         try{
             try {
+                let serverId = await getServerId(req.params.server.toLowerCase())
                 const {Name, Reporter, Reason} = req.body;
                 const date = app.getDate();
                 const Status = "open";
@@ -752,8 +804,7 @@ router.post('/:server/reports/create', isLoggedIn, isPublic, async (req, res) =>
                         date,
                         Status
                     };
-                    const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                     const values = [info];
                     await createReport(database, values)
                     req.flash('success', 'Report Created Correctly')
@@ -779,8 +830,8 @@ router.get('/:server/warns', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId])
+            let serverId = await getServerId(req.params.server.toLowerCase())
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
             const warns = await getWarns(database);
             req.user.role = await getRole(req.user.staffId);
             for (let i = 0; i< warns.length; i ++){
@@ -801,10 +852,10 @@ router.get('/:server/warns/delete/:id', isLoggedIn, isPublic, async (req, res) =
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try {
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
             const server = req.params.server;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             if ( await deleteWarn(database,id) ){
                 req.flash('success', 'Warn Deleted Correctly')
                 res.redirect('/servers/'+server+'/warns')
@@ -826,9 +877,9 @@ router.get('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) => 
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase( ) ) ){
         try{
+            let serverId = await getServerId(req.params.server.toLowerCase())
             const id = req.params.id;
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+            const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
             const warns = await getWarnsById(database, id);
             warns[0].server = req.params.server.toLowerCase( );
             req.user.role = await getRole(req.user.staffId);
@@ -849,8 +900,8 @@ router.post('/:server/warns/edit/:id', isLoggedIn, isPublic, async (req, res) =>
         try {
             const server = req.params.server;
             try {
-                const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                let serverId = await getServerId(req.params.server.toLowerCase())
+                const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                 const id = req.params.id;
                 const {Name, Warner, Reason} = req.body;
                 const info = {
@@ -897,6 +948,7 @@ router.post('/:server/warns/create', isLoggedIn, isPublic, async (req, res) => {
     if (servers.includes(req.params.server.toLowerCase())) {
         try{
             try {
+                let serverId = await getServerId(req.params.server.toLowerCase())
                 const {Name, Warner, Reason} = req.body;
                 const date = app.getDate();
                 const Status = "open";
@@ -908,8 +960,7 @@ router.post('/:server/warns/create', isLoggedIn, isPublic, async (req, res) => {
                         date,
                         Status
                     };
-                    const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
-                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [profile[0].serverId]);
+                    const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId]);
                     const values = [info];
                     await createWarn(database, values)
                     req.flash('success', 'Warn Created Correctly')
