@@ -138,24 +138,30 @@ module.exports = {
         const server = req.params.server
         const username = req.user.username
         const serverId = req.user.serverId
-        const result = await db.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
-        if (await result[0].isPublic) {
-            return next();
-        } else {
-            const response = await db.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?', [username, server]);
-            if (response.length > 0) {
-                const staff = response[0].staff.toString().split(',');
-                if (staff.contains('username')) {
-                    return next();
+        try {
+            const result = await db.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
+            if (await result[0].isPublic) {
+                return next();
+            } else {
+                const response = await db.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?', [username, server]);
+                if (response.length > 0) {
+                    const staff = response[0].staff.toString().split(',');
+                    if (staff.contains('username')) {
+                        return next();
+                    } else {
+                        req.flash('error', `You are not allowed to see the details of this server`);
+                        return res.redirect('/');
+                    }
                 } else {
-                    req.flash('error', `You are not allowed to see the details of this server`);
+                    req.flash('error', `You are not part of the staff of this server`);
                     return res.redirect('/');
                 }
-            } else {
-                req.flash('error', `You are not part of the staff of this server`);
-                return res.redirect('/');
             }
+        } catch (e) {
+            req.flash('error', `Contact with the dev, you don't have a ServerId`);
+            return res.redirect('/');
         }
+
     },
     async isStaff(req, res, next) {
         if (await isAdmin( req.user.username ) ) {
@@ -178,6 +184,8 @@ module.exports = {
                         return res.redirect('/');
                     } else if ( staffId[0].staffId === 3 ){
                         return next();
+                    }else {
+                        console.log("test");
                     }
                 } else {
                     req.flash('error', `You are not allowed to see the details of this server`);
