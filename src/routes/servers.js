@@ -1,7 +1,7 @@
 const express = require('express');
 const app = require('../app');
 const router = express.Router();
-const {isLoggedIn, connectExternalDb, isPublic, getDataFromExtDb, isStaff } = require('../lib/auth');
+const {isLoggedIn, connectExternalDb, isPublic, getDataFromExtDb } = require('../lib/auth');
 const datab = require('../database');
 
 function decode(str) {
@@ -209,6 +209,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             /* --------------= BANS =-------------- */
 
             globalInfo.bansLength = bansLength;
+
             if (globalInfo.bansLength !== 0) {
                 globalInfo.bansLengthPercentage = ( (bansLength / serverSettings.maxBans) * 100)| 0;
             } else {
@@ -216,6 +217,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             }
 
             globalInfo.openBansLength = rawOpenBansLength;
+
             if (globalInfo.openBansLength !== 0) {
                 globalInfo.openBansLengthPercentage = ( (rawOpenBansLength / bansLength) * 100)| 0;
             } else {
@@ -223,6 +225,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             }
 
             globalInfo.closedBansLength = rawClosedBansLength;
+
             if (globalInfo.closedBansLength !== 0) {
                 globalInfo.closedBansLengthPercentage = ( (rawClosedBansLength / bansLength) * 100)| 0;
             } else {
@@ -232,6 +235,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             /* --------------= REPORTS =-------------- */
 
             globalInfo.reportsLength = reportsLength;
+
             if (globalInfo.reportsLength !== 0) {
                 globalInfo.reportsLengthPercentage = ( (reportsLength / serverSettings.maxReports) * 100)| 0;
             } else {
@@ -239,6 +243,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             }
 
             globalInfo.openReportsLength = rawOpenReportsLength;
+
             if (globalInfo.openReportsLength !== 0) {
                 globalInfo.openReportsLengthPercentage = ( (rawOpenReportsLength / reportsLength) * 100 )| 0;
             } else {
@@ -246,6 +251,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             }
 
             globalInfo.closedReportsLength = rawClosedReportsLength;
+
             if (globalInfo.closedReportsLength !== 0) {
                 globalInfo.closedReportsLengthPercentage = ( (rawClosedReportsLength / reportsLength) * 100 )| 0;
             } else {
@@ -294,7 +300,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
 })
 
 
-router.get('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.get('/:server/settings', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
         try{
@@ -329,7 +335,7 @@ router.get('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) 
     }
 })
 
-router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.post('/:server/settings', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     const serverRaw = req.params.server.toLowerCase( );
     if ( await servers.includes( serverRaw ) === true ){
@@ -374,7 +380,7 @@ router.post('/:server/settings', isLoggedIn, isPublic, isStaff, async (req, res)
     }
 })
 
-router.get('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.get('/:server/settings/db', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
         let serverId = await getServerId(req.params.server.toLowerCase())
@@ -401,7 +407,7 @@ router.get('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, re
         return res.redirect('/');
     }
 })
-router.get('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.get('/:server/settings/addstaff', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     if ( servers.includes(req.params.server.toLowerCase()) ){
         let serverId = await getServerId(req.params.server.toLowerCase())
@@ -423,7 +429,7 @@ router.get('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (r
     }
 })
 
-router.post('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.post('/:server/settings/addstaff', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     const server = req.params.server.toLowerCase( );
     if ( await servers.includes( server ) === true ){
@@ -448,7 +454,7 @@ router.post('/:server/settings/addstaff', isLoggedIn, isPublic, isStaff, async (
     }
 })
 
-router.post('/:server/settings/db', isLoggedIn, isPublic, isStaff, async (req, res) => {
+router.post('/:server/settings/db', isLoggedIn, isPublic, async (req, res) => {
     const servers = await getServers();
     const server = req.params.server.toLowerCase( );
     if ( await servers.includes( server ) === true ){

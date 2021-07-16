@@ -111,12 +111,10 @@ module.exports = {
 
                 case 'get-server-info':
                     const servers = await datab.query('SELECT * FROM sc_servers');
-                    pool.end();
-                    return servers;
+                    return await servers;
                 case 'get-server-staff':
                     const staff = await datab.query('SELECT * FROM sc_servers_staff');
-                    pool.end();
-                    return staff;
+                    return await staff;
                 case 'get-players':
                     const players = await pool.query('SELECT Name FROM sc_alts ');
                     pool.end();
@@ -141,17 +139,25 @@ module.exports = {
         }
         const server = req.params.server
         const username = req.user.username
-        const serverId = req.user.serverId
+        let serverId = await getServerId( server);
         try {
             const result = await datab.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
             if (await result[0].isPublic) {
                 return next();
             } else {
-                const response = await datab.query('SELECT staff FROM sc_servers WHERE owner LIKE ? AND server LIKE ?', [username, server]);
-                if (response.length > 0) {
+                const response = await datab.query('SELECT staff FROM sc_servers WHERE serverId LIKE ?', [serverId]);
+                if (await response.length !== 0) {
                     const staff = response[0].staff.toString().split(',');
-                    if (staff.contains('username')) {
-                        return next();
+                    if (await staff.includes(username)) {
+                        const staffId = await datab.query('SELECT staffId FROM sc_users WHERE username LIKE ?', [username]);
+                        if ( staffId[0].staffId === 1 || staffId[0].staffId === 2 ){
+                            req.flash('error', `You are not allowed to edit the configuration of this server`);
+                            return res.redirect('/');
+                        } else if ( staffId[0].staffId === 3 ){
+                            return next();
+                        }else {
+                            console.log("test");
+                        }
                     } else {
                         req.flash('error', `You are not allowed to see the details of this server`);
                         return res.redirect('/');
@@ -162,43 +168,9 @@ module.exports = {
                 }
             }
         } catch (e) {
+            console.log(e)
             req.flash('error', `Contact with the dev, you don't have a ServerId`);
             return res.redirect('/');
-        }
-
-    },
-    async isStaff(req, res, next) {
-        if (await isAdmin( req.user.username ) ) {
-            return next();
-        }
-        const server = req.params.server
-        const username = req.user.username
-        let serverId = getServerId( server);
-        const result = await datab.query('SELECT isPublic FROM sc_servers_settings WHERE serverId LIKE ?', [serverId]);
-        if (await result[0].isPublic) {
-            return next();
-        } else {
-            const response = await datab.query('SELECT staff FROM sc_servers WHERE serverId LIKE ?', [serverId]);
-            if (response.length > 0) {
-                const staff = response[0].staff.toString().split(',');
-                if (staff.includes(username)) {
-                    const staffId = await datab.query('SELECT staffId FROM sc_users WHERE username LIKE ?', [username]);
-                    if ( staffId[0].staffId === 1 || staffId[0].staffId === 2 ){
-                        req.flash('error', `You are not allowed to edit the configuration of this server`);
-                        return res.redirect('/');
-                    } else if ( staffId[0].staffId === 3 ){
-                        return next();
-                    }else {
-                        console.log("test");
-                    }
-                } else {
-                    req.flash('error', `You are not allowed to see the details of this server`);
-                    return res.redirect('/');
-                }
-            } else {
-                req.flash('error', `You are not part of the staff of this server`);
-                return res.redirect('/');
-            }
         }
 
     },
