@@ -8,6 +8,11 @@ function decode(str) {
     return Buffer.from(str, 'base64').toString('ascii');
 }
 
+function encode( str ) {
+    let buff = new Buffer( str,'ascii');
+    return buff.toString('base64');
+}
+
 /* --------------= BANS =-------------- */
 
 async function getBans(database) {
@@ -131,11 +136,6 @@ async function getPlayersLength(database) {
 async function getRole(staffId){
     const role = await datab.query('SELECT role FROM staffcore.sc_servers_staff WHERE staffId LIKE ?', [staffId]);
     return role[0].role;
-}
-
-function encode( str ) {
-    let buff = new Buffer( str,'ascii');
-    return buff.toString('base64');
 }
 
 async function getServers(){

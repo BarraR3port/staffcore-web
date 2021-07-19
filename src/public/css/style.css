@@ -193,10 +193,6 @@ body, td {
   width: 60px !important;
 }
 
-.cut1 {
-  width: 60px !important;
-}
-
 .cut2 {
   width: 70px !important;
 }
@@ -253,7 +249,7 @@ body, td {
   top: -20px;
   transform: translateY(0);
   transition: transform 200ms;
-  width: 76px;
+  width: 50px;
 }
 
 .cut-short {
@@ -488,6 +484,12 @@ html.modern .header-right {
 }
 
 .progress-value {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.progress-value-2 {
   position: absolute;
   right: 0;
   left: 0;
