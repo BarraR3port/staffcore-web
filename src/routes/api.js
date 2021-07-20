@@ -112,6 +112,11 @@ router.get('/version', (req, res) => {
         "latest": version
     })
 })
+router.get('/stats/:base64', (req, res) => {
+    res.json({
+        "latest": version
+    })
+})
 
 router.get('/head/:username', async (req, res) => {
     let username = req.params.username;

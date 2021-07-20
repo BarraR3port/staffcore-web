@@ -198,6 +198,8 @@ SELECT  * FROM sc_bans;
 SELECT Name, BanId from sc_bans where BanId between 5 and 12 order by Name;
 
 ALTER TABLE sc_servers_settings change maxBans maxBans varchar(40);
+
+CREATE TABLE sc_web_stats(serverId INT PRIMARY KEY AUTO_INCREMENT, ServerName VARCHAR(30), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT);
 --
 --
 --
