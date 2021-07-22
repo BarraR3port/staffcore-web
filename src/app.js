@@ -69,7 +69,7 @@ async function createUsersDatabase() {
                                                                   username VARCHAR(30) NOT NULL UNIQUE KEY
         )`)
     await db.query( `INSERT IGNORE INTO sc_web_admins(username) VALUES (?) `,['BarraR3port'])
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_web_stats(UUID VARCHAR(36) PRIMARY KEY, ServerName VARCHAR(30), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT);`)
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_web_stats(UUID VARCHAR(36) PRIMARY KEY, ServerName VARCHAR(30), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT, Staff INT, Vanish INT);`)
 }
 
 createUsersDatabase()

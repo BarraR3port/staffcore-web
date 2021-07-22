@@ -1463,11 +1463,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <ColNames>username</ColNames>
       <UnderlyingIndexName>username</UnderlyingIndexName>
     </key>
-    <column id="397" parent="298" name="serverId">
+    <column id="397" parent="298" name="UUID">
       <Position>1</Position>
-      <DataType>int|0s</DataType>
+      <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="398" parent="298" name="ServerName">
       <Position>2</Position>
@@ -1501,28 +1500,36 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>9</Position>
       <DataType>int|0s</DataType>
     </column>
-    <key id="406" parent="298" name="PRIMARY">
+    <column id="406" parent="298" name="Staff">
+      <Position>10</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="407" parent="298" name="Vanish">
+      <Position>11</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <key id="408" parent="298" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>serverId</ColNames>
+      <ColNames>UUID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="407" parent="299" name="session_id">
+    <column id="409" parent="299" name="session_id">
       <Position>1</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <Collation>utf8mb4_bin</Collation>
     </column>
-    <column id="408" parent="299" name="expires">
+    <column id="410" parent="299" name="expires">
       <Position>2</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="409" parent="299" name="data">
+    <column id="411" parent="299" name="data">
       <Position>3</Position>
       <DataType>mediumtext|0s</DataType>
       <Collation>utf8mb4_bin</Collation>
     </column>
-    <key id="410" parent="299" name="PRIMARY">
+    <key id="412" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>session_id</ColNames>
       <Primary>1</Primary>

@@ -19,9 +19,6 @@ function decode2(str) {
     return Buffer.from(str, 'base64').toString('ascii');
 }
 
-function decode3(str) {
-    return Buffer.from(str, 'base64').toString('ascii');
-}
 
 async function isRegistered(name) {
     const registeredPlayer = await datab.query('SELECT username FROM `sc_users` WHERE username LIKE ?', [name]);
@@ -97,9 +94,22 @@ const isServerRegistered = async (server) => {
     return result.length !== 0;
 }
 
+const isServerUUIDRegistered = async (uuid) => {
+    const result = await datab.query('SELECT UUID FROM `sc_web_stats` WHERE UUID LIKE ?', [uuid]);
+    return result.length !== 0;
+}
+
 const isPlayerLinked = async (player) => {
     const result = await datab.query('SELECT serverId FROM `sc_users` WHERE username LIKE ?', [player]);
     return result[0].serverId !== null;
+}
+
+const createServerStats = async (data ) =>{
+    await datab.query('INSERT INTO sc_web_stats SET ?', [data]);
+}
+
+const updateServerStats = async ( updateType, UUID) =>{
+    await datab.query('update sc_web_stats SET ' + updateType + ' = (' + updateType + '+ 1) WHERE UUID LIKE ?', [UUID]);
 }
 
 
@@ -112,11 +122,73 @@ router.get('/version', (req, res) => {
         "latest": version
     })
 })
-router.get('/stats/:base64', (req, res) => {
-    res.json({
-        "latest": version
-    })
-})
+router.get('/stats/:base64', async (req, res) => {
+    const base64 = req.params.base64;
+    let stringEncoded = decode2(decode2(decode2(base64)));
+    try {
+        const request = JSON.parse(stringEncoded);
+        const type = request.type;
+        const UUID = request.UUID;
+        if (type === "createServerStats") {
+            if (!await isServerUUIDRegistered(UUID)) {
+                try {
+                    const data = {
+                        UUID: request.UUID,
+                        ServerName: request.ServerName,
+                        Bans: request.CurrentBans,
+                        Reports: request.CurrentReports,
+                        Warns: request.CurrentWarns,
+                        Players: request.CurrentPlayers,
+                        Frozen: request.CurrentFrozen,
+                        Staff: request.CurrentStaff,
+                        Vanish: request.CurrentVanished,
+                        Wipes: request.CurrentWipes,
+                        Mutes: request.CurrentMutes
+                    }
+                    try{
+                        await createServerStats(data);
+                        res.json({
+                            "type": "success"
+                        })
+                    }catch (Exception) {
+                        console.log(Exception)
+                        res.json({
+                            "type": "error",
+                            "msg": "error_catch"
+                        })
+                    }
+                } catch (Exception) {
+                    console.log(Exception)
+                    res.json({
+                        "type": "error",
+                        "msg": "error_catch"
+                    })
+                }
+            } else {
+                res.json({
+                    "type": "error",
+                    "msg": "error_incorrect_username"
+                })
+            }
+        } else if (type === "updateServerStats") {
+            try{
+                const updateType = request.updateType;
+                await updateServerStats(updateType, UUID)
+                res.json({
+                    "type": "success"
+                })
+            } catch (Exception) {
+                console.log(Exception)
+                res.json({
+                    "type": "error",
+                    "msg": "error_catch"
+                })
+            }
+        }
+    } catch (SyntaxError) {
+        res.send("What are you doing?")
+    }
+});
 
 router.get('/head/:username', async (req, res) => {
     let username = req.params.username;
@@ -144,7 +216,7 @@ router.get('/head/:username', async (req, res) => {
 
 router.get('/:base64', async (req, res) => {
     const base64 = req.params.base64;
-    let stringEncoded = decode3(decode2(decode(base64)));
+    let stringEncoded = decode2(decode2(decode(base64)));
     try {
         const database = JSON.parse(decode(stringEncoded));
         const type = decode2(database.type);
