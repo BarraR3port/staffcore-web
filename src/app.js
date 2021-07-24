@@ -173,6 +173,7 @@ app.use('/servers', require('./routes/servers'));
 app.use('/features', require('./routes/features'));
 app.use('/download', require('./routes/download'));
 app.use('/news', require('./routes/news'));
+app.use('/error', require('./routes/error'));
 
 
 // Public

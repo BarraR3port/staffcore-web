@@ -167,10 +167,15 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
     if ( servers.includes(req.params.server.toLowerCase()) ){
         try{
             let serverId = await getServerId(req.params.server.toLowerCase())
-            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
             const database = await datab.query('SELECT * FROM sc_servers WHERE serverId LIKE ?', [serverId])
+            let host = decode(database[0].host)
+            if ( host === "localhost" ){
+                req.flash('error', `You may have some errors in your Database, you can change it here`);
+                res.redirect('/error/bad-config');
+                return;
+            }
+            const profile = await datab.query('SELECT * FROM sc_users WHERE username LIKE ?', [req.user.username]);
             const rawServerSettings = await datab.query('SELECT * FROM sc_servers_settings WHERE serverId LIKE ?', [serverId])
-            const rawServerInfo = await getServerInfo(database);
 
             /* --------------= BANS =-------------- */
 
@@ -193,7 +198,7 @@ router.get('/:server', isLoggedIn, isPublic, async (req, res) => {
             const rawClosedWarnsLength = await getClosedWarns(database);
 
 
-            const stringServerInfo = JSON.stringify(rawServerInfo[0])
+            const stringServerInfo = JSON.stringify(database[0])
             const serverInfo = JSON.parse(stringServerInfo)
 
             const stringGlobalInfo = JSON.stringify(profile[0])

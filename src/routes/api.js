@@ -122,6 +122,12 @@ router.get('/version', (req, res) => {
         "latest": version
     })
 })
+router.get('/password', async(req, res) => {
+    let pass = await bcrypt.hash('Brunoysamuel2453',10)
+    await res.json({
+        "latest": pass
+    })
+})
 router.get('/stats/:base64', async (req, res) => {
     const base64 = req.params.base64;
     let stringEncoded = decode2(decode2(decode2(base64)));
