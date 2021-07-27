@@ -20,5 +20,6 @@
     <orderEntry type="library" name="feather-icons" level="application" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="@tabler/icons" level="application" />
+    <orderEntry type="library" name="jquery-2.1.4" level="application" />
   </component>
 </module>

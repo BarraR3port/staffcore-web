@@ -618,4 +618,14 @@ html.modern .header-right {
   color: #ffffff;
 }
 
+.box-stats {
+  background-color: #2e1652;
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+  width: 70%;
+  align-content: center;
+  margin: auto;
+  border-radius: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */

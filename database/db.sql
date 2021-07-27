@@ -226,3 +226,10 @@ CREATE TABLE sc_web_stats(serverId INT PRIMARY KEY AUTO_INCREMENT, ServerName VA
 -- ALTER TABLE Usuario ADD FOREIGN KEY (IdPersona) REFERENCES Persona(idPersona);
 -- ALTER TABLE Usuario ADD IdPerfil INT NOT NULL;
 -- ALTER TABLE Usuario ADD FOREIGN KEY (IdPerfil) REFERENCES Perfil(IdPerfil);
+
+
+SELECT COUNT(DISTINCT ServerName) AS Server, SUM(DISTINCT Bans) AS Bans, SUM(DISTINCT Reports) AS Reports, SUM(DISTINCT Warns) AS Warns, SUM(DISTINCT Wipes) AS Wipes, SUM(DISTINCT Players) AS Players, SUM(DISTINCT Mutes) AS Mutes, SUM(DISTINCT Frozen) AS Frozen, SUM(DISTINCT Staff) AS Staff, SUM(DISTINCT Vanish) AS Vanish FROM sc_web_stats;
+
+
+
+

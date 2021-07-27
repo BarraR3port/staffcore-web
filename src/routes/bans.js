@@ -30,7 +30,7 @@ router.post('/create', isLoggedIn, async (req, res) => {
 })
 router.get('/', isLoggedIn, async (res, req) => {
     const bans = await db.query('SELECT * FROM `sc_bans` ORDER BY `BanId`');
-    req.render('bans/bans', {bans});
+    res.render('bans/bans', {bans});
 })
 
 

@@ -135,34 +135,55 @@ router.get('/stats/:base64', async (req, res) => {
         const request = JSON.parse(stringEncoded);
         const type = request.type;
         const UUID = request.UUID;
-        if (type === "createServerStats") {
-            if (!await isServerUUIDRegistered(UUID)) {
-                try {
-                    const data = {
-                        UUID: request.UUID,
-                        ServerName: request.ServerName,
-                        Bans: request.CurrentBans,
-                        Reports: request.CurrentReports,
-                        Warns: request.CurrentWarns,
-                        Players: request.CurrentPlayers,
-                        Frozen: request.CurrentFrozen,
-                        Staff: request.CurrentStaff,
-                        Vanish: request.CurrentVanished,
-                        Wipes: request.CurrentWipes,
-                        Mutes: request.CurrentMutes
-                    }
-                    try{
-                        await createServerStats(data);
-                        res.json({
-                            "type": "success"
-                        })
-                    }catch (Exception) {
+        if (UUID !== ""){
+            if (type === "createServerStats") {
+                if (!await isServerUUIDRegistered(UUID)) {
+                    try {
+                        const data = {
+                            UUID: request.UUID,
+                            ServerName: request.ServerName,
+                            Bans: request.CurrentBans,
+                            Reports: request.CurrentReports,
+                            Warns: request.CurrentWarns,
+                            Players: request.CurrentPlayers,
+                            Frozen: request.CurrentFrozen,
+                            Staff: request.CurrentStaff,
+                            Vanish: request.CurrentVanished,
+                            Wipes: request.CurrentWipes,
+                            Mutes: request.CurrentMutes
+                        }
+                        try{
+                            await createServerStats(data);
+                            res.json({
+                                "type": "success"
+                            })
+                        }catch (Exception) {
+                            console.log(Exception)
+                            res.json({
+                                "type": "error",
+                                "msg": "error_catch"
+                            })
+                        }
+                    } catch (Exception) {
                         console.log(Exception)
                         res.json({
                             "type": "error",
                             "msg": "error_catch"
                         })
                     }
+                } else {
+                    res.json({
+                        "type": "error",
+                        "msg": "server_not_registered"
+                    })
+                }
+            } else if (type === "updateServerStats") {
+                try{
+                    const updateType = request.updateType;
+                    await updateServerStats(updateType, UUID)
+                    res.json({
+                        "type": "success"
+                    })
                 } catch (Exception) {
                     console.log(Exception)
                     res.json({
@@ -170,26 +191,12 @@ router.get('/stats/:base64', async (req, res) => {
                         "msg": "error_catch"
                     })
                 }
-            } else {
-                res.json({
-                    "type": "error",
-                    "msg": "error_incorrect_username"
-                })
             }
-        } else if (type === "updateServerStats") {
-            try{
-                const updateType = request.updateType;
-                await updateServerStats(updateType, UUID)
-                res.json({
-                    "type": "success"
-                })
-            } catch (Exception) {
-                console.log(Exception)
-                res.json({
-                    "type": "error",
-                    "msg": "error_catch"
-                })
-            }
+        } else {
+            res.json({
+                "type": "error",
+                "msg": "server_not_registered"
+            })
         }
     } catch (SyntaxError) {
         res.send("What are you doing?")
