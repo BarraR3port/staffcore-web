@@ -19,57 +19,198 @@ require('./lib/passport');
 async function createUsersDatabase() {
     // Create the Staff table
 
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_staff(
-                                                                   staffId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                                                   role VARCHAR(20) NOT NULL UNIQUE KEY)`
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_staff
+            (
+                staffId
+                INT
+                NOT
+                NULL
+                AUTO_INCREMENT
+                PRIMARY
+                KEY,
+                role
+                VARCHAR
+                    (
+                20
+                    ) NOT NULL UNIQUE KEY)`
     );
-    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('User')`);
-    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('Mod')`);
-    await db.query(`INSERT IGNORE INTO sc_servers_staff(role) VALUES ('Admin')`);
+    await db.query(`INSERT
+    IGNORE INTO sc_servers_staff(role) VALUES ('User')`);
+    await db.query(`INSERT
+    IGNORE INTO sc_servers_staff(role) VALUES ('Mod')`);
+    await db.query(`INSERT
+    IGNORE INTO sc_servers_staff(role) VALUES ('Admin')`);
 
     // Create the Servers Table
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers(
-                                                             serverId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                                             owner VARCHAR(20) NOT NULL UNIQUE KEY,
-        server VARCHAR(30) NOT NULL UNIQUE KEY,
-        address VARCHAR(30) NOT NULL UNIQUE KEY,
-        username VARCHAR(100) NOT NULL,
-        db VARCHAR(100) NOT NULL,
-        host VARCHAR(100) NOT NULL,
-        port VARCHAR(30) NOT NULL,
-        password VARCHAR(100),
-        staff VARCHAR(200))`
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_servers
+            (
+                serverId
+                INT
+                NOT
+                NULL
+                AUTO_INCREMENT
+                PRIMARY
+                KEY,
+                owner
+                VARCHAR
+                    (
+                20
+                    ) NOT NULL UNIQUE KEY,
+                server VARCHAR
+                    (
+                        30
+                    ) NOT NULL UNIQUE KEY,
+                address VARCHAR
+                    (
+                        30
+                    ) NOT NULL UNIQUE KEY,
+                username VARCHAR
+                    (
+                        100
+                    ) NOT NULL,
+                db VARCHAR
+                    (
+                        100
+                    ) NOT NULL,
+                host VARCHAR
+                    (
+                        100
+                    ) NOT NULL,
+                port VARCHAR
+                    (
+                        30
+                    ) NOT NULL,
+                password VARCHAR
+                    (
+                        100
+                    ),
+                staff VARCHAR
+                    (
+                        200
+                    ))`
     );
 
     // Create the Users Table
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_users (
-                                                            id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                                            username VARCHAR (20) NOT NULL UNIQUE KEY,
-        mail VARCHAR(40) NOT NULL UNIQUE KEY,
-        password VARCHAR(255) NOT NULL,
-        serverId INT,
-        staffId INT NOT NULL DEFAULT 1,
-        FOREIGN KEY fk_staff_id(staffId) REFERENCES sc_servers_staff(staffId),
-        FOREIGN KEY fk_server_id(serverId) REFERENCES sc_servers(serverId))`
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_users
+            (
+                id
+                INT
+                NOT
+                NULL
+                AUTO_INCREMENT
+                PRIMARY
+                KEY,
+                username
+                VARCHAR
+                    (
+                20
+                    ) NOT NULL UNIQUE KEY,
+                mail VARCHAR
+                    (
+                        40
+                    ) NOT NULL UNIQUE KEY,
+                password VARCHAR
+                    (
+                        255
+                    ) NOT NULL,
+                serverId INT,
+                staffId INT NOT NULL DEFAULT 1,
+                FOREIGN KEY fk_staff_id
+                    (
+                        staffId
+                    ) REFERENCES sc_servers_staff
+                    (
+                        staffId
+                    ),
+                FOREIGN KEY fk_server_id
+                    (
+                        serverId
+                    ) REFERENCES sc_servers
+                    (
+                        serverId
+                    ))`
     );
 
     await db.query(`CREATE TABLE IF NOT EXISTS sc_servers_settings
-                    ( id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                      serverId INT NOT NULL,
-                      maxBans INT NOT NULL DEFAULT 100,
-                      maxReports INT NOT NULL DEFAULT 100,
-                      maxWarns INT NOT NULL DEFAULT 100,
-                      maxPlayers INT NOT NULL DEFAULT 1000,
-                      isPublic BOOLEAN NOT NULL DEFAULT TRUE,
-                      CONSTRAINT fk_server_id_settings FOREIGN KEY
-                    ( serverId) REFERENCES sc_servers ( serverId ))`
+            (
+                id
+                INT
+                NOT
+                NULL
+                AUTO_INCREMENT
+                PRIMARY
+                KEY,
+                serverId
+                INT
+                NOT
+                NULL,
+                maxBans
+                INT
+                NOT
+                NULL
+                DEFAULT
+                100,
+                maxReports
+                INT
+                NOT
+                NULL
+                DEFAULT
+                100,
+                maxWarns
+                INT
+                NOT
+                NULL
+                DEFAULT
+                100,
+                maxPlayers
+                INT
+                NOT
+                NULL
+                DEFAULT
+                1000,
+                isPublic
+                BOOLEAN
+                NOT
+                NULL
+                DEFAULT
+                TRUE,
+                CONSTRAINT
+                fk_server_id_settings
+                FOREIGN
+                KEY
+                    (
+                serverId
+                    ) REFERENCES sc_servers
+                    (
+                        serverId
+                    ))`
     );
-    await db.query( `CREATE TABLE IF NOT EXISTS sc_web_admins (
-                                                                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                                                  username VARCHAR(30) NOT NULL UNIQUE KEY
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_web_admins
+    (
+        id
+        INT
+        NOT
+        NULL
+        AUTO_INCREMENT
+        PRIMARY
+        KEY,
+        username
+        VARCHAR
+                    (
+        30
+                    ) NOT NULL UNIQUE KEY
         )`)
-    await db.query( `INSERT IGNORE INTO sc_web_admins(username) VALUES (?) `,['BarraR3port'])
-    await db.query(`CREATE TABLE IF NOT EXISTS sc_web_stats(UUID VARCHAR(36) PRIMARY KEY, ServerName VARCHAR(30), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT, Staff INT, Vanish INT);`)
+    await db.query(`INSERT
+    IGNORE INTO sc_web_admins(username) VALUES (?) `, ['BarraR3port'])
+    await db.query(`CREATE TABLE IF NOT EXISTS sc_web_stats
+    (
+        UUID VARCHAR
+                    (
+        36
+                    ) PRIMARY KEY, ServerName VARCHAR
+                    (
+                        50
+                    ), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT, Staff INT, Vanish INT);`)
 }
 
 createUsersDatabase()
@@ -139,7 +280,8 @@ async function getIp(banned) {
                                  WHERE Name LIKE '${banned}'`)
     try {
         return rows[0].Ips;
-    } catch (error) {}
+    } catch (error) {
+    }
 }
 
 module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp, app: app}
@@ -147,10 +289,10 @@ module.exports = {getDate: getDate, convertDate: convertDate, getIp: getIp, app:
 app.use(async (req, res, next) => {
     app.locals.success = req.flash('success');
     app.locals.error = req.flash('error');
-    if (req.user !== undefined){
-        const rawServer = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?',[req.user.serverId]);
-        if (rawServer !== undefined){
-            if ( rawServer.length > 0 ){
+    if (req.user !== undefined) {
+        const rawServer = await db.query('SELECT server FROM sc_servers WHERE serverId LIKE ?', [req.user.serverId]);
+        if (rawServer !== undefined) {
+            if (rawServer.length > 0) {
                 req.user.server = rawServer[0].server;
             } else {
                 req.user.server = null;

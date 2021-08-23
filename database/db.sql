@@ -18,7 +18,7 @@ SELECT serverId
 FROM `sc_users`
 WHERE username LIKE 'BarraR3port';
 
-insert into sc_servers(owner, server, username, db, host, password, staff) VALUE ( 'awdawda',
+insert into sc_servers(owner, server, username, db, host, password, staff) VALUE ('awdawda',
                                                                                   'h523',
                                                                                   'sdb235',
                                                                                   'n3n523',
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS sc_servers_staff
     VARCHAR
 (
     20
-) NOT NULL UNIQUE KEY);
+) NOT NULL UNIQUE KEY
+    );
 
 INSERT INTO sc_servers_staff(role)
 VALUES ('Admin');
@@ -95,7 +96,8 @@ CREATE TABLE IF NOT EXISTS sc_servers
     staff VARCHAR
 (
     200
-));
+)
+    );
 
 CREATE TABLE IF NOT EXISTS sc_users
 (
@@ -134,7 +136,8 @@ CREATE TABLE IF NOT EXISTS sc_users
 ) REFERENCES sc_servers
 (
     serverId
-));
+)
+    );
 
 CREATE TABLE IF NOT EXISTS sc_servers_settings
 (
@@ -177,29 +180,60 @@ CREATE TABLE IF NOT EXISTS sc_servers_settings
     NULL
     DEFAULT
     TRUE,
-    CONSTRAINT fk_server_id_settings FOREIGN KEY( serverId) REFERENCES sc_servers(serverId)
+    CONSTRAINT
+    fk_server_id_settings
+    FOREIGN
+    KEY
+(
+    serverId
+) REFERENCES sc_servers
+(
+    serverId
+)
     );
 INSERT INTO sc_servers_settings(public, serverId)
-VALUES (public =?, serverId = ?)
+VALUES (public = ?, serverId = ?)
 
 
-CREATE TABLE sc_web_admins (
-                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                     username VARCHAR(30) NOT NULL
-                     );
-INSERT INTO sc_web_admins(username) VALUES ('BarraR3port');
+CREATE TABLE sc_web_admins
+(
+    id       INT         NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL
+);
+INSERT INTO sc_web_admins(username)
+VALUES ('BarraR3port');
 
-SELECT username FROM sc_web_admins WHERE username LIKE ('BarraR3port');
+SELECT username
+FROM sc_web_admins
+WHERE username LIKE ('BarraR3port');
 
 INSERT INTO sc_servers(owner, server, address, username, db, host, port, password, staff)
- VALUES ('Bermudas','servertest','c3RhZmZjb3Jl','c3RhZmZjb3Jl','c3RhZmZjb3Jl','c3RhZmZjb3JlLmNsYmxncDNicWNtZS51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20','MzMwNg','YnJ1bm95c2FtdWVsMjQ1Mw','Bermudas,Alfredo');
+VALUES ('Bermudas', 'servertest', 'c3RhZmZjb3Jl', 'c3RhZmZjb3Jl', 'c3RhZmZjb3Jl',
+        'c3RhZmZjb3JlLmNsYmxncDNicWNtZS51cy1lYXN0LTIucmRzLmFtYXpvbmF3cy5jb20', 'MzMwNg', 'YnJ1bm95c2FtdWVsMjQ1Mw',
+        'Bermudas,Alfredo');
 
-SELECT  * FROM sc_bans;
-SELECT Name, BanId from sc_bans where BanId between 5 and 12 order by Name;
+SELECT *
+FROM sc_bans;
+SELECT Name, BanId
+from sc_bans
+where BanId between 5 and 12
+order by Name;
 
-ALTER TABLE sc_servers_settings change maxBans maxBans varchar(40);
+ALTER TABLE sc_servers_settings
+    change maxBans maxBans varchar (40);
 
-CREATE TABLE sc_web_stats(serverId INT PRIMARY KEY AUTO_INCREMENT, ServerName VARCHAR(30), Bans INT, Reports INT, Warns INT, Wipes INT, Players INT, Mutes INT, Frozen INT);
+CREATE TABLE sc_web_stats
+(
+    serverId   INT PRIMARY KEY AUTO_INCREMENT,
+    ServerName VARCHAR(30),
+    Bans       INT,
+    Reports    INT,
+    Warns      INT,
+    Wipes      INT,
+    Players    INT,
+    Mutes      INT,
+    Frozen     INT
+);
 --
 --
 --
@@ -228,8 +262,23 @@ CREATE TABLE sc_web_stats(serverId INT PRIMARY KEY AUTO_INCREMENT, ServerName VA
 -- ALTER TABLE Usuario ADD FOREIGN KEY (IdPerfil) REFERENCES Perfil(IdPerfil);
 
 
-SELECT COUNT(DISTINCT ServerName) AS Server, SUM(DISTINCT Bans) AS Bans, SUM(DISTINCT Reports) AS Reports, SUM(DISTINCT Warns) AS Warns, SUM(DISTINCT Wipes) AS Wipes, SUM(DISTINCT Players) AS Players, SUM(DISTINCT Mutes) AS Mutes, SUM(DISTINCT Frozen) AS Frozen, SUM(DISTINCT Staff) AS Staff, SUM(DISTINCT Vanish) AS Vanish FROM sc_web_stats;
+SELECT COUNT(DISTINCT ServerName) AS Server,
+       SUM(DISTINCT Bans)         AS Bans,
+       SUM(DISTINCT Reports)      AS Reports,
+       SUM(DISTINCT Warns)        AS Warns,
+       SUM(DISTINCT Wipes)        AS Wipes,
+       SUM(DISTINCT Players)      AS Players,
+       SUM(DISTINCT Mutes)        AS Mutes,
+       SUM(DISTINCT Frozen)       AS Frozen,
+       SUM(DISTINCT Staff)        AS Staff,
+       SUM(DISTINCT Vanish)       AS Vanish
+FROM sc_web_stats;
 
+update sc_web_stats
+SET Bans       = (Bans + 1),
+    ServerName = 'StaffCore 2'
+WHERE UUID LIKE ?
 
-
+ALTER TABLE sc_web_stats
+    ADD Version varchar(20) DEFAULT '4.4.7';
 

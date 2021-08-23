@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { version } = require('../keys');
+const {version} = require('../keys');
 const datab = require('../database')
 const bcrypt = require('bcrypt');
 const got = require('got');
@@ -25,7 +25,7 @@ async function isRegistered(name) {
     return registeredPlayer.length !== 0;
 }
 
-async function isWebServerRegistered( server ) {
+async function isWebServerRegistered(server) {
     const registeredPlayer = await datab.query('SELECT server FROM sc_servers WHERE server LIKE ?', [server]);
     return registeredPlayer.length !== 0;
 }
@@ -104,12 +104,12 @@ const isPlayerLinked = async (player) => {
     return result[0].serverId !== null;
 }
 
-const createServerStats = async (data ) =>{
+const createServerStats = async (data) => {
     await datab.query('INSERT INTO sc_web_stats SET ?', [data]);
 }
 
-const updateServerStats = async ( updateType, UUID) =>{
-    await datab.query('update sc_web_stats SET ' + updateType + ' = (' + updateType + '+ 1) WHERE UUID LIKE ?', [UUID]);
+const updateServerStats = async (updateType, UUID, ServerName, Version) => {
+    await datab.query('UPDATE sc_web_stats SET ' + updateType + ' = (' + updateType + ' + 1), ServerName = ?, Version = ? WHERE UUID LIKE ?', [ServerName,Version,UUID]);
 }
 
 
@@ -122,8 +122,8 @@ router.get('/version', (req, res) => {
         "latest": version
     })
 })
-router.get('/password', async(req, res) => {
-    let pass = await bcrypt.hash('Brunoysamuel2453',10)
+router.get('/password', async (req, res) => {
+    let pass = await bcrypt.hash('Brunoysamuel2453', 10)
     await res.json({
         "latest": pass
     })
@@ -135,13 +135,14 @@ router.get('/stats/:base64', async (req, res) => {
         const request = JSON.parse(stringEncoded);
         const type = request.type;
         const UUID = request.UUID;
-        if (UUID !== ""){
+        if (UUID !== "") {
             if (type === "createServerStats") {
                 if (!await isServerUUIDRegistered(UUID)) {
                     try {
                         const data = {
                             UUID: request.UUID,
                             ServerName: request.ServerName,
+                            Version: request.Version,
                             Bans: request.CurrentBans,
                             Reports: request.CurrentReports,
                             Warns: request.CurrentWarns,
@@ -152,12 +153,12 @@ router.get('/stats/:base64', async (req, res) => {
                             Wipes: request.CurrentWipes,
                             Mutes: request.CurrentMutes
                         }
-                        try{
+                        try {
                             await createServerStats(data);
                             res.json({
                                 "type": "success"
                             })
-                        }catch (Exception) {
+                        } catch (Exception) {
                             console.log(Exception)
                             res.json({
                                 "type": "error",
@@ -178,9 +179,11 @@ router.get('/stats/:base64', async (req, res) => {
                     })
                 }
             } else if (type === "updateServerStats") {
-                try{
+                try {
                     const updateType = request.updateType;
-                    await updateServerStats(updateType, UUID)
+                    const ServerName = request.ServerName;
+                    const Version = request.Version;
+                    await updateServerStats(updateType, UUID, ServerName, Version)
                     res.json({
                         "type": "success"
                     })
@@ -206,24 +209,24 @@ router.get('/stats/:base64', async (req, res) => {
 router.get('/head/:username', async (req, res) => {
     let username = req.params.username;
 
-    let responseId = await got.get('https://api.mojang.com/users/profiles/minecraft/'+username, {responseType: 'json'})
+    let responseId = await got.get('https://api.mojang.com/users/profiles/minecraft/' + username, {responseType: 'json'})
         .then(res => {
             return JSON.parse(res.body);
         })
         .catch(err => {
             console.log('Error: ', err.message);
-            res.json( {"type": "error"})
+            res.json({"type": "error"})
         });
-    let responseFinal = await got.get('https://sessionserver.mojang.com/session/minecraft/profile/'+responseId.id, {responseType: 'json'})
+    let responseFinal = await got.get('https://sessionserver.mojang.com/session/minecraft/profile/' + responseId.id, {responseType: 'json'})
         .then(res => {
             return JSON.parse(res.body);
         })
         .catch(err => {
             console.log('Error: ', err.message);
-            res.json( {"type": "error"})
+            res.json({"type": "error"})
         });
     let value = responseFinal.properties[0].value;
-    await res.json( {"type":"success","value": value})
+    await res.json({"type": "success", "value": value})
 })
 
 
